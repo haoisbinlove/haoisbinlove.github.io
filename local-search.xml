@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>有关部署GitHub博客的坑</title>
+    <link href="/2024/06/28/%E6%9C%89%E5%85%B3%E9%83%A8%E7%BD%B2GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%9D%91/"/>
+    <url>/2024/06/28/%E6%9C%89%E5%85%B3%E9%83%A8%E7%BD%B2GitHub%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%9D%91/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>也就是说，如果想创建一个新的博客。执行步骤是：</p><ul><li>新建一个空文件夹</li><li>终端进入该文件夹中，hexo init</li><li>需要下载git，npm install hexo-deployer-git -save</li><li>然后修改博客目录下的 _config.yml 文件，修改语言（注意，名字需要先到主题文件夹下的language上查看，不要拼写错名字了）</li><li>添加deploy配置，type（git），repo（仓库的ssh链接），branch（main）</li><li>hexo g</li><li>hexo d</li><li>hexo s查看效果</li></ul></blockquote><p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240628213605778.png" alt="image-20240628213605778"></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>test</title>
     <link href="/2024/06/28/test/"/>
     <url>/2024/06/28/test/</url>
