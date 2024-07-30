@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#FFD8F2">
+  <meta name="author" content="Sweety">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.渗透测试网络安全-自学笔记 渗透测试①流程 前期交互 信息收集 威胁建模 漏洞分析 渗透攻击 后渗透攻击 报告  ②测试方法 白盒测试：基本从内部发起，通过正常渠道向被测单位获取资料。 黑盒测试：在授权的情况下，模拟黑客的攻击方法和思维方式，评估安全风险。黑盒测试不同于黑客入侵。  前期交互目标：  确定范围：测试目标的范围、ip、域名、内外网、测试账户。 确定规则：能渗透到什么程度，所需要的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透测试（一）">
+<meta property="og:url" content="https://haoisbinlove.github.io/2024/07/30/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.渗透测试网络安全-自学笔记 渗透测试①流程 前期交互 信息收集 威胁建模 漏洞分析 渗透攻击 后渗透攻击 报告  ②测试方法 白盒测试：基本从内部发起，通过正常渠道向被测单位获取资料。 黑盒测试：在授权的情况下，模拟黑客的攻击方法和思维方式，评估安全风险。黑盒测试不同于黑客入侵。  前期交互目标：  确定范围：测试目标的范围、ip、域名、内外网、测试账户。 确定规则：能渗透到什么程度，所需要的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707164136300.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707165721514.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709134232544.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709134434241.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709135535182.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709142722978.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709142938308.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709150649237.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709150903081.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709151237123.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709151514907.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709152136780.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709152056475.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709154255324.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709154740043.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709161318682.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709162401797.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709230713348.png">
+<meta property="article:published_time" content="2024-07-30T14:07:36.000Z">
+<meta property="article:modified_time" content="2024-07-30T14:22:01.588Z">
+<meta property="article:author" content="Sweety">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707164136300.png">
+  
+  
+  
+  <title>渗透测试（一） - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"haoisbinlove.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sweety Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/24.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.08)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="渗透测试（一）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-30 22:07" pubdate>
+          2024年7月30日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">渗透测试（一）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-渗透测试"><a href="#1-渗透测试" class="headerlink" title="1.渗透测试"></a>1.渗透测试</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lady_killer9/article/details/106791542">网络安全-自学笔记</a></p>
+<h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h2><h3 id="①流程"><a href="#①流程" class="headerlink" title="①流程"></a>①流程</h3><blockquote>
+<p>前期交互</p>
+<p>信息收集</p>
+<p>威胁建模</p>
+<p>漏洞分析</p>
+<p>渗透攻击</p>
+<p>后渗透攻击</p>
+<p>报告</p>
+</blockquote>
+<h3 id="②测试方法"><a href="#②测试方法" class="headerlink" title="②测试方法"></a>②测试方法</h3><blockquote>
+<p>白盒测试：基本从内部发起，通过正常渠道向被测单位获取资料。</p>
+<p>黑盒测试：在授权的情况下，模拟黑客的攻击方法和思维方式，评估安全风险。黑盒测试不同于黑客入侵。</p>
+</blockquote>
+<h2 id="前期交互"><a href="#前期交互" class="headerlink" title="前期交互"></a>前期交互</h2><p>目标：</p>
+<ul>
+<li>确定范围：测试目标的范围、ip、域名、内外网、测试账户。</li>
+<li>确定规则：能渗透到什么程度，所需要的时间，能够执行修改上传，能否提权等。</li>
+<li>确定需求：web应用的漏洞，业务逻辑漏洞，人员权限管理漏洞等。</li>
+</ul>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>主要收集服务器的配置信息和网站的敏感信息，其中包括：</p>
+<ul>
+<li>域名以及子域名信息</li>
+<li>目标网站系统</li>
+<li>cms指纹</li>
+<li>目标网站真实IP</li>
+<li>开放的端口等。</li>
+</ul>
+<p>信息收集的方式可分为<code>主动</code>和<code>被动</code>两种。</p>
+<p><code>主动信息收集</code>：与目标主机进行直接交互，从而拿到目标信息。（比如黑进目标主机）</p>
+<p><code>被动信息收集</code>：间接交互，通过搜索引擎或社会工程等方式间接获取目标主机上的信息。（比如Google搜索、Shodan搜索等）</p>
+<h3 id="①域名信息的收集"><a href="#①域名信息的收集" class="headerlink" title="①域名信息的收集"></a>①域名信息的收集</h3><p>确定了要渗透的目标，即确定了其域名。</p>
+<p>确定了域名之后还需要确定域名对应的<code>IP地址</code>，域名的<code>whois</code>信息、<code>子域名</code>等一系列与域名相关的信息。</p>
+<h4 id="1、域名的whois信息"><a href="#1、域名的whois信息" class="headerlink" title="1、域名的whois信息"></a>1、域名的whois信息</h4><p><code>whois</code>是用来查询域名的<code>IP地址</code>以及所有者等信息的传输协议。</p>
+<p>通常，执行whois查询的工具是：</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhanid.com/tool/whois.html">whois查询工具—站长工具网</a></p>
+<p><a target="_blank" rel="noopener" href="https://tools.wujingquan.com/whois/">whois信息查询-站长工具</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707164136300.png" srcset="/img/loading.gif" lazyload alt="image-20240707164136300"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707165721514.png" srcset="/img/loading.gif" lazyload alt="image-20240707165721514"></p>
+<p>其它的注入阿里云的域名查询在线工具也可以，就是显示出来的信息没有那么集中。</p>
+<p>在kali下，也有默认的<code>whois工具指令</code>。</p>
+<p>查询命令为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">whois 域名（.com）<br></code></pre></td></tr></table></figure>
+
+<h4 id="2、备案信息查询"><a href="#2、备案信息查询" class="headerlink" title="2、备案信息查询"></a>2、备案信息查询</h4><p>ICP备案信息查询。</p>
+<p>查询网址：</p>
+<p><a target="_blank" rel="noopener" href="https://icp.chinaz.com/">ICP备案查询-站长工具</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709134232544.png" srcset="/img/loading.gif" lazyload alt="image-20240709134232544"></p>
+<p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index">工信部ICP备案查询</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709134434241.png" srcset="/img/loading.gif" lazyload alt="image-20240709134434241"></p>
+<p>可以从中得到一些有关于网址或者域名的一些备案号、主办单位、网站负责人之类的信息。</p>
+<h4 id="3、子域名信息"><a href="#3、子域名信息" class="headerlink" title="3、子域名信息"></a>3、子域名信息</h4><p>查询子域名的几种方法如下：</p>
+<ul>
+<li>Layer子域名爆破机</li>
+</ul>
+<p>Layer是win下的一款子域名探测工具，其工作原理是：利用<code>子域名字典</code>进行爆破。</p>
+<p>输入目标网站的域名即可启动进行字典爆破子域名。如下是访问gxu官网域名爆破得到的子域名结果。</p>
+<p>工具地址：<code>E:\IDEToolsV2\Layer子域名挖掘机4.2纪念版</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709135535182.png" srcset="/img/loading.gif" lazyload alt="image-20240709135535182"></p>
+<ul>
+<li>subDomainsBurte</li>
+</ul>
+<p>它同样也是一个子域名爆破工具，使用<code>字典暴力</code>破解，并通过<code>DNS解析</code>来确定是否存在有效的子域名。它的特点是可以用小字典递归地发现三级域名、四级域名、甚至是五级域名等不容易被探测到的域名。</p>
+<p>工具下载链接： <a target="_blank" rel="noopener" href="https://github.com/lijiejie/subDomainsBrute%EF%BC%88%E5%8F%AF%E4%BD%BF%E7%94%A8pip%E5%AE%89%E8%A3%85%EF%BC%89">https://github.com/lijiejie/subDomainsBrute（可使用pip安装）</a></p>
+<p>也可以在kali下安装使用哦。</p>
+<p>使用默认下载源的话可能速度较慢而且可能会失败，所以我们可以使用镜像源下载。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple dnspython==2.2.1 async_timeout<br></code></pre></td></tr></table></figure>
+
+<p>在kali主机内部暂时下载失败。</p>
+<p>通过远程连接下载也是失败：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709142722978.png" srcset="/img/loading.gif" lazyload alt="image-20240709142722978"></p>
+<p>由错误信息可以略知一二，kali系统中本来就有<code>dnspython</code>，所以试图再次下载的时候就会报错。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709142938308.png" srcset="/img/loading.gif" lazyload alt="image-20240709142938308"></p>
+<p>所以就直接先下载那个GitHub文件。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_57206390/article/details/133201540">kali 安装使用subDomainsBrute</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/lijiejie/subDomainsBrute.git<br></code></pre></td></tr></table></figure>
+
+<p>这里远程终端下载一直发生错误，在kali内部尝试访问浏览器，也不行，然后更改了代理设置为使用系统自定义的代理，但是在远程终端还是不行。去到kali本机访问目标链接，发现可以访问到，然后直接在里边下载了。成功了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709150649237.png" srcset="/img/loading.gif" lazyload alt="image-20240709150649237"></p>
+<p>进入到目标文件夹安装依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install dnspython gevent<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709150903081.png" srcset="/img/loading.gif" lazyload alt="image-20240709150903081"></p>
+<p>启动方式为：进入到<code>subDomainsBrute</code>文件夹下，执行启动代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 subDomainsBrute.py gxu.edu.com（域名）<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709151237123.png" srcset="/img/loading.gif" lazyload alt="image-20240709151237123"></p>
+<p>爆破速度远比Layer慢。</p>
+<ul>
+<li>Google查询</li>
+</ul>
+<p>使用语法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">site:域名<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709151514907.png" srcset="/img/loading.gif" lazyload alt="image-20240709151514907"></p>
+<p>本来也可以使用<code>FOFA</code>的，但是它并不是免费使用哈哈。</p>
+<h4 id="4、http证书查询"><a href="#4、http证书查询" class="headerlink" title="4、http证书查询"></a>4、http证书查询</h4><p><a target="_blank" rel="noopener" href="https://crt.sh/">http证书查询</a></p>
+<p>可以输入域名，查询与其绑定的相关证书信息。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709152136780.png" srcset="/img/loading.gif" lazyload alt="image-20240709152136780"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709152056475.png" srcset="/img/loading.gif" lazyload alt="image-20240709152056475"></p>
+<h4 id="5、DNS记录查询"><a href="#5、DNS记录查询" class="headerlink" title="5、DNS记录查询"></a>5、DNS记录查询</h4><p>DNS指的是域名解析服务，即将域名与IP之间做相应的转换。</p>
+<blockquote>
+<p>正向解析：根据域名查找对应的IP地址</p>
+<p>反向解析：根据IP地址查找对应的域名</p>
+</blockquote>
+<ul>
+<li><p>kali工具（DNSenum、Fierce、DMitry）</p>
+</li>
+<li><p>在线查询工具：</p>
+<p><a target="_blank" rel="noopener" href="http://tool.chinaz.com/dns/">站长工具之DNS查询</a></p>
+<p>查询的效果是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709154255324.png" srcset="/img/loading.gif" lazyload alt="image-20240709154255324"></p>
+<p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/home/search">国外的DNS查询工具</a></p>
+<p>界面良好直观，而且经过测试应该也是免费的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709154740043.png" srcset="/img/loading.gif" lazyload alt="image-20240709154740043"></p>
+</li>
+</ul>
+<h4 id="6、判断域名对应的IP地址"><a href="#6、判断域名对应的IP地址" class="headerlink" title="6、判断域名对应的IP地址"></a>6、判断域名对应的IP地址</h4><p>首先需要判断域名是否存在CDN的情况。可以先去在线CDN查询网站进行查询。</p>
+<p><a target="_blank" rel="noopener" href="https://ping.chinaz.com/">在线CDN查询</a></p>
+<p>如果输入域名查询得到的IP地址不止一个的话，那就说明该IP地址不是真实的服务器地址。<code>如果是两个或者三个IP地址，并且这些IP地址是同一个地区不同运营商的话，则这些IP地址很有可能是服务器的出口地址，该服务器在内网中</code></p>
+<p>现在下面查询的这个域名，他只有一个对应的IP地址，说明该IP地址就是该域名的真实服务器地址，不存在CDN的情况。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709161318682.png" srcset="/img/loading.gif" lazyload alt="image-20240709161318682"></p>
+<p>如何绕过CDN查找网站的真实IP呢？</p>
+<ul>
+<li><p>很多时候一些重要的站点会做CDN，但是它旗下的一些子域名站点不会做CDN。可以从子域名切入查找网站的真实IP。<code>启动终端，在终端中使用ping命令。执行 ping 子域名 的命令，ping返回结果中会返回该子域名的IP地址</code>。 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709162401797.png" srcset="/img/loading.gif" lazyload alt="image-20240709162401797"></p>
+</li>
+</ul>
+<blockquote>
+<p>CDN（内容分发网络）是构建在现有互联网基础之上的一层智能虚拟网络。</p>
+</blockquote>
+<h3 id="②整站分析"><a href="#②整站分析" class="headerlink" title="②整站分析"></a>②整站分析</h3><p>分析的对象有：</p>
+<ul>
+<li><p>服务器类型：windows、linux</p>
+<blockquote>
+<p>ping探测：win的TLS值一般是128，linux的则一般是64。</p>
+<p>nmap扫描：<code>namp -O/-A IP地址</code>一般都能扫描得出来。</p>
+</blockquote>
+</li>
+<li><p>网站容器：apache、nginx、tomcat、IIS等</p>
+</li>
+<li><p>脚本类型：php、jsp、asp、aspx</p>
+</li>
+<li><p>数据库类型：mysql、oracle、access、sqlserver</p>
+</li>
+</ul>
+<p>在之前进行靶场攻打的过程中，有关于分析网站技术构成的指纹工具（如wappalyzer）就很适合用于整站分析（网站容器、脚本类型、数据库类型）。</p>
+<p><strong>几种数据库的区别：</strong></p>
+<blockquote>
+<ul>
+<li>Access：小型数据库，数据库后缀名：.mdb。一般是asp网页文件使用这个数据库</li>
+<li>SQL Server：比较大型的数据库，端口号为1433，数据库后缀名：.mdf</li>
+<li>MySQL：大部分是PHP页面，默认端口号是3306</li>
+<li>Oracle：常用于比较大型的网站，默认端口是1521</li>
+</ul>
+</blockquote>
+<p>常见搭配：</p>
+<p>asp、aspx：access、sqlserver</p>
+<p>php：mysql、postgreSQL</p>
+<p>jsp：Oracle、mysql</p>
+<h3 id="③企业信息查询"><a href="#③企业信息查询" class="headerlink" title="③企业信息查询"></a>③企业信息查询</h3><p>确认了公司之后，可以去互联网上查询与该公司有关的任何信息。如：企业基本信息、员工信息（手机号、邮箱、姓名、社交账号信息等）、组织框架、企业法人、企业综合信息等。使用社会工程学攻击获取这些信息也不是不行（在合法报备情况下哈）。</p>
+<p><a target="_blank" rel="noopener" href="https://www.tianyancha.com/">天眼查</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.qcc.com/">企查查</a></p>
+<p>也可以通过之前得ICP备案查询去获取一些信息。</p>
+<h3 id="④GitHub信息收集"><a href="#④GitHub信息收集" class="headerlink" title="④GitHub信息收集"></a>④GitHub信息收集</h3><p>亲测，做毕设的时候在GitHub上找项目，找到了一个包含一万七条的员工入职个人信息。确实有这个必要进行GitHub信息收集。</p>
+<p>主要收集：泄露源码、泄露数据库&#x2F;邮箱&#x2F;ftp&#x2F;ssh&#x2F;3389等账号、泄露的人员信息以及其它敏感信息。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36119192/article/details/99690742">信息收集之Github搜索语法</a></p>
+<h3 id="⑤端口扫描"><a href="#⑤端口扫描" class="headerlink" title="⑤端口扫描"></a>⑤端口扫描</h3><h4 id="1、nmap端口扫描"><a href="#1、nmap端口扫描" class="headerlink" title="1、nmap端口扫描"></a>1、nmap端口扫描</h4><ul>
+<li><p>功能：主机发现（检测存活在网络上的主机）、端口发现（检测开放端口）、服务发现（检测端口开放的服务和其版本）、检测操作系统&#x2F;硬件地址&#x2F;软件版本等、检测脆弱性漏洞（<code>--script=vuln</code>）</p>
+</li>
+<li><p>常用命令：</p>
+</li>
+</ul>
+<blockquote>
+<p>-sS：tcp syn扫描</p>
+<p>-p：指定端口号扫描</p>
+<p>-v：显示扫描过程</p>
+<p>-F：快速扫描</p>
+<p>-A：全面扫描</p>
+<p>-Pn：禁止ping后扫描，跳过主机发现的过程进行端口扫描</p>
+<p>-sU：udp扫描</p>
+<p>-sT：tcp扫描</p>
+<p>-sV：扫描系统版本和程序版本号检测</p>
+<p>-n：禁止反向域名解析</p>
+<p>-R：启用反向域名解析</p>
+<p>-6：启用IPV6扫描</p>
+<p>–script&#x3D;vuln：全面的漏洞扫描</p>
+</blockquote>
+<h4 id="2、旁站和c段扫描"><a href="#2、旁站和c段扫描" class="headerlink" title="2、旁站和c段扫描"></a>2、旁站和c段扫描</h4><p>旁站是指和目标网站在同一台服务器上的其它网站。拿webshell，提权，拿下该网站。</p>
+<p>使用IP反查域名搜索旁站：</p>
+<p><a target="_blank" rel="noopener" href="http://s.tool.chinaz.com/same">IP反查域名</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.aizhan.com/">SEO综合查询·反查域名</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709230713348.png" srcset="/img/loading.gif" lazyload alt="image-20240709230713348"></p>
+<p>对红蓝对抗和护网，c段扫描比较有意义。c段是指与目标服务器IP处于同一个C段的其它服务器。（192.168.1.0&#x2F;24）</p>
+<h3 id="⑥网站敏感目录和文件"><a href="#⑥网站敏感目录和文件" class="headerlink" title="⑥网站敏感目录和文件"></a>⑥网站敏感目录和文件</h3><p>通常我们所说的敏感文件、敏感目录大概有以下几种：</p>
+<blockquote>
+<p>后台、robots.txt、数据库.log、sitemap.xml、mysql.sql、licence.txt、Git、hg&#x2F;Mercurial、svn&#x2F;Subversion、bzr&#x2F;Bazaar、Cvs、WEB-INF泄露、备份文件泄露、配置文件泄露。</p>
+</blockquote>
+<ul>
+<li>Cansina</li>
+</ul>
+<p>用于发现网站的敏感目录和内容的安全测试工具，通过分析服务器的响应进行探测并使用sqlite保证数据持久性。</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/deibit/cansina">https://github.com/deibit/cansina</a></p>
+<ul>
+<li>Githack</li>
+</ul>
+<p>git泄露利用脚本</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/lijiejie/GitHack">https://github.com/lijiejie/GitHack</a></p>
+<h2 id="威胁建模"><a href="#威胁建模" class="headerlink" title="威胁建模"></a>威胁建模</h2><p>利用上一个信息收集阶段获取的信息进行攻击规划。</p>
+<p>标识目标组织可能存在的漏洞与缺陷，根据威胁模型确定下一步需要搜集的信息和攻击方法。</p>
+<h2 id="渗透攻击"><a href="#渗透攻击" class="headerlink" title="渗透攻击"></a>渗透攻击</h2><p><a target="_blank" rel="noopener" href="https://github.com/Getshell/LinuxTQ">linux提权方法论</a></p>
+<h3 id="①对象"><a href="#①对象" class="headerlink" title="①对象"></a>①对象</h3><h4 id="1、CMS"><a href="#1、CMS" class="headerlink" title="1、CMS"></a>1、CMS</h4><p>内容管理系统，用于快速统一创建网站。许多使用CMS构建的网站均存在着对应的漏洞。比如，WordPress 是著名的个人网站CMS，之前我们进行靶场的攻打的时候发现它存在着不少可以被利用来提权的漏洞。</p>
+<blockquote>
+<p>常见的CMS网站平台有：</p>
+<ul>
+<li>WordPress</li>
+<li>HubSpot</li>
+<li>Joomla</li>
+<li>WooCommerce</li>
+<li>Drupal</li>
+<li>Wix</li>
+<li>BigCommerce</li>
+<li>Shopify</li>
+<li>ghost</li>
+<li>Magento</li>
+<li>Textpattern</li>
+<li>Blogger</li>
+<li>Bitrix24</li>
+<li>TYPO3</li>
+</ul>
+</blockquote>
+<p>可以通过<code>metasploit</code>、<code>searchsploit</code>等来搜索有关特定CMS平台的漏洞并尝试进行利用。</p>
+<h4 id="2、中间件"><a href="#2、中间件" class="headerlink" title="2、中间件"></a>2、中间件</h4><p>中间件是一种独立的系统软件或服务程序，位于客户机&#x2F;服务器的操作系统之上，管理计算机资源和网络通讯，是连接两个独立应用程序或独立系统的软件。</p>
+<p>常见的中间件有：<code>IIS、apache、ngnix、weblogic等</code>。</p>
+<p>中间件本身并不能用来Getshell或提权。而且其一般不是以root用户启动的。但是，在特定条件下（比如存在一些安全漏洞）可以被利用来实施攻击。</p>
+<blockquote>
+<p>常见的三种架构：</p>
+<ul>
+<li>ASP &#x3D; windows + IIS + SQL Server&#x2F;Access + ASP</li>
+<li>J2EE &#x3D; UNIX + Tomcat + Oracle + JSP</li>
+<li>LAMP &#x3D; Linux + Apache + MySql + php</li>
+</ul>
+</blockquote>
+<h4 id="3、后门"><a href="#3、后门" class="headerlink" title="3、后门"></a>3、后门</h4><p>后门是指黑客为了对主机进行长期的控制，在机器上种植的一段程序或留下的一个“入口”。</p>
+<p>如何检测机器上的后门，主要是通过后门扫描工具来进行。比如，BackdoorBox、</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/356576.html">常见系统后门技术总结与分析利用</a></p>
+<p>一般来说，我们可以通过植入后门对目标主机进行监控。具体的就先不深入探究了。</p>
+<h4 id="4、webshell"><a href="#4、webshell" class="headerlink" title="4、webshell"></a>4、webshell</h4><p>指网站后门。它通过web服务进行命令执行。</p>
+<h3 id="②目标"><a href="#②目标" class="headerlink" title="②目标"></a>②目标</h3><h4 id="1、Getshell"><a href="#1、Getshell" class="headerlink" title="1、Getshell"></a>1、Getshell</h4><p>即<code>获取目标的命令执行权限</code>。</p>
+<blockquote>
+<p>shell，简单来说就是“为使用者提供操作页面”的命令解释器。</p>
+</blockquote>
+<h4 id="2、提权"><a href="#2、提权" class="headerlink" title="2、提权"></a>2、提权</h4><p>操作系统低权限的账户将自己提升为管理员权限使用的方法。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sfsec/p/15163907.html">linux提权总结</a></p>
+<h4 id="3、相关术语"><a href="#3、相关术语" class="headerlink" title="3、相关术语"></a>3、相关术语</h4><blockquote>
+<ul>
+<li>肉鸡：被黑客入侵并被长期驻扎的计算机或服务器。可以随意控制，可以是任意系统的设备，对象可以是企业，个人，政府等等所有单位。</li>
+<li>抓鸡：利用程序的漏洞，使用自动化方式获取存在漏洞的行为。</li>
+<li>撞库：撞库是黑客通过收集互联网已泄露的用户和密码信息，生成对应的字典表，尝试批量登陆其他网站后，得到一系列可以登录的用户。</li>
+<li>拖库：拖库本来是数据库领域的术语，指从数据库中导出数据。到了黑客攻击泛滥的今天，它被用来指网站遭到入侵后，黑客窃取其数据库。</li>
+<li>POC：全称”Proof of Concept”（ 概念验证），常指一段漏洞证明的代码。</li>
+<li>EXP：全称”Exploit”（利用），指利用系统漏洞进行攻击的动作。</li>
+<li>Payload：“有效载荷”，指成功exploit之后，真正在目标系统执行的代码&#x2F;指令。</li>
+<li>ShellCode：“shell代码”，是Payload的一种，因其建立正向&#x2F;反向shell而得名。</li>
+<li>APT攻击：Advanced Persistent Threat ，高级可持续性攻击，是指组织或者小团体利用先进的攻击手段对特定目标进行长期持续性网络攻击的攻击形式。（具有极强的隐蔽性、潜伏期长、持续性强、目标性强）。</li>
+</ul>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>渗透测试（一）</div>
+      <div>https://haoisbinlove.github.io/2024/07/30/渗透测试（一）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Sweety</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/30/DC-7/" title="DC-7">
+                        <span class="hidden-mobile">DC-7</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

