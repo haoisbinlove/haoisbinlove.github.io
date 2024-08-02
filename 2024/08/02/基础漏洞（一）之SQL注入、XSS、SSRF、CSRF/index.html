@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721391030526.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721390879675.png">
 <meta property="article:published_time" content="2024-08-02T15:18:14.000Z">
-<meta property="article:modified_time" content="2024-08-02T15:24:07.624Z">
+<meta property="article:modified_time" content="2024-08-02T15:32:16.167Z">
 <meta property="article:author" content="Sweety">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145304230.png">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.3k 字
+          11k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          62 分钟
+          89 分钟
         
       </span>
     
@@ -532,12 +532,12 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38118138/article/details/118081903">XSS过滤器Filter实现全过程</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Code_shadow/article/details/103125060">使用Filter进行XSS过滤</a></p>
 <h3 id="5、XSS绕过"><a href="#5、XSS绕过" class="headerlink" title="5、XSS绕过"></a>5、XSS绕过</h3><h4 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h4><p>HTML对标签大小写不敏感，可以利用大小写混用绕过。</p>
-<p>例如：<script>改为<ScRiPt></p>
+<p>例如：<code>&lt;script&gt;改为&lt;ScRiPt&gt;</code></p>
 <h4 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h4><p>有些情况下的规则会将黑名单标签替换为空，可以利用这一点构造标签。</p>
-<p>例如：<script>改为<scr<script>ipt></p>
+<p>例如：<code>&lt;script&gt;改为&lt;scr&lt;script&gt;ipt&gt;</code></p>
 <p>同理，某些注释符在规则中也会替换为空，这时候可以利用它构造payload。</p>
-<p>例如：<script>改为<scr<!---test--->ipt></p>
-<h4 id="开口标签"><a href="#开口标签" class="headerlink" title="开口标签"></a>开口标签</h4><p>在某些特殊环境，由于html代码的补全机制，可以故意<code>不闭合标签</code>绕过黑名单检测例如：<script>改为<script</p>
+<p>例如：<code>&lt;script&gt;改为&lt;scr&lt;!---test---&gt;ipt&gt;</code></p>
+<h4 id="开口标签"><a href="#开口标签" class="headerlink" title="开口标签"></a>开口标签</h4><p>在某些特殊环境，由于html代码的补全机制，可以故意<code>不闭合标签</code>绕过黑名单检测例如：<code>&lt;script&gt;改为&lt;script</code></p>
 <h4 id="空格回车Tab"><a href="#空格回车Tab" class="headerlink" title="空格回车Tab"></a>空格回车Tab</h4><p>例如：js伪协议<code>javascript:alert(&#39;xss&#39;);</code>可以改为<code>java script:alert(&#39;xss&#39;);</code>等</p>
 <h4 id="编码转义"><a href="#编码转义" class="headerlink" title="编码转义"></a>编码转义</h4><p>JavaScript是很灵活的语言，可以使用十六进制、Unicode、HTML等进行编码，以下属性可以被编码。</p>
 <blockquote>
@@ -556,12 +556,12 @@
 <p>5、然后，使用浏览器打开dvwa靶场，将安全级别调到low。选择反射性xss，将上面的js代码复制一个到输入框中，进行测试。</p>
 <p>6、回到xss平台，查看内容。展开，会发现登陆用的cookie</p>
 <p>7、获取到cookie后，打开另外一个浏览器访问dvwa(模拟攻击者操作)，f12打开开发者工具，在”存储“中找到cookie值，记录其<code>PHPSESSION</code>值</p>
-<p>8、将之前获取到的cookie值替换上去，把security的impossible改为low,回到登录界面，在url后面加上获取到的cookie信息（cookie=security=low; PHPSESSION=记下的内容）。ps：url改为后台地址（cookie下的url地址）</p>
+<p>8、将之前获取到的cookie值替换上去，把security的impossible改为low,回到登录界面，在url后面加上获取到的cookie信息（cookie&#x3D;security&#x3D;low; PHPSESSION&#x3D;记下的内容）。ps：url改为后台地址（cookie下的url地址）</p>
 </blockquote>
 <h2 id="③SSRF服务器端请求伪造"><a href="#③SSRF服务器端请求伪造" class="headerlink" title="③SSRF服务器端请求伪造"></a>③SSRF服务器端请求伪造</h2><h3 id="1、漏洞简介-1"><a href="#1、漏洞简介-1" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h3><p>· SSRF，服务器端请求伪造，是由攻击者构造请求，但由服务端发起请求的安全漏洞。本质上属于信息泄露漏洞。</p>
 <p>· SSRF攻击的目标是：<code>从外网无法访问的内部系统</code>。（因为其由服务器端发起，所以它能够请求到与它相连而与外网隔离的内部系统，也就是把目标网站当作中间人）</p>
 <p>· SSRF 形成的原因：<code>大都是由于服务器提供了从其他服务器应用获取数据的功能，且没有对目标地址做过滤和限制 </code>。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等。</p>
-<p>· 数据流：<code>攻击者</code>----<code>服务器</code>----<code>目标地址</code></p>
+<p>· 数据流：<code>攻击者</code>—-<code>服务器</code>—-<code>目标地址</code></p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/miruier/p/13907150.html">SSRF漏洞（原理、挖掘点、漏洞利用、修复建议）</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44159028/article/details/114626708">SSRF (服务器端请求伪造) 漏洞原理与利用方式</a></p>
@@ -622,9 +622,9 @@
 <p>1.一般情况下PHP不会开启fopen的gopher wrapper </p>
 <p>2.file_get_contents的gopher协议不能URL编码 </p>
 <p>3.file_get_contents关于Gopher的302跳转会出现bug，导致利用失败 </p>
-<p>4.curl/libcurl 7.43 上gopher协议存在bug(%00截断) 经测试7.49 可用 </p>
-<p>5.curl_exec() //默认不跟踪跳转</p>
-<p>6.file_get_contents() // file_get_contents支持php://input协议</p>
+<p>4.curl&#x2F;libcurl 7.43 上gopher协议存在bug(%00截断) 经测试7.49 可用 </p>
+<p>5.curl_exec() &#x2F;&#x2F;默认不跟踪跳转</p>
+<p>6.file_get_contents() &#x2F;&#x2F; file_get_contents支持php:&#x2F;&#x2F;input协议</p>
 </blockquote>
 <h4 id="可利用协议"><a href="#可利用协议" class="headerlink" title="可利用协议"></a>可利用协议</h4><ul>
 <li><strong>file协议</strong></li>
@@ -640,21 +640,21 @@
 <p>· 字典服务器协议，可以访问字典资源，如<code>dict:///ip:6739/info</code>，其中<code>info</code>是Redis的常用命令。</p>
 <p>· 可以探测指纹信息，使用格式如下：</p>
 <blockquote>
-<p><strong>dict://ip:port/命令:命令2:命令3</strong></p>
+<p><strong>dict:&#x2F;&#x2F;ip:port&#x2F;命令:命令2:命令3</strong></p>
 <p>其中，命令是可选字段，每个命令使用冒号隔开。</p>
-<p>例：dict://127.0.0.1:6379/set:passwd:123456</p>
-<p>dict://127.0.0.1:6379/get:passwd 等</p>
+<p>例：dict:&#x2F;&#x2F;127.0.0.1:6379&#x2F;set:passwd:123456</p>
+<p>dict:&#x2F;&#x2F;127.0.0.1:6379&#x2F;get:passwd 等</p>
 <p>在实际地址栏中，这些指令的显示效果为：</p>
-<p>ssrf.php?url=dict://127.0.0.1:6379/set:passwd:123456</p>
-<p>ssrf.php?url=dict://127.0.0.1:22</p>
+<p>ssrf.php?url&#x3D;dict:&#x2F;&#x2F;127.0.0.1:6379&#x2F;set:passwd:123456</p>
+<p>ssrf.php?url&#x3D;dict:&#x2F;&#x2F;127.0.0.1:22</p>
 </blockquote>
 <p>· 可以写入反弹shell</p>
 <p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145304230.png" srcset="/img/loading.gif" lazyload alt="image-20240719145304230"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145316045.png" srcset="/img/loading.gif" lazyload alt="image-20240719145316045"></p>
 <p>· 可以用于<code>结合cURL攻击</code></p>
-<p>· 最主要的还是进行<code>端口探测</code>！例如：dict://127.0.0.1:80</p>
+<p>· 最主要的还是进行<code>端口探测</code>！例如：dict:&#x2F;&#x2F;127.0.0.1:80</p>
 <ul>
-<li><strong>http/https协议</strong></li>
+<li><strong>http&#x2F;https协议</strong></li>
 </ul>
 <p>进行<code>内网探测</code></p>
 <ul>
@@ -668,7 +668,7 @@
 <p><code>evil.com</code>指代目标网站的域名或IP地址，其后冒号跟着的是自己设置的监听端口号。</p>
 <p>在本地（如kali）终端开启监听，等待来自目标服务器的连接：</p>
 <p>local:$ nc -lvvp 9999</p>
-<p>Connection from [192.168.0.12] port 9999[tcp/*]<br>accepted (family 2, sport 37146)SSH-2.0-libssh2_1.4.2</p>
+<p>Connection from [192.168.0.12] port 9999[tcp&#x2F;*]<br>accepted (family 2, sport 37146)SSH-2.0-libssh2_1.4.2</p>
 <p>nc命令的输出表明（是别人的输出捏）攻击者已经成功接受了来自目标服务器的连接，即连接被建立了。</p>
 </blockquote>
 <p>· tftp，（Trivial File Transfer Protocol,简单文件传输协议），是一种简单的基于lockstep机制的文件传输协议，它允许客户端从远程主机获取文件或将文件上传至远程主机。</p>
@@ -699,14 +699,14 @@
 <p>5.利用file协议读取本地文件等;</p>
 <p>6.各个协议调用探针：http,file,dict,ftp,gopher等;</p>
 <blockquote>
-<p>http:192.168.64.144/phpmyadmin/<br>file:///D:/<a target="_blank" rel="noopener" href="http://www.txt/">www.txt</a><br>dict://192.168.64.144:3306/info<br><a href="ftp://192.168.64.144/">ftp://192.168.64.144:21</a></p>
+<p>http:192.168.64.144&#x2F;phpmyadmin&#x2F;<br>file:&#x2F;&#x2F;&#x2F;D:&#x2F;<a target="_blank" rel="noopener" href="http://www.txt/">www.txt</a><br>dict:&#x2F;&#x2F;192.168.64.144:3306&#x2F;info<br><a href="ftp://192.168.64.144/">ftp://192.168.64.144:21</a></p>
 </blockquote>
 <p>7、本地利用和远程利用</p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/258449.html">ssrf知识点总结</a></p>
 <h3 id="4、绕过方式"><a href="#4、绕过方式" class="headerlink" title="4、绕过方式"></a>4、绕过方式</h3><h4 id="绕过（http基本身份认证绕过）"><a href="#绕过（http基本身份认证绕过）" class="headerlink" title="@绕过（http基本身份认证绕过）"></a>@绕过（http基本身份认证绕过）</h4><p>使用前提：目标网站对访问的域名进行限制，且其本身存在ssrf漏洞时。</p>
 <blockquote>
 <p>url的完整格式为：</p>
-<p>协议类型://访问资源需要的凭证信息@服务器地址:端口号/资源层级UNIX文件路径（精确到文件名）?查询#片段ID</p>
+<p>协议类型:&#x2F;&#x2F;访问资源需要的凭证信息@服务器地址:端口号&#x2F;资源层级UNIX文件路径（精确到文件名）?查询#片段ID</p>
 </blockquote>
 <p>因此！</p>
 <blockquote>
@@ -736,15 +736,15 @@
 <ul>
 <li>————————————————————————</li>
 </ul>
-<h4 id="用句号-。-替换"><a href="#用句号-。-替换" class="headerlink" title="用句号"。"替换 ".""></a>用句号"。"替换 "."</h4><blockquote>
+<h4 id="用句号”。”替换-“-”"><a href="#用句号”。”替换-“-”" class="headerlink" title="用句号”。”替换 “.”"></a>用句号”。”替换 “.”</h4><blockquote>
 <p>将IP地址中各个分隔部分的“.”号均分别使用“。”替代：</p>
-<p>例：192.168.204.128 ----> 192。168。204.128</p>
+<p>例：192.168.204.128 —-&gt; 192。168。204.128</p>
 <p>但是执行过程中，右边的表达也会被解析为左边的表达。</p>
 </blockquote>
 <h4 id="xip-io-和-xip-name-绕过"><a href="#xip-io-和-xip-name-绕过" class="headerlink" title="xip.io 和 xip.name 绕过"></a>xip.io 和 xip.name 绕过</h4><p>使用前提：服务端没有先解析IP再过滤内网地址，就可以使用localhost等解析到内网的域名。（ xip.name在使用上与xip.io一致）</p>
 <p>此外，如果php后端只使用parse_url函数中的host参数判断是否等于127.0.0.1，那么就可以使用<code>xip.io</code>、<code>nip.io</code>、<code>sslip.io</code>这些特殊网址进行绕过。</p>
 <blockquote>
-<p><code>xip.io</code>可以指向任意域名。所以可以将其与内网IP/域名进行绑定，使其解析到内网。</p>
+<p><code>xip.io</code>可以指向任意域名。所以可以将其与内网IP&#x2F;域名进行绑定，使其解析到内网。</p>
 <p>例；<code>http://127.0.0.1.xip.io/1.php</code>实际上会解析到<code>http://127.0.0.1/1.php</code></p>
 </blockquote>
 <h4 id="添加端口号"><a href="#添加端口号" class="headerlink" title="添加端口号"></a>添加端口号</h4><p>有些网站可能会限制子网段。因此可以在URL中目标IP地址后面使用冒号“:”添加服务端口号，常用的是，添加<code>：80</code>端口绕过。</p>
@@ -786,7 +786,7 @@
 <p>· <strong>攻击细节</strong>：</p>
 <p>csrf（跨站请求攻击）简单来说，就是攻击者通过一些技术手段<code>欺骗</code>用户的浏览器去访问一个用户<code>曾经认证过的网站</code>并运行一些操作（如发邮件、发信息、财产操作如转账或购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。</p>
 <p>攻击过程中利用了web中用户身份验证的漏洞：<code>简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的</code>。</p>
-<p>典型示例：tom登陆了银行网站且没有退出，此时浏览器中包含着tom在银行的身份验证信息 ----  攻击者将伪造的转账请求包含在帖子中，并发送给tom ----  tom在银行网站保持登陆的情况下浏览帖子 ----  即会将伪造的转账请求连同身份的认证信息发送到银行网站 ----  银行网站看到身份认证信息，认为请求是tom的合法操作。</p>
+<p>典型示例：tom登陆了银行网站且没有退出，此时浏览器中包含着tom在银行的身份验证信息 —-  攻击者将伪造的转账请求包含在帖子中，并发送给tom —-  tom在银行网站保持登陆的情况下浏览帖子 —-  即会将伪造的转账请求连同身份的认证信息发送到银行网站 —-  银行网站看到身份认证信息，认为请求是tom的合法操作。</p>
 <p>· <strong>原理总结</strong>：</p>
 <blockquote>
 <p>一个CSRF漏洞攻击的实现，其需要由‘几个部分’来构成：</p>
