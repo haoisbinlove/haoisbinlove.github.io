@@ -48,7 +48,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1721808910747.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/QQ_1722241085705.png">
 <meta property="article:published_time" content="2024-08-02T15:34:45.000Z">
-<meta property="article:modified_time" content="2024-08-02T15:37:42.437Z">
+<meta property="article:modified_time" content="2024-08-02T15:38:57.007Z">
 <meta property="article:author" content="Sweety">
 <meta property="article:tag" content="基础漏洞">
 <meta property="article:tag" content="渗透流程">
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15k 字
+          22k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          123 分钟
+          184 分钟
         
       </span>
     
@@ -821,12 +821,12 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38118138/article/details/118081903">XSS过滤器Filter实现全过程</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Code_shadow/article/details/103125060">使用Filter进行XSS过滤</a></p>
 <h4 id="5、XSS绕过"><a href="#5、XSS绕过" class="headerlink" title="5、XSS绕过"></a>5、XSS绕过</h4><h6 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h6><p>HTML对标签大小写不敏感，可以利用大小写混用绕过。</p>
-<p>例如：<script>改为<ScRiPt></p>
+<p>例如：<code>&lt;script&gt;改为&lt;ScRiPt&gt;</code></p>
 <h6 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h6><p>有些情况下的规则会将黑名单标签替换为空，可以利用这一点构造标签。</p>
-<p>例如：<script>改为<scr<script>ipt></p>
+<p>例如：<code>&lt;script&gt;改为&lt;scr&lt;script&gt;ipt&gt;</code></p>
 <p>同理，某些注释符在规则中也会替换为空，这时候可以利用它构造payload。</p>
-<p>例如：<script>改为<scr<!---test--->ipt></p>
-<h6 id="开口标签"><a href="#开口标签" class="headerlink" title="开口标签"></a>开口标签</h6><p>在某些特殊环境，由于html代码的补全机制，可以故意<code>不闭合标签</code>绕过黑名单检测例如：<script>改为<script</p>
+<p>例如：<code>&lt;script&gt;改为&lt;scr&lt;!---test---&gt;ipt&gt;</code></p>
+<h6 id="开口标签"><a href="#开口标签" class="headerlink" title="开口标签"></a>开口标签</h6><p>在某些特殊环境，由于html代码的补全机制，可以故意<code>不闭合标签</code>绕过黑名单检测例如：<code>&lt;script&gt;改为&lt;script</code></p>
 <h6 id="空格回车Tab"><a href="#空格回车Tab" class="headerlink" title="空格回车Tab"></a>空格回车Tab</h6><p>例如：js伪协议<code>javascript:alert(&#39;xss&#39;);</code>可以改为<code>java script:alert(&#39;xss&#39;);</code>等</p>
 <h6 id="编码转义"><a href="#编码转义" class="headerlink" title="编码转义"></a>编码转义</h6><p>JavaScript是很灵活的语言，可以使用十六进制、Unicode、HTML等进行编码，以下属性可以被编码。</p>
 <blockquote>
@@ -845,12 +845,12 @@
 <p>5、然后，使用浏览器打开dvwa靶场，将安全级别调到low。选择反射性xss，将上面的js代码复制一个到输入框中，进行测试。</p>
 <p>6、回到xss平台，查看内容。展开，会发现登陆用的cookie</p>
 <p>7、获取到cookie后，打开另外一个浏览器访问dvwa(模拟攻击者操作)，f12打开开发者工具，在”存储“中找到cookie值，记录其<code>PHPSESSION</code>值</p>
-<p>8、将之前获取到的cookie值替换上去，把security的impossible改为low,回到登录界面，在url后面加上获取到的cookie信息（cookie=security=low; PHPSESSION=记下的内容）。ps：url改为后台地址（cookie下的url地址）</p>
+<p>8、将之前获取到的cookie值替换上去，把security的impossible改为low,回到登录界面，在url后面加上获取到的cookie信息（cookie&#x3D;security&#x3D;low; PHPSESSION&#x3D;记下的内容）。ps：url改为后台地址（cookie下的url地址）</p>
 </blockquote>
 <h3 id="③SSRF服务器端请求伪造"><a href="#③SSRF服务器端请求伪造" class="headerlink" title="③SSRF服务器端请求伪造"></a>③SSRF服务器端请求伪造</h3><h4 id="1、漏洞简介-1"><a href="#1、漏洞简介-1" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h4><p>· SSRF，服务器端请求伪造，是由攻击者构造请求，但由服务端发起请求的安全漏洞。本质上属于信息泄露漏洞。</p>
 <p>· SSRF攻击的目标是：<code>从外网无法访问的内部系统</code>。（因为其由服务器端发起，所以它能够请求到与它相连而与外网隔离的内部系统，也就是把目标网站当作中间人）</p>
 <p>· SSRF 形成的原因：<code>大都是由于服务器提供了从其他服务器应用获取数据的功能，且没有对目标地址做过滤和限制 </code>。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等。</p>
-<p>· 数据流：<code>攻击者</code>----<code>服务器</code>----<code>目标地址</code></p>
+<p>· 数据流：<code>攻击者</code>—-<code>服务器</code>—-<code>目标地址</code></p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/miruier/p/13907150.html">SSRF漏洞（原理、挖掘点、漏洞利用、修复建议）</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44159028/article/details/114626708">SSRF (服务器端请求伪造) 漏洞原理与利用方式</a></p>
@@ -911,9 +911,9 @@
 <p>1.一般情况下PHP不会开启fopen的gopher wrapper </p>
 <p>2.file_get_contents的gopher协议不能URL编码 </p>
 <p>3.file_get_contents关于Gopher的302跳转会出现bug，导致利用失败 </p>
-<p>4.curl/libcurl 7.43 上gopher协议存在bug(%00截断) 经测试7.49 可用 </p>
-<p>5.curl_exec() //默认不跟踪跳转</p>
-<p>6.file_get_contents() // file_get_contents支持php://input协议</p>
+<p>4.curl&#x2F;libcurl 7.43 上gopher协议存在bug(%00截断) 经测试7.49 可用 </p>
+<p>5.curl_exec() &#x2F;&#x2F;默认不跟踪跳转</p>
+<p>6.file_get_contents() &#x2F;&#x2F; file_get_contents支持php:&#x2F;&#x2F;input协议</p>
 </blockquote>
 <h5 id="可利用协议"><a href="#可利用协议" class="headerlink" title="可利用协议"></a>可利用协议</h5><ul>
 <li><strong>file协议</strong></li>
@@ -929,21 +929,21 @@
 <p>· 字典服务器协议，可以访问字典资源，如<code>dict:///ip:6739/info</code>，其中<code>info</code>是Redis的常用命令。</p>
 <p>· 可以探测指纹信息，使用格式如下：</p>
 <blockquote>
-<p><strong>dict://ip:port/命令:命令2:命令3</strong></p>
+<p><strong>dict:&#x2F;&#x2F;ip:port&#x2F;命令:命令2:命令3</strong></p>
 <p>其中，命令是可选字段，每个命令使用冒号隔开。</p>
-<p>例：dict://127.0.0.1:6379/set:passwd:123456</p>
-<p>dict://127.0.0.1:6379/get:passwd 等</p>
+<p>例：dict:&#x2F;&#x2F;127.0.0.1:6379&#x2F;set:passwd:123456</p>
+<p>dict:&#x2F;&#x2F;127.0.0.1:6379&#x2F;get:passwd 等</p>
 <p>在实际地址栏中，这些指令的显示效果为：</p>
-<p>ssrf.php?url=dict://127.0.0.1:6379/set:passwd:123456</p>
-<p>ssrf.php?url=dict://127.0.0.1:22</p>
+<p>ssrf.php?url&#x3D;dict:&#x2F;&#x2F;127.0.0.1:6379&#x2F;set:passwd:123456</p>
+<p>ssrf.php?url&#x3D;dict:&#x2F;&#x2F;127.0.0.1:22</p>
 </blockquote>
 <p>· 可以写入反弹shell</p>
 <p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145304230.png" srcset="/img/loading.gif" lazyload alt="image-20240719145304230"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240719145316045.png" srcset="/img/loading.gif" lazyload alt="image-20240719145316045"></p>
 <p>· 可以用于<code>结合cURL攻击</code></p>
-<p>· 最主要的还是进行<code>端口探测</code>！例如：dict://127.0.0.1:80</p>
+<p>· 最主要的还是进行<code>端口探测</code>！例如：dict:&#x2F;&#x2F;127.0.0.1:80</p>
 <ul>
-<li><strong>http/https协议</strong></li>
+<li><strong>http&#x2F;https协议</strong></li>
 </ul>
 <p>进行<code>内网探测</code></p>
 <ul>
@@ -957,7 +957,7 @@
 <p><code>evil.com</code>指代目标网站的域名或IP地址，其后冒号跟着的是自己设置的监听端口号。</p>
 <p>在本地（如kali）终端开启监听，等待来自目标服务器的连接：</p>
 <p>local:$ nc -lvvp 9999</p>
-<p>Connection from [192.168.0.12] port 9999[tcp/*]<br>accepted (family 2, sport 37146)SSH-2.0-libssh2_1.4.2</p>
+<p>Connection from [192.168.0.12] port 9999[tcp&#x2F;*]<br>accepted (family 2, sport 37146)SSH-2.0-libssh2_1.4.2</p>
 <p>nc命令的输出表明（是别人的输出捏）攻击者已经成功接受了来自目标服务器的连接，即连接被建立了。</p>
 </blockquote>
 <p>· tftp，（Trivial File Transfer Protocol,简单文件传输协议），是一种简单的基于lockstep机制的文件传输协议，它允许客户端从远程主机获取文件或将文件上传至远程主机。</p>
@@ -988,14 +988,14 @@
 <p>5.利用file协议读取本地文件等;</p>
 <p>6.各个协议调用探针：http,file,dict,ftp,gopher等;</p>
 <blockquote>
-<p>http:192.168.64.144/phpmyadmin/<br>file:///D:/<a target="_blank" rel="noopener" href="http://www.txt/">www.txt</a><br>dict://192.168.64.144:3306/info<br><a href="ftp://192.168.64.144/">ftp://192.168.64.144:21</a></p>
+<p>http:192.168.64.144&#x2F;phpmyadmin&#x2F;<br>file:&#x2F;&#x2F;&#x2F;D:&#x2F;<a target="_blank" rel="noopener" href="http://www.txt/">www.txt</a><br>dict:&#x2F;&#x2F;192.168.64.144:3306&#x2F;info<br><a href="ftp://192.168.64.144/">ftp://192.168.64.144:21</a></p>
 </blockquote>
 <p>7、本地利用和远程利用</p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/258449.html">ssrf知识点总结</a></p>
 <h4 id="4、绕过方式"><a href="#4、绕过方式" class="headerlink" title="4、绕过方式"></a>4、绕过方式</h4><h5 id="绕过（http基本身份认证绕过）"><a href="#绕过（http基本身份认证绕过）" class="headerlink" title="@绕过（http基本身份认证绕过）"></a>@绕过（http基本身份认证绕过）</h5><p>使用前提：目标网站对访问的域名进行限制，且其本身存在ssrf漏洞时。</p>
 <blockquote>
 <p>url的完整格式为：</p>
-<p>协议类型://访问资源需要的凭证信息@服务器地址:端口号/资源层级UNIX文件路径（精确到文件名）?查询#片段ID</p>
+<p>协议类型:&#x2F;&#x2F;访问资源需要的凭证信息@服务器地址:端口号&#x2F;资源层级UNIX文件路径（精确到文件名）?查询#片段ID</p>
 </blockquote>
 <p>因此！</p>
 <blockquote>
@@ -1025,15 +1025,15 @@
 <ul>
 <li>————————————————————————</li>
 </ul>
-<h5 id="用句号-。-替换"><a href="#用句号-。-替换" class="headerlink" title="用句号"。"替换 ".""></a>用句号"。"替换 "."</h5><blockquote>
+<h5 id="用句号”。”替换-“-”"><a href="#用句号”。”替换-“-”" class="headerlink" title="用句号”。”替换 “.”"></a>用句号”。”替换 “.”</h5><blockquote>
 <p>将IP地址中各个分隔部分的“.”号均分别使用“。”替代：</p>
-<p>例：192.168.204.128 ----> 192。168。204.128</p>
+<p>例：192.168.204.128 —-&gt; 192。168。204.128</p>
 <p>但是执行过程中，右边的表达也会被解析为左边的表达。</p>
 </blockquote>
 <h5 id="xip-io-和-xip-name-绕过"><a href="#xip-io-和-xip-name-绕过" class="headerlink" title="xip.io 和 xip.name 绕过"></a>xip.io 和 xip.name 绕过</h5><p>使用前提：服务端没有先解析IP再过滤内网地址，就可以使用localhost等解析到内网的域名。（ xip.name在使用上与xip.io一致）</p>
 <p>此外，如果php后端只使用parse_url函数中的host参数判断是否等于127.0.0.1，那么就可以使用<code>xip.io</code>、<code>nip.io</code>、<code>sslip.io</code>这些特殊网址进行绕过。</p>
 <blockquote>
-<p><code>xip.io</code>可以指向任意域名。所以可以将其与内网IP/域名进行绑定，使其解析到内网。</p>
+<p><code>xip.io</code>可以指向任意域名。所以可以将其与内网IP&#x2F;域名进行绑定，使其解析到内网。</p>
 <p>例；<code>http://127.0.0.1.xip.io/1.php</code>实际上会解析到<code>http://127.0.0.1/1.php</code></p>
 </blockquote>
 <h5 id="添加端口号"><a href="#添加端口号" class="headerlink" title="添加端口号"></a>添加端口号</h5><p>有些网站可能会限制子网段。因此可以在URL中目标IP地址后面使用冒号“:”添加服务端口号，常用的是，添加<code>：80</code>端口绕过。</p>
@@ -1075,7 +1075,7 @@
 <p>· <strong>攻击细节</strong>：</p>
 <p>csrf（跨站请求攻击）简单来说，就是攻击者通过一些技术手段<code>欺骗</code>用户的浏览器去访问一个用户<code>曾经认证过的网站</code>并运行一些操作（如发邮件、发信息、财产操作如转账或购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。</p>
 <p>攻击过程中利用了web中用户身份验证的漏洞：<code>简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的</code>。</p>
-<p>典型示例：tom登陆了银行网站且没有退出，此时浏览器中包含着tom在银行的身份验证信息 ----  攻击者将伪造的转账请求包含在帖子中，并发送给tom ----  tom在银行网站保持登陆的情况下浏览帖子 ----  即会将伪造的转账请求连同身份的认证信息发送到银行网站 ----  银行网站看到身份认证信息，认为请求是tom的合法操作。</p>
+<p>典型示例：tom登陆了银行网站且没有退出，此时浏览器中包含着tom在银行的身份验证信息 —-  攻击者将伪造的转账请求包含在帖子中，并发送给tom —-  tom在银行网站保持登陆的情况下浏览帖子 —-  即会将伪造的转账请求连同身份的认证信息发送到银行网站 —-  银行网站看到身份认证信息，认为请求是tom的合法操作。</p>
 <p>· <strong>原理总结</strong>：</p>
 <blockquote>
 <p>一个CSRF漏洞攻击的实现，其需要由‘几个部分’来构成：</p>
@@ -1142,14 +1142,14 @@
 <li><strong>定期重置 Session ID</strong></li>
 </ul>
 <p>降低会话被劫持的风险，确保会话令牌的安全性。</p>
-<h3 id="⑤RCE远程代码执行漏洞"><a href="#⑤RCE远程代码执行漏洞" class="headerlink" title="⑤RCE远程代码执行漏洞"></a>⑤RCE远程代码执行漏洞</h3><h4 id="1、漏洞简介-3"><a href="#1、漏洞简介-3" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h4><p>RCE，远程命令执行/远程代码执行。指用户通过<code>浏览器</code>提交执行操作命令，由于服务器端没有针对执行函数做过滤，就执行了恶意命令/代码。</p>
+<h3 id="⑤RCE远程代码执行漏洞"><a href="#⑤RCE远程代码执行漏洞" class="headerlink" title="⑤RCE远程代码执行漏洞"></a>⑤RCE远程代码执行漏洞</h3><h4 id="1、漏洞简介-3"><a href="#1、漏洞简介-3" class="headerlink" title="1、漏洞简介"></a>1、漏洞简介</h4><p>RCE，远程命令执行&#x2F;远程代码执行。指用户通过<code>浏览器</code>提交执行操作命令，由于服务器端没有针对执行函数做过滤，就执行了恶意命令&#x2F;代码。</p>
 <ul>
-<li><strong>出现：</strong>应用程序<code>直接/间接</code>使用了动态执行命令/代码的危险函数，并且函数的运行参数是<code>用户可控</code>的。</li>
+<li><strong>出现：</strong>应用程序<code>直接/间接</code>使用了动态执行命令&#x2F;代码的危险函数，并且函数的运行参数是<code>用户可控</code>的。</li>
 </ul>
 <p><strong>·</strong> 远程命令执行，一般出现这种漏洞，是因为应用系统从设计上需要给用户提供指定的远程命令操作的接口。比如常见的<code>路由器</code>、<code>防火墙</code>、<code>入侵检测等设备</code>的web管理页面上，一般会给用户提供一个ping操作的web界面，用户从web界面输入目标IP，提交后后台会对该IP地址进行一次ping测试，并返回测试结果。如果设计者对该功能没有做严格的安全控制，则可能会导致攻击者通过该接口提交“意想不到”的命令。</p>
 <p><strong>·</strong> 远程代码执行，亦是同样的道理，后台有时候会把用户的输入 作为代码的一部分进行执行。</p>
 <ul>
-<li><strong>原理：</strong>当用户控制命令/代码执行函数中的参数时，注入恶意系统命令到正常命令中，造成命令/代码执行攻击。</li>
+<li><strong>原理：</strong>当用户控制命令&#x2F;代码执行函数中的参数时，注入恶意系统命令到正常命令中，造成命令&#x2F;代码执行攻击。</li>
 </ul>
 <p><strong>·</strong> RCE漏洞，可以让攻击者直接向后台服务器远程注入操作系统命令或代码，从而控制后台系统。</p>
 <ul>
@@ -1164,9 +1164,9 @@
 </blockquote>
 <h4 id="2、命令拼接符"><a href="#2、命令拼接符" class="headerlink" title="2、命令拼接符"></a>2、命令拼接符</h4><h5 id="windows系统"><a href="#windows系统" class="headerlink" title="windows系统"></a>windows系统</h5><blockquote>
 <p><code>|</code>：管道符，前面命令的输出作为后面命令的输入。如 help | more，前面help命令会输出help的所有用法选项，这些选项输入给more，进行分页展示。</p>
-<p><code>&amp;</code>：commandA & commandB，运行命令A，然后再运行命令B。</p>
+<p><code>&amp;</code>：commandA &amp; commandB，运行命令A，然后再运行命令B。</p>
 <p><code>||</code>：commandA || commandB，运行命令A，如果失败则运行命令B，如果成功也不再需要运行命令B了。</p>
-<p><code>&amp;&amp;</code>：commandA && commandB，运行命令A，如果成功则运行命令B，言外之意就是运行A失败后不再运行后面的命令。</p>
+<p><code>&amp;&amp;</code>：commandA &amp;&amp; commandB，运行命令A，如果成功则运行命令B，言外之意就是运行A失败后不再运行后面的命令。</p>
 </blockquote>
 <h5 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h5><p>windows系统下的命令拼接符均使用于Linux下，此外，Linux还有：</p>
 <blockquote>
@@ -1222,15 +1222,15 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46706771/article/details/118893434">RCE(远程代码执行漏洞)原理及漏洞利用</a></p>
 <h5 id="RCE绕过"><a href="#RCE绕过" class="headerlink" title="RCE绕过"></a>RCE绕过</h5><blockquote>
 <ul>
-<li><strong>空格绕过</strong>：使用<code>$&#123;IFS&#125;</code>、<code>$IFS</code>、<code>+</code>、<code>%09</code>、<code>%0b</code>、<code>$IFS$9</code>、<code>$IFS$1</code>、重定向符<code>&lt;</code>或<code>&lt;&lt;</code>中的一种符合替代空格。例如：cat file -- cat>file</li>
+<li><strong>空格绕过</strong>：使用<code>$&#123;IFS&#125;</code>、<code>$IFS</code>、<code>+</code>、<code>%09</code>、<code>%0b</code>、<code>$IFS$9</code>、<code>$IFS$1</code>、重定向符<code>&lt;</code>或<code>&lt;&lt;</code>中的一种符合替代空格。例如：cat file – cat&gt;file</li>
 <li><strong>字符绕过</strong>：</li>
 </ul>
-<p>用 \ 绕过：例如 cat -> c\at</p>
-<p>用 ` 绕过：例如 cat -> 使用两个单引号将 cat 包围封闭起来</p>
-<p>用 '' 绕过：例如 cat -> c''at</p>
-<p>用 $ 绕过(字符拼接法)：例如：flag -> a=f;$alag（如果过滤了<code>;</code>字符串,可以用<code>%0a,%0d,%0D%0A</code>来代替）</p>
+<p>用 \ 绕过：例如 cat -&gt; c\at</p>
+<p>用 &#96; 绕过：例如 cat -&gt; 使用两个单引号将 cat 包围封闭起来</p>
+<p>用 ‘’ 绕过：例如 cat -&gt; c’’at</p>
+<p>用 $ 绕过(字符拼接法)：例如：flag -&gt; a&#x3D;f;$alag（如果过滤了<code>;</code>字符串,可以用<code>%0a,%0d,%0D%0A</code>来代替）</p>
 <p>用base编码绕过</p>
-<p>......还有更多的绕过方法参考上述链接1、2、3、4</p>
+<p>……还有更多的绕过方法参考上述链接1、2、3、4</p>
 </blockquote>
 <h5 id="利用方式-1"><a href="#利用方式-1" class="headerlink" title="利用方式"></a>利用方式</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 注入一句话木马<br>?txt=@<span class="hljs-built_in">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);    <br>// 获取当前绝对路径<br>?txt=<span class="hljs-built_in">print</span>(_FILE_);      <br>// 读取重要文件<br>?txt=var_dump(file_get_contents(<span class="hljs-string">&#x27;c:\\windows\system32\drivers\etc\hosts&#x27;</span>));    <br>// 写入shell，Getshell<br>?txt=var_dump(file_put_contents(<span class="hljs-variable">$_POST</span>[1],<span class="hljs-variable">$POST</span>[2]));<br>1=shell.php&amp;2=&lt;?php phpinfo()?&gt;   <br></code></pre></td></tr></table></figure>
 
@@ -1282,7 +1282,7 @@
 <ul>
 <li><h5 id="XML树结构"><a href="#XML树结构" class="headerlink" title="XML树结构"></a>XML树结构</h5></li>
 </ul>
-<p>XML 文档形成了一种树结构，它从"根部"开始，然后扩展到"枝叶"</p>
+<p>XML 文档形成了一种树结构，它从”根部”开始，然后扩展到”枝叶”</p>
 <ul>
 <li><h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5></li>
 </ul>
@@ -1307,7 +1307,7 @@
 <li>利用XXE盲打，通过报错信息获取数据</li>
 </ul>
 <p>其实上面这四个分类是有点泛的说法。依照实际情况来说呢，XXE的漏洞利用主要有：</p>
-<p>任意文件读取（有回显、无回显）、探测SQL盲注、探测内网地址/端口、攻击内网网站、执行系统命令、netdoc协议读取文件、Dos拒绝服务攻击</p>
+<p>任意文件读取（有回显、无回显）、探测SQL盲注、探测内网地址&#x2F;端口、攻击内网网站、执行系统命令、netdoc协议读取文件、Dos拒绝服务攻击</p>
 </blockquote>
 <h4 id="5、漏洞发现"><a href="#5、漏洞发现" class="headerlink" title="5、漏洞发现"></a>5、漏洞发现</h4><p><code>寻找XML输入点</code>！</p>
 <ul>
@@ -1374,14 +1374,14 @@
 <p>php：</p>
 <p>libxml_disable_entity_loader(true);</p>
 <p>Java：</p>
-<p>DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(); dbf.setExpandEntityReferences(false);</p>
+<p>DocumentBuilderFactory dbf &#x3D; DocumentBuilderFactory.newInstance(); dbf.setExpandEntityReferences(false);</p>
 <p>Python：</p>
-<p>from lxml import etree<br>xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</p>
+<p>from lxml import etree<br>xmlData &#x3D; etree.parse(xmlSource,etree.XMLParser(resolve_entities&#x3D;False))</p>
 </blockquote>
 <ul>
 <li>过滤用户提交的XML数据</li>
 </ul>
-<p>关键词：<!DOCTYPE和<!ENTITY，或者是 SYSTEM和PUBLIC</p>
+<p>关键词：&lt;!DOCTYPE和&lt;!ENTITY，或者是 SYSTEM和PUBLIC</p>
 <ul>
 <li>不允许XML中含有自定义的DTD</li>
 </ul>
@@ -1443,7 +1443,7 @@
 <p>· 大小写绕过（如写成PHp）</p>
 <p>· 特殊扩展名绕过，比如php可以用php3、php4、php5代替</p>
 <p>· 名单列表绕过（指黑名单之外的后缀名）</p>
-<p>· windows特性（一些特殊的文件名命名方式在win下是不被允许的，利用Burpsuite抓包修改后缀名，绕过验证后上传文件，windows会自动去掉后面添加的，但这特性是win特有的，Unix/Linux没有这个特性）：</p>
+<p>· windows特性（一些特殊的文件名命名方式在win下是不被允许的，利用Burpsuite抓包修改后缀名，绕过验证后上传文件，windows会自动去掉后面添加的，但这特性是win特有的，Unix&#x2F;Linux没有这个特性）：</p>
 <p>对应windows特性的绕过方法一是<code>点绕过</code>，win下文件后缀名最后一个点会被自动去除，而Linux系统下不会。因此可以利用burpsuite工具拦截http请求，上传文件后缀名，然后＋<code>.</code>绕过上传（例如：<code>demo.php.</code>）。</p>
 <p>对应windows特性的绕过方法二是<code>::$DATA绕过</code>，win下，如果上传的文件名为<code>a.php::$DATA</code>，那么它会在服务器上生成一个<code>a.php</code>文件，其中内容和所上传内容相同，且会被解析。场景利用也是通过拦截请求然后修改数据包，在对应的文件后缀处添加<code>::$DATA</code>（注意！win下无法直接测试::$DATA，因为win不允许后缀名中存在特殊字符）</p>
 <p>· <code>.htaccess</code>文件攻击（前提是apache开启.htaccess文件功能）：</p>
@@ -1458,15 +1458,15 @@
 <blockquote>
 <p>常见的MIME类型如下：</p>
 <p>文件扩展名		MIME-type</p>
-<p>.js					application/x-javascript</p>
-<p>.html				 text/html</p>
-<p>.jpg				   image/jpeg</p>
-<p>.png				  image/png</p>
-<p>.pdf				   application/pdf</p>
+<p>.js					application&#x2F;x-javascript</p>
+<p>.html				 text&#x2F;html</p>
+<p>.jpg				   image&#x2F;jpeg</p>
+<p>.png				  image&#x2F;png</p>
+<p>.pdf				   application&#x2F;pdf</p>
 </blockquote>
 <blockquote>
 <p>检测原理：判断<code>$_FILES[&quot;file&quot;][&quot;type&quot;]</code>是不是图片格式，不是则不允许上传。在http协议中，使用<code>Content-Type</code>字段表示文件的MIME类型，<code>$_FILES[&quot;file&quot;][&quot;type&quot;]</code>的值是从请求数据包中的<code>Content-Type</code>中获取的。</p>
-<p>绕过方法：通过抓取数据包，上传php文件（同样也是在数据包后面追加php代码），Content-Type的值是application/octer-stream，上传jpg格式的文件时，Content-Type的值是 image/jpeg。因此可以修改文件类型进行绕过。</p>
+<p>绕过方法：通过抓取数据包，上传php文件（同样也是在数据包后面追加php代码），Content-Type的值是application&#x2F;octer-stream，上传jpg格式的文件时，Content-Type的值是 image&#x2F;jpeg。因此可以修改文件类型进行绕过。</p>
 </blockquote>
 <ul>
 <li>文件内容检测与绕过</li>
@@ -1476,7 +1476,7 @@
 <p>绕过方法：在脚本文件开头补充图片对应的头部值，或者在图片后写入脚本代码</p>
 <p>···制作图片马：</p>
 <p>· 在图片后写入脚本文件</p>
-<p>· copy 1.jpg/b+1.php/a 2.jpg（参数<code>/b</code>指定以二进制格式复制、合并文件，用于图像类/声音类文件；参数<code>/a</code>指定以ASCII码格式复制、合并文件，用于txt等文档类文件）</p>
+<p>· copy 1.jpg&#x2F;b+1.php&#x2F;a 2.jpg（参数<code>/b</code>指定以二进制格式复制、合并文件，用于图像类&#x2F;声音类文件；参数<code>/a</code>指定以ASCII码格式复制、合并文件，用于txt等文档类文件）</p>
 </blockquote>
 <ul>
 <li>00截断检测与绕过</li>
@@ -1500,13 +1500,13 @@
 <p>服务器获取所请求的页面(也可以是文件，比如1.jpg）的后缀名以后，接下来会在服务器端寻找可以处理这类后缀名的应用程序，如果服务器找不到可以处理此类文件的应用程序，那么服务器将直接把这个文件返还给客户端。</p>
 <h5 id="什么是解析漏洞"><a href="#什么是解析漏洞" class="headerlink" title="什么是解析漏洞"></a>什么是解析漏洞</h5><p>解析漏洞是指服务器应用程序在解析某些精心构造的后缀文件时，会将其解析成网页脚本，从而导致网站的沦陷。大部分解析漏洞的产生都是由<code>应用程序本身的漏洞</code>导致的。</p>
 <h5 id="常见的解析漏洞"><a href="#常见的解析漏洞" class="headerlink" title="常见的解析漏洞"></a>常见的解析漏洞</h5><ul>
-<li><strong>IIS 5.x/IIS 6.0解析漏洞</strong></li>
+<li><strong>IIS 5.x&#x2F;IIS 6.0解析漏洞</strong></li>
 </ul>
-<p>在IIS 5.x/IIS 6.0中存在以下两个解析漏洞：</p>
+<p>在IIS 5.x&#x2F;IIS 6.0中存在以下两个解析漏洞：</p>
 <blockquote>
 <p>（1）<strong>目录解析漏洞</strong></p>
 <p>在网站中建立名字为*.asp或.asa的文件夹，其目录内的任何扩展名文件都会被IIS当做ASP文件来解析并执行。</p>
-<p>例如：创建一个目录test.asp，那么/test.asp/1.jpg将被当做ASP文件来执行。（<code>/xx.asp/xx.jpg</code>）</p>
+<p>例如：创建一个目录test.asp，那么&#x2F;test.asp&#x2F;1.jpg将被当做ASP文件来执行。（<code>/xx.asp/xx.jpg</code>）</p>
 <p>（2）<strong>文件解析漏洞</strong></p>
 <p>网站上传图片的时候，如果将网页木马文件的名字改成<code>*.asp;1.jpg</code>，分号后面的不被解析，也就是说，<code>*.asp;1.jpg</code>会被服务器看成是<code>*.asp</code>，就可以绕过服务器禁止上传ASP文件的限制，这样的畸形文件也同样会被IIS当做ASP文件来解析并执行。</p>
 <p>例如：上传一个图片文件名为<code>test.asp;1.jpg</code>的木马文件，该文件可以被当做ASP文件解析并执行。<br>在IIS6.0版本中，默认可执行文件除了<code>test.asp</code>以外，还包括<code>test.asa</code>、<code>test.cer</code>、<code>test.cdx</code>这三种，同样也存在解析漏洞。</p>
@@ -1519,9 +1519,9 @@
 <p>4、找到<code>/</code>号，如果有，则内存截断</p>
 <p>5、最终，将保留下来<code>.asp</code>字符串</p>
 <ul>
-<li><strong>IIS 7.0/IIS 7.5 || Nginx解析漏洞</strong></li>
+<li><strong>IIS 7.0&#x2F;IIS 7.5 || Nginx解析漏洞</strong></li>
 </ul>
-<p>IIS 7.0/IIS 7.5或Nginx在使用FastCGI方式调用php时，在<code>php.ini</code>里设置<code>cgi.fix_pathinfo=1</code>，这使得访问任意文件URL时，在URL后面添加<code>/x.php</code>等字符时，该文件被IIS当成<code>php文件代码</code>解析。</p>
+<p>IIS 7.0&#x2F;IIS 7.5或Nginx在使用FastCGI方式调用php时，在<code>php.ini</code>里设置<code>cgi.fix_pathinfo=1</code>，这使得访问任意文件URL时，在URL后面添加<code>/x.php</code>等字符时，该文件被IIS当成<code>php文件代码</code>解析。</p>
 <p>在某些使用有漏洞的网站中，访问<code>http://127.0.0.1/1.jpg/1.php</code>，此时的1.jpg会被当作<code>PHP脚本</code>来解析,而<code>1.php本身是不存在的</code>。</p>
 <p>这就意味着攻击者可以上传合法的“图片”（<code>图片木马</code>），然后在URL后面加上<code>/xxx.php</code>，就可以获得网站的WebShell，然后再使用中国菜刀连接即可。</p>
 <blockquote>
@@ -1530,7 +1530,7 @@
 <ul>
 <li><strong>Nginx 空字节代码执行漏洞</strong></li>
 </ul>
-<p>影响版本：0.5 ,0.6 , 0.7 <= 0.7.65, 0.8 <= 0.8.37</p>
+<p>影响版本：0.5 ,0.6 , 0.7 &lt;&#x3D; 0.7.65, 0.8 &lt;&#x3D; 0.8.37</p>
 <p>当使用<code>PHP-FastCGI</code>执行PHP时，遇到url里面存在%00空字节时与<code>FastCGI</code>的处理不一致，导致可<code>在非PHP文件中嵌入PHP代码</code>，通过访问<code>url + %00.PHP</code>来执行其中的PHP代码。</p>
 <blockquote>
 <p>例如：<code>http://127.0.0.1/1.jpg%00.php</code>会把1.jpg文件（木马文件）当做PHP文件来执行。</p>
@@ -1541,7 +1541,7 @@
 </ul>
 <p><strong>漏洞原理</strong></p>
 <p>Apache 解析文件的规则是：<code>从右到左</code>开始判断解析,如果后缀名为不可识别文件解析,就再往左判断。比如 test.php.owf.rar2 ,“.owf”和”.rar2” 这两种后缀是apache不可识别解析,apache就会把wooyun.php.owf.rar解析成php文件。</p>
-<p>注意~！尽管上传如此命名的文件<code>www.xxxx.xxx.com/test.php.xxx.yyy</code>会因为一些不可识别文件解析后缀而被交给php处理，但是有可能我们去访问时，发现文件并没有被解析，这是因为apache本身根本不存在所谓的解析漏洞，最后一步虽然交给了php来处理文件，但是php也不认识那些不可识别文件解析后缀，因此会以DefaultType的默认值“text/plain”来当作文本解析。</p>
+<p>注意~！尽管上传如此命名的文件<code>www.xxxx.xxx.com/test.php.xxx.yyy</code>会因为一些不可识别文件解析后缀而被交给php处理，但是有可能我们去访问时，发现文件并没有被解析，这是因为apache本身根本不存在所谓的解析漏洞，最后一步虽然交给了php来处理文件，但是php也不认识那些不可识别文件解析后缀，因此会以DefaultType的默认值“text&#x2F;plain”来当作文本解析。</p>
 <p><strong>配置问题导致的漏洞</strong></p>
 <p>（1）如果在 Apache 的 conf 里有这样一行配置<code> AddHandler php5-script .php</code> 这时,只要文件名里包含<code>.php </code>,即使文件名是 test2.php.jpg , 也会以 php 来执行。</p>
 <p>（2）如果在 Apache 的 conf 里有这样一行配置 <code>AddType application/x-httpd-php .jpg </code>即使扩展名是 jpg，一样能以 php 方式执行。</p>
